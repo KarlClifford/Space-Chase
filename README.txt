@@ -39,18 +39,18 @@ The project folders have been divided into the following project tree:
 📦 src
 └─ main
    ├─ java
-   │  ├─ com.example.spacechase
-   │  ├─ controllers
-   │  ├─ models
-   │  │  ├─ characters
-   │  │  ├─ items
-   │  │  └─ level
-   │  ├─ services
-   │  │  └─ motd
-   │  └─ utils
-   │     ├─ login
-   │     ├─ main_menu
-   │     └─ save
+   │  └─ com.example.spacechase
+   │     ├─ controllers
+   │     ├─ models
+   │     │  ├─ characters
+   │     │  ├─ items
+   │     │  └─ level
+   │     ├─ services
+   │     │  └─ motd
+   │     └─ utils
+   │        ├─ login
+   │        ├─ main_menu
+   │        └─ save
    └─ resources
       └─ com.example.spacechase
          ├─ data
