@@ -1,0 +1,42 @@
+image: maven:3.8.5
+
+pipelines:
+  pull-requests:
+    '**': #this runs as default for any branch not elsewhere defined
+      - step:
+          name: Build and Test
+          caches:
+            - maven
+          script:
+            - mvn clean install site
+          after-script:
+            - pipe: atlassian/checkstyle-report:0.3.0
+              variables:
+                REPORT_FAIL_SEVERITY: 'error'
+  branches:
+    release:
+      - step:
+          name: Generate JAVADOC
+          caches:
+            - maven
+          script:
+            - mvn javadoc:javadoc
+          after-script:
+            - apt-get update && apt-get install -y zip
+            - zip -r JAVADOC.zip target/site/apidocs
+            - pipe: atlassian/bitbucket-upload-file:0.3.3
+              variables:
+                BITBUCKET_USERNAME: $APP_USER
+                BITBUCKET_APP_PASSWORD: $APP_PASS
+                FILENAME: 'JAVADOC.zip'
+            - pipe: atlassian/email-notify:0.8.0
+              variables:
+                USERNAME: $EMAIL_ADDRESS
+                PASSWORD: $EMAIL_PASS
+                FROM: $EMAIL_ADDRESS
+                TO: $BOT_EMAIL
+                HOST: 'smtp.gmail.com'
+                PORT: '587'
+                TLS: 'true'
+                SUBJECT: 'IMPORTANT CODEBASE UPDATE'
+                BODY_PLAIN: 'The release branch has been updated with a new commit! If any changes are relevant to you, consider pulling the release branch into your subbranch. You can check the following URL for the latest commit to view a list of changes: https://bitbucket.org/swanuni/live-demo/commits/branch/release The new JAVADOC has been saved to the downloads section of the bitbucket repository which you can find here: https://bitbucket.org/swanuni/live-demo/downloads only the latest version is stored in downloads. Navigate to the index.html in the JAVADOC folder to open the JAVADOC in your browser.'
