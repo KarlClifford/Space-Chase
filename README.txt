@@ -40,17 +40,6 @@ The project folders have been divided into the following project tree:
 └─ main
    ├─ java
    │  └─ com.example.spacechase
-   │     ├─ controllers
-   │     ├─ models
-   │     │  ├─ characters
-   │     │  ├─ items
-   │     │  └─ level
-   │     ├─ services
-   │     │  └─ motd
-   │     └─ utils
-   │        ├─ login
-   │        ├─ main_menu
-   │        └─ save
    └─ resources
       └─ com.example.spacechase
          ├─ data
@@ -58,10 +47,12 @@ The project folders have been divided into the following project tree:
          │  └─ profiles
          ├─ fonts
          ├─ fxml
-         └─ images
+         ├─ html
+         ├─ images
+         └─ licenses
 ```
 
-If any additional folders need to be created then try to find the most suitable position for this folder in the tree.
+> **note**: You can create new folders in the resources.com.example.spacechase directory. **Do not create new folders in java.com.example.spacechase as this is prohibited in maven.**
 
 ## Branch naming conventions
 
