@@ -15,7 +15,7 @@ public class MainMenuController extends Controller {
      */
     @FXML
     private void onNewGameButtonClicked() {
-        loadFxml("menus/newGame.fxml");
+        loadFxml("fxml/newGame.fxml");
     }
 
     /**
@@ -23,6 +23,6 @@ public class MainMenuController extends Controller {
      */
     @FXML
     private void onLoadGameButtonClicked() {
-        loadFxml("menus/loadGame.fxml");
+        loadFxml("fxml/loadGame.fxml");
     }
 }

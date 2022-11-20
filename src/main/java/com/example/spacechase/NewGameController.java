@@ -39,7 +39,7 @@ public class NewGameController extends Controller {
 
         if (success) {
             LevelMenuController.setPlayerName(name);
-            loadFxml("menus/levelMenu.fxml");
+            loadFxml("fxml/levelMenu.fxml");
         } else {
             errorMessageLabel.setOpacity(1);
         }
@@ -50,6 +50,6 @@ public class NewGameController extends Controller {
      */
     @FXML
     private void onBackButtonClicked() {
-        loadFxml("menus/mainMenu.fxml");
+        loadFxml("fxml/mainMenu.fxml");
     }
 }

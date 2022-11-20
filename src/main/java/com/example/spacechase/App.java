@@ -54,7 +54,7 @@ public class App extends Application {
 
         AnchorPane pane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        getClass().getResource("menus/mainMenu.fxml")));
+                        getClass().getResource("fxml/mainMenu.fxml")));
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);

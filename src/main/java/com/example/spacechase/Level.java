@@ -417,7 +417,7 @@ public class Level {
             File nextFile = Data.copyLevel(id + 1, playerName);
             if (nextFile == null) {
                 Controller controller = new Controller();
-                controller.loadFxml("menus/levelMenu.fxml");
+                controller.loadFxml("fxml/levelMenu.fxml");
             } else {
                 Level newLevel = Data.readLevel(nextFile);
                 newLevel.start();

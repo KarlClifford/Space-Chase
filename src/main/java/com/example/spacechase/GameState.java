@@ -90,7 +90,7 @@ public class GameState {
         //WebView webView = new WebView();
         //webView.getEngine().load("file:"
         //+ new File(
-        // "src/main/resources/com/example/spacechasealt/http/ad.html")
+        // "src/main/resources/com/example/spacechasealt/html/ad.html")
         // .getAbsolutePath());
 
         resumeButton.setOnMouseClicked(e -> {
@@ -104,7 +104,7 @@ public class GameState {
 
         menuButton.setOnMouseClicked(e -> {
             Controller controller = new Controller();
-            controller.loadFxml("menus/levelMenu.fxml");
+            controller.loadFxml("fxml/levelMenu.fxml");
         });
 
         quitButton.setOnMouseClicked(e -> Platform.exit());
@@ -155,7 +155,7 @@ public class GameState {
         menuButton.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
         menuButton.setOnMouseClicked(e -> {
             Controller controller = new Controller();
-            controller.loadFxml("menus/levelMenu.fxml");
+            controller.loadFxml("fxml/levelMenu.fxml");
         });
 
         VBox vBox = new VBox();

@@ -64,7 +64,7 @@ public class LoadGameController extends Controller {
      */
     @FXML
     private void onBackButtonClicked() {
-        loadFxml("menus/mainMenu.fxml");
+        loadFxml("fxml/mainMenu.fxml");
     }
 
     /**
@@ -92,7 +92,7 @@ public class LoadGameController extends Controller {
         loadButton.setFont(Font.font("neuropol x rg", FONT_SIZE));
         loadButton.setOnMouseClicked(e -> {
             LevelMenuController.setPlayerName(name);
-            loadFxml("menus/levelMenu.fxml");
+            loadFxml("fxml/levelMenu.fxml");
         });
         return loadButton;
     }
@@ -113,7 +113,7 @@ public class LoadGameController extends Controller {
         deleteButton.setGraphic(binImage);
         deleteButton.setOnMouseClicked(e -> {
             Data.removeProfile(name);
-            loadFxml("menus/loadGame.fxml");
+            loadFxml("fxml/loadGame.fxml");
         });
 
         return deleteButton;
