@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.LoadGameController">
+   <children>
+      <ScrollPane layoutX="53.0" layoutY="66.0" prefHeight="268.0" prefWidth="494.0" vbarPolicy="ALWAYS">
+         <content>
+            <VBox fx:id="profileContainer" prefHeight="311.0" prefWidth="501.0" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="50.0" layoutY="350.0" mnemonicParsing="false" onAction="#onBackButtonClicked" text="back">
+         <font>
+            <Font name="NeuropolXRg-Regular" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="45.0" layoutY="24.0" prefHeight="30.0" prefWidth="112.0" text="Profiles" textFill="WHITE">
+         <font>
+            <Font name="NeuropolXRg-Regular" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
