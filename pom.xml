@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>Space-Chase</artifactId>
+    <artifactId>SpaceChaseAlt</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Space-Chase</name>
+    <name>SpaceChaseAlt</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,6 +15,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>20-ea+7</version>
+        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -40,27 +45,6 @@
         </dependency>
     </dependencies>
 
-    <!-- Checkstyle configuration -->
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <configLocation>group40-checkstyle.xml</configLocation>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>checkstyle</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <build>
         <plugins>
             <plugin>
@@ -81,7 +65,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.spacechase/com.example.spacechase.HelloApplication</mainClass>
+                            <mainClass>com.example.spacechasealt/com.example.spacechase.App</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
@@ -91,17 +75,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Checkstyle reporting -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
             </plugin>
         </plugins>
     </build>

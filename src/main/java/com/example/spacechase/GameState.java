@@ -9,6 +9,12 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * This class represents a game state. A game state contains
+ * components of pause menu and end game menu.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class GameState {
     /**
      * spacing of vbox.

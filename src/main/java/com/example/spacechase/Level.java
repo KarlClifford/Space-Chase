@@ -18,6 +18,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * This class represents a level. A level contains
+ * components of id, file, score, tile map, clock, state,
+ * characters, items, player, labels and scene. It can be
+ * initialised by start, restarted by restart and proceed
+ * to next level by next.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Level {
     /**
      * x offset of canvas.

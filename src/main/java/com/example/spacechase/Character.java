@@ -4,6 +4,12 @@ import javafx.scene.image.ImageView;
 
 import java.util.Objects;
 
+/**
+ * This abstract class represents a character. A character contains
+ * components of id, tile, image, level.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public abstract class Character {
     /**
      * path to images.

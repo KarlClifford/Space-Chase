@@ -4,6 +4,12 @@ import javafx.animation.AnimationTimer;
 import java.time.Clock;
 import java.util.Arrays;
 
+/**
+ * This class represents a game clock. A game clock contains
+ * components of a game loop and time interval for each character update.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class GameClock {
     /**
      * milliseconds in one second.

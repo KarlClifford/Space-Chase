@@ -2,6 +2,13 @@ package com.example.spacechase;
 
 import javafx.scene.Scene;
 
+/**
+ * This class represents a player.
+ * A player contains components of direction and all shared
+ * components from character.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Player extends Collector {
     /**
      * direction of the player.

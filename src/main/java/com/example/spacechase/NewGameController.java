@@ -6,7 +6,13 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-
+/**
+ * This class represents a controller for new game menu.
+ * This controller contains components of a username text field,
+ * a error message label, and a back button.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class NewGameController extends Controller {
     /**
      * name text field.

@@ -1,5 +1,11 @@
 package com.example.spacechase;
 
+/**
+ * This class represents a clock. A clock contains components of
+ * a value and same components shared with item.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Clock extends Item {
     /**
      * Time value of the clock.

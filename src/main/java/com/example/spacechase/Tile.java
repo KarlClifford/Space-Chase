@@ -3,6 +3,13 @@ package com.example.spacechase;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * This class represents a tile.
+ * A tile contains components of colours array, position x
+ * and y, links and neighbours tile, an item, and a character.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Tile {
     /**
      * tile size.

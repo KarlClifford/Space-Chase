@@ -1,5 +1,11 @@
 package com.example.spacechase;
 
+/**
+ * This class represents a flying assassin. A flying assassin contains
+ * components of directions and all shared components from character.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class FlyingAssassin extends Character {
     /**
      * direction of flying assassin.

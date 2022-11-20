@@ -1,5 +1,12 @@
 package com.example.spacechase;
 
+/**
+ * This class represents a node.
+ * A node contains components of an element and its next node.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ * @param <T> type of node
+ */
 public class Node<T> {
     /**
      * Element of the node.

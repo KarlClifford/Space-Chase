@@ -7,6 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class represents a controller. A controller contains
+ * components of a stage.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Controller {
     /**
      * Stage of the game.

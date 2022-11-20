@@ -4,6 +4,12 @@ import javafx.scene.image.ImageView;
 
 import java.util.Objects;
 
+/**
+ * This abstract class represents an item. An item contains
+ * components of id, tile, level and image.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public abstract class Item {
     /**
      * path to images.

@@ -40,6 +40,13 @@ import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * This class represents a Map builder.
+ * A map builder contains components of loading, editing and saving
+ * a map.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class MapBuilder extends Application {
     /**
      * path to images.

@@ -11,6 +11,13 @@ import javafx.scene.text.Font;
 
 import java.util.Objects;
 
+/**
+ * This class represents a controller for load game menu.
+ * This controller contains components of a buttons for loading
+ * and deleting a profile, and a back button.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class LoadGameController extends Controller {
     /**
      * spacing for HBox.

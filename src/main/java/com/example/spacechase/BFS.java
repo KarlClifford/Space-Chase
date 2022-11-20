@@ -2,6 +2,13 @@ package com.example.spacechase;
 
 import java.util.PriorityQueue;
 
+/**
+ * This class represents the path finding algorithm of Breadth First Search.
+ * It contains components of paths and nodes. A graph can be created by
+ * providing a root tile, a path can then be calculated with an end tile.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class BFS {
     /**
      * All paths sorted with distance. Shorter path has higher priority.

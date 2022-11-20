@@ -2,6 +2,14 @@ package com.example.spacechase;
 
 import java.util.HashSet;
 
+/**
+ * This class represents a path.
+ * A path contains components of front node, rear node and
+ * tile exists in the path.
+ * and a back button.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Path implements Comparable<Path> {
     /**
      * Tiles that exists in path.

@@ -4,6 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 
+/**
+ * This class represents a controller for level selection menu.
+ * This controller contains components of a buttons for different level
+ * and a back button.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class LevelMenuController extends Controller {
     /**
      * player name.

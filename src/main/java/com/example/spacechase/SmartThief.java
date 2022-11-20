@@ -2,6 +2,13 @@ package com.example.spacechase;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a smart thief.
+ * A smart thief contains components of all shared components
+ * from character.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class SmartThief extends Collector {
     /**
      * Creates a smart thief.

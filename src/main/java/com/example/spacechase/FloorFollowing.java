@@ -3,6 +3,13 @@ package com.example.spacechase;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class represents a floor following thief. A floor following contains
+ * components of follow colour, last tile, directions, and all shared components
+ * from collector.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class FloorFollowing extends Collector {
     /**
      * the colour that the thief will follow.

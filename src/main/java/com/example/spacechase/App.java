@@ -11,6 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * This class represents the main app of the game. It loads
+ * the required fonts and launch the game with main menu.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class App extends Application {
     /**
      * width of the stage.

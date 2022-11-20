@@ -1,5 +1,11 @@
 package com.example.spacechase;
 
+/**
+ * This class represents a door. A door contains
+ * components of all components shared from item.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class Door extends Item {
     /**
      * Creates a door object.

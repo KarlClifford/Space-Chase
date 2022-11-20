@@ -10,6 +10,13 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * This interface represents the access to data where it contains
+ * methods of reading and copy a level, loading, saving and deleting
+ * a profile.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public interface Data {
     /**
      * path to resources.
