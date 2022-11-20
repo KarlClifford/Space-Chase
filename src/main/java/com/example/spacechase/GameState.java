@@ -84,7 +84,7 @@ public class GameState {
         //WebView webView = new WebView();
         //webView.getEngine().load("file:"
         //+ new File(
-        // "src/main/resources/com/example/spacechasealt/http/ad.html")
+        // "src/main/resources/com/example/spacechasealt/html/ad.html")
         // .getAbsolutePath());
 
         resumeButton.setOnMouseClicked(e -> {
