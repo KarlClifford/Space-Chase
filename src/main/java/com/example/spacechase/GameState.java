@@ -98,7 +98,7 @@ public class GameState {
 
         menuButton.setOnMouseClicked(e -> {
             Controller controller = new Controller();
-            controller.loadFxml("menus/levelMenu.fxml");
+            controller.loadFxml("fxml/levelMenu.fxml");
         });
 
         quitButton.setOnMouseClicked(e -> Platform.exit());
@@ -149,7 +149,7 @@ public class GameState {
         menuButton.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
         menuButton.setOnMouseClicked(e -> {
             Controller controller = new Controller();
-            controller.loadFxml("menus/levelMenu.fxml");
+            controller.loadFxml("fxml/levelMenu.fxml");
         });
 
         VBox vBox = new VBox();

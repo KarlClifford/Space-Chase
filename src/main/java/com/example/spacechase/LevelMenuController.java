@@ -45,6 +45,6 @@ public class LevelMenuController extends Controller {
      */
     @FXML
     private void onBackButtonClicked() {
-        loadFxml("menus/mainMenu.fxml");
+        loadFxml("fxml/mainMenu.fxml");
     }
 }
