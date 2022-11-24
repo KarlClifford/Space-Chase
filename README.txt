@@ -80,7 +80,7 @@ The Group 40 checkstyle file has been provided for you in the top level project 
 1. Download the checkstyle plugin:
    > File -> Settings -> Plugins -> Marketplace -> CheckStyle-IDEA
 2. Add the checkstyle file to the plugin:
-   > File -> Settings -> Tools -> Checkstyle -> Add Configuration File (Plus icon) -> Description = Group 40 Checkstyle -> Select "Use a local Checkstyle file" and paste the file path to the checkstyle -> Select Next -> Select Next again (You don't need to input anything into the fields. -> Select Finish -> Select Apply -> Select OK
+   > File -> Settings -> Tools -> Checkstyle -> Add Configuration File (Plus icon) -> Description = Group 40 Checkstyle -> Select "Use a local Checkstyle file" and paste the file path to the checkstyle -> Select Next -> Select Next again (You don't need to input anything into the fields) -> Select Finish -> Select Apply -> Select OK
 3. Activate the Checkstyle:
    > Select Checkstyle (Button near bottom of the screen) -> Set active configuration to Group 40 Checkstyle
 
