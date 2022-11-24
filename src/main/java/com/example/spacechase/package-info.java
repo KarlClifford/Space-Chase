@@ -8,7 +8,7 @@
  * @author Alex Hallsworth
  * @author Daniel Halsall
  * @author Jamie Quinn
- * @version 1.0
+ * @version 1.0.0
  */
 
 package com.example.spacechase;
