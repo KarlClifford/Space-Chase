@@ -39,7 +39,9 @@ public class Path implements Comparable<Path> {
         exists.add(t);
 
         Node<Tile> node = new Node<>(t);
-
+        /* If the list is empty, sets front and rear
+         to the node. Otherwise, sets next node of rear
+         to the node, and sets rear to node. */
         if (isEmpty()) {
             front = rear = node;
         } else {
@@ -54,11 +56,16 @@ public class Path implements Comparable<Path> {
      */
     public Tile dequeue() {
         Node<Tile> node = front;
+        /* If there is no front node then return null.
+         Otherwise, sets the front to its next node,
+         and return the front node. */
         if (node == null) {
             return null;
         } else {
             front = front.getNext();
 
+            /* If there is no front node then set
+            rear node to null */
             if (front == null) {
                 rear = null;
             }
@@ -68,6 +75,7 @@ public class Path implements Comparable<Path> {
     }
 
     /**
+     * Gets the size of the path.
      * @return size of the path.
      */
     public int size() {
@@ -75,6 +83,7 @@ public class Path implements Comparable<Path> {
     }
 
     /**
+     * Gets boolean of path is empty or not.
      * @return path is empty or not.
      */
     public boolean isEmpty() {
@@ -165,6 +174,9 @@ public class Path implements Comparable<Path> {
      * @return string of the node.
      */
     private String getString(Node<Tile> node) {
+        /* Return empty string if node is null.
+         Otherwise, return string of current node
+         and string of its next node. */
         if (node == null) {
             return "";
         } else {
@@ -173,6 +185,8 @@ public class Path implements Comparable<Path> {
     }
 
     /**
+     * Return string of all nodes starting from the front node
+     * and call recursively to get its next nodes.
      * @return string of all nodes in path.
      */
     @Override

@@ -19,34 +19,40 @@ import java.util.Objects;
  */
 public class App extends Application {
     /**
-     * width of the stage.
+     * Width of the stage.
+     * @see javafx.stage
      */
     public static final double STAGE_WIDTH = 600;
     /**
-     * height of the stage.
+     * Height of the stage.
+     * @see javafx.stage
      */
     public static final double STAGE_HEIGHT = 500;
     /**
-     * title of the stage.
+     * Title of the stage.
+     * @see javafx.stage
      */
     public static final String TITLE = "Space Chase";
     /**
-     * resizeable of the stage.
+     * Resizeable of the stage.
+     * @see javafx.stage
      */
     public static final boolean RESIZEABLE = true;
     /**
-     * font size.
+     * Font size.
+     * @see javafx.scene.text.Font
      */
     public static final int FONT_SIZE = 10;
     /**
-     * path of fonts.
+     * Path of fonts.
      */
     private static final String PATH_TO_FONTS =
             "src/main/resources/com/example/spacechase/fonts";
 
     /**
      * @param stage primary stage of the game.
-     * @throws IOException
+     * @throws IOException This exception is being thrown when the FXMLLoader
+     * cannot load the scene.
      */
     @Override
     public void start(final Stage stage) throws IOException {
@@ -68,7 +74,7 @@ public class App extends Application {
 
     /**
      * Loads all the fonts and launches the game.
-     * @param args
+     * @param args parameters on launching the game.
      */
     public static void main(final String[] args) {
         loadFonts();
@@ -76,13 +82,12 @@ public class App extends Application {
     }
 
     /**
-     * Loads every font in the font resource folder.
+     * Loads every font from the font resource folder.
      */
     private static void loadFonts() {
+        // For every font file in fonts directory, load the font.
         for (File file : Objects.requireNonNull(
-                new File(
-                        PATH_TO_FONTS)
-                        .listFiles())) {
+                new File(PATH_TO_FONTS).listFiles())) {
             Font.loadFont("file:" + file.getPath(), FONT_SIZE);
         }
     }

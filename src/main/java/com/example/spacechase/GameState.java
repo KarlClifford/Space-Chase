@@ -17,19 +17,22 @@ import javafx.scene.text.Font;
  */
 public class GameState {
     /**
-     * spacing of vbox.
+     * Spacing of vbox.
+     * @see javafx.scene.layout.VBox
      */
     private static final int VBOX_SPACING = 10;
     /**
-     * large font size.
+     * Large font size.
+     * @see javafx.scene.text.Font
      */
     private static final int LARGE_FONT_SIZE = 50;
     /**
-     * normal font size.
+     * Normal font size.
+     * @see javafx.scene.text.Font
      */
     private static final int NORM_FONT_SIZE = 16;
     /**
-     * level of the game state.
+     * Level of the game state.
      */
     private final Level level;
 
@@ -42,7 +45,7 @@ public class GameState {
     }
 
     /**
-     * Creates a pause button, when it is pressed, pause time,
+     * Creates a pause button where it can pause time,
      * save the current level, and launch the pause menu.
      * @return pause button
      */
@@ -57,8 +60,6 @@ public class GameState {
             Data.saveLevel(level);
 
             createPauseMenu();
-
-
         });
 
         return pauseButton;
@@ -86,12 +87,6 @@ public class GameState {
         Button quitButton = new Button();
         quitButton.setText("quit game");
         quitButton.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
-
-        //WebView webView = new WebView();
-        //webView.getEngine().load("file:"
-        //+ new File(
-        // "src/main/resources/com/example/spacechasealt/html/ad.html")
-        // .getAbsolutePath());
 
         resumeButton.setOnMouseClicked(e -> {
             GameClock clock = level.getClock();
@@ -138,6 +133,9 @@ public class GameState {
         Button levelButton = new Button();
         levelButton.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
 
+        /* If the player won the game, then show level as cleared with
+         next level option. Otherwise, show level as failed with restart
+         option. */
         if (win) {
             levelStateLabel.setText("Level cleared!");
             levelStateLabel.setTextFill(Color.GREEN);

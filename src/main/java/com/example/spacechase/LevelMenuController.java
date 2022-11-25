@@ -13,16 +13,18 @@ import javafx.scene.layout.FlowPane;
  */
 public class LevelMenuController extends Controller {
     /**
-     * player name.
+     * Player name.
      */
     private static String playerName;
     /**
-     * container of all level buttons.
+     * Container of all level buttons.
+     * @see javafx.scene.layout.FlowPane
      */
     @FXML
     private FlowPane levelContainer;
 
     /**
+     * Sets player name.
      * @param name player name.
      */
     public static void setPlayerName(String name) {
@@ -37,6 +39,7 @@ public class LevelMenuController extends Controller {
     private void initialize() {
         Level[] levels = Data.getLevels(playerName);
 
+        // Creates a button for each level exists in player profile.
         for (Level level : levels) {
             int id = level.getId();
             Button button = new Button();

@@ -35,16 +35,27 @@ public class BFS {
      * @return path to tile.
      */
     public Path search(Tile end) {
+        /* While the there are paths, dequeue the path
+         and check if the path has reached the end. */
         while (!paths.isEmpty()) {
             Path path = paths.poll();
             Tile tile = path.getRear();
 
+            /* Return the path if it reaches the end.
+             Otherwise, go through each link of the tile
+             and create a new path. */
             if (tile == end) {
                 return path;
             } else {
+                /* For each possible direction,
+                 get the link of the tile
+                 and append new path to paths if link is valid. */
                 for (Direction direction : Direction.values()) {
                     Tile link = tile.getLinkedTile(direction);
 
+                    /* If a link exists
+                     where it does not exist in the path
+                     and have no character on it, add a new path. */
                     if (link != null
                             && link.getCharacter() == null
                             && !path.contains(link)) {

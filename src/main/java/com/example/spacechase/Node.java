@@ -3,6 +3,7 @@ package com.example.spacechase;
 /**
  * This class represents a node.
  * A node contains components of an element and its next node.
+ * A node is an element of a list or tree.
  * @author Tristan Tsang
  * @version 1.0.0
  * @param <T> type of node
@@ -63,6 +64,8 @@ public class Node<T> {
      */
     public Node<T> clone() {
         Node<T> node = new Node<>(element);
+        /* If there is next node, then sets
+         next node to the clone of that node. */
         if (next != null) {
             node.setNext(next.clone());
         }

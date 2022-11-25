@@ -8,7 +8,7 @@ package com.example.spacechase;
  */
 public class FlyingAssassin extends Character {
     /**
-     * direction of flying assassin.
+     * Direction of flying assassin.
      */
     private Direction direction;
 
@@ -28,6 +28,9 @@ public class FlyingAssassin extends Character {
     @Override
     void move() {
         Tile neighbour = tile.getNeighbourTile(direction);
+        /* If there's no neighbour tile in that direction,
+         change direction to an opposite direction.
+         Otherwise, move to that tile. */
         if (neighbour == null) {
             direction = direction == Direction.LEFT
                     ? Direction.RIGHT
@@ -35,6 +38,8 @@ public class FlyingAssassin extends Character {
         } else {
             Character character = neighbour.getCharacter();
 
+            /* Eliminate the character if there is a character
+             on the tile. */
             if (character != null) {
                 character.remove();
             }

@@ -12,33 +12,33 @@ import java.util.Arrays;
  */
 public class GameClock {
     /**
-     * milliseconds in one second.
+     * Milliseconds in one second.
      */
     private static final double MILLISECONDS = 1000.0;
     /**
-     * time interval between each tick of the clock.
+     * Time interval between each tick of the clock.
      */
     private static final double CLOCK_TICK = 50.0;
     /**
-     * time interval between each tick of the player.
+     * Time interval between each tick of the player.
      */
     private static final double PLAYER_TICK = 100.0;
     /**
-     * time interval between each tick of the npc.
+     * Time interval between each tick of the npc.
      */
     private static final double NPC_TICK = 1000.0;
     /**
-     * determines whether game is running.
+     * Determines whether game is running.
      */
     private boolean run = true;
     /**
-     * level of this clock.
+     * Level of the clock.
      */
     private final Level level;
 
     /**
      * Creates a new GameClock instance.
-     * @param level level
+     * @param level level of the clock.
      */
     public GameClock(Level level) {
         this.level = level;
@@ -65,17 +65,24 @@ public class GameClock {
                         .toArray(Character[]::new)
                         .clone();
 
+                // If there is no more time, then stop the timer.
                 if (time <= 0) {
                     this.stop();
                 }
 
+                // If game is running, update every character in the map.
                 if (run) {
+                    /* If last tick is more than or equal to the clock tick,
+                     then decrease the time by time interval. */
                     if (now - last >= CLOCK_TICK) {
                         last = now;
                         level.setTime(time - CLOCK_TICK / MILLISECONDS);
                     }
 
+                    /* If last tick is more than or equal to the player tick,
+                     then update the player in level. */
                     if (now - playerLast >= PLAYER_TICK) {
+                        // Update each player in all the characters of level.
                         for (Player player : Arrays.stream(characters)
                                 .filter(c -> c instanceof Player)
                                 .toArray(Player[]::new)) {
@@ -84,7 +91,13 @@ public class GameClock {
 
                         playerLast = now;
 
-                    } else if (now - npcLast >= NPC_TICK) {
+                    }
+
+                    /* If last tick is more than or equal to the enemy tick,
+                     then update the enemies in level. */
+                    if (now - npcLast >= NPC_TICK) {
+                        /* Update each non-player in all the characters
+                         of level. */
                         for (Character character : characters) {
                             if (!(character instanceof Player)) {
                                 character.update();
@@ -101,6 +114,7 @@ public class GameClock {
     }
 
     /**
+     * Sets run.
      * @param r boolean of run.
      */
     public void setRun(boolean r) {

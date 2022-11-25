@@ -11,7 +11,7 @@ import javafx.scene.Scene;
  */
 public class Player extends Collector {
     /**
-     * direction of the player.
+     * Direction of the player.
      */
     private Direction direction;
     /**
@@ -38,7 +38,6 @@ public class Player extends Collector {
     /**
      * Initializes input for the level. Changes direction depending
      * on the input.
-     *
      * @param scene scene of the level.
      */
     public void initialize(Scene scene) {
@@ -59,12 +58,18 @@ public class Player extends Collector {
      */
     @Override
     void move() {
+        /* If player has direction from input,
+        move towards that direction if possible. */
         if (direction != null) {
             Tile link = tile.getLinkedTile(direction);
+            /* Change tile of the player to link of current tile
+            in player direction if link exists and has no
+            character on it. */
             if (link != null && link.getCharacter() == null) {
                 changeTile(link);
             }
         }
+
         direction = null;
     }
 }

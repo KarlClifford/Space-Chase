@@ -1,8 +1,9 @@
 package com.example.spacechase;
 
 /**
- * This class represents a door. A door contains
- * components of all components shared from item.
+ * This class represents a door. A door is an item that allows
+ * player to finish a level, or fail a level if an enemy interact
+ * with it.
  * @author Tristan Tsang
  * @version 1.0.0
  */
@@ -16,7 +17,7 @@ public class Door extends Item {
     }
 
     /**
-     * Ends the game, stops the time, and creates an end level menu.
+     * Begins the end game procedure.
      * @param collector collector of this door.
      */
     @Override
@@ -24,8 +25,6 @@ public class Door extends Item {
         super.interact(collector);
         GameClock clock = level.getClock();
         clock.setRun(false);
-
-        //Data.saveLevel(level);
 
         GameState state = level.getState();
         state.createEndLevelMenu(collector instanceof Player);

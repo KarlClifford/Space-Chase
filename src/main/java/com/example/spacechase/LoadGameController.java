@@ -20,19 +20,22 @@ import java.util.Objects;
  */
 public class LoadGameController extends Controller {
     /**
-     * spacing for HBox.
+     * Spacing for HBox.
+     * @see javafx.scene.layout.HBox
      */
     private static final int HBOX_SPACING = 10;
     /**
-     * font size.
+     * Font size.
+     * @see javafx.scene.text.Font
      */
     private static final int FONT_SIZE = 12;
     /**
-     * height of bin image.
+     * Height of bin image.
      */
     private static final int BIN_IMAGE_HEIGHT = 20;
     /**
-     * container of profiles.
+     * VBox container of profiles.
+     * @see javafx.scene.layout.VBox
      */
     @FXML
     private VBox profileContainer;

@@ -29,75 +29,80 @@ import java.util.Objects;
  */
 public class Level {
     /**
-     * x offset of canvas.
+     * X offset of canvas.
+     * @see javafx.scene.canvas
      */
     public static final int CANVAS_OFFSET_X = 100;
     /**
-     * spacing of tiles.
+     * Spacing of tiles.
      */
     public static final int TILE_SPACING = 5;
     /**
-     * spacing of hbox.
+     * Spacing of HBox.
+     * @see javafx.scene.layout.HBox
      */
     private static final int HBOX_SPACING = 10;
     /**
-     * normal font size.
+     * Normal font size.
+     * @see javafx.scene.text.Font
      */
     private static final int NORM_FONT_SIZE = 16;
     /**
-     * id of the level.
+     * ID of the level.
      */
     private final int id;
     /**
-     * file of the level.
+     * File of the level.
      */
     private final File file;
     /**
-     * score of the level.
+     * Score of the level.
      */
     private int score;
     /**
-     * time of the level.
+     * Time of the level.
      */
     private double time;
     /**
-     * tile map.
+     * Tile map.
      */
     private final Tile[][] tileMap;
     /**
-     * clock of the level.
+     * Clock of the level.
      */
     private final GameClock clock;
     /**
-     * state of the level.
+     * State of the level.
      */
     private final GameState state;
     /**
-     * player in level.
+     * Player in level.
      */
     private Player player;
     /**
-     * characters of the level.
+     * Characters of the level.
      */
-    private ArrayList<Character> characters;
+    private final ArrayList<Character> characters;
     /**
-     * items of the level.
+     * Items of the level.
      */
-    private ArrayList<Item> items;
+    private final ArrayList<Item> items;
     /**
-     * label of the time.
+     * Label of the time.
      */
     private Label timeLabel;
     /**
-     * label of the score.
+     * Label of the score.
      */
     private Label scoreLabel;
     /**
-     * scene of the level.
+     * Scene of the level.
+     * @see javafx.scene
      */
     private Scene scene;
     /**
-     * pane of the level.
+     * Pane of the level.
+     * @see javafx.scene.layout.BorderPane
      */
     private BorderPane pane;
 
@@ -123,6 +128,7 @@ public class Level {
     }
 
     /**
+     * Gets id of the level.
      * @return id of the level.
      */
     public int getId() {
@@ -130,6 +136,7 @@ public class Level {
     }
 
     /**
+     * Gets the file that the level is read from.
      * @return file of the level.
      */
     public File getFile() {
@@ -137,6 +144,7 @@ public class Level {
     }
 
     /**
+     * Gets the scene of the level.
      * @return the scene of the level.
      */
     public Scene getScene() {
@@ -144,6 +152,7 @@ public class Level {
     }
 
     /**
+     * Gets the characters in the level.
      * @return all the characters in the map.
      */
     public ArrayList<Character> getCharacters() {
@@ -151,6 +160,7 @@ public class Level {
     }
 
     /**
+     * Gets the items in the level.
      * @return all the items in the map.
      */
     public ArrayList<Item> getItems() {
@@ -158,6 +168,7 @@ public class Level {
     }
 
     /**
+     * Gets the current game time of the level.
      * @return game time.
      */
     public double getTime() {
@@ -165,14 +176,16 @@ public class Level {
     }
 
     /**
-     * @return game clock.
+     * Gets the game clock instance of the level.
+     * @return game clock of the level.
      */
     public GameClock getClock() {
         return clock;
     }
 
     /**
-     * @return state of the game.
+     * Gets the game state instance of the level.
+     * @return state of the level.
      */
     public GameState getState() {
         return state;
@@ -180,7 +193,6 @@ public class Level {
 
     /**
      * Sets the new time and updates it in the label.
-     *
      * @param time new time to be set.
      */
     public void setTime(double time) {
@@ -252,14 +264,19 @@ public class Level {
         Canvas canvas = (Canvas) group.getChildren().get(0);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        /* Loops through each tile of the map and draws it out,
+         sets each tile their neighbour and link tile if possible.
+         Draws the item and character if they exist on a tile. */
         for (int y = 0; y < tileMap.length; y++) {
             Tile[] row = tileMap[y];
 
+            // For every tile in a row.
             for (int x = 0; x < row.length; x++) {
                 Tile tile = row[x];
-
                 char[] colours = tile.getColours();
 
+                /* For every direction, tries to set a link and neighbour
+                 if there is any for the tile. */
                 for (Direction direction : Direction.values()) {
                     Tile link = getLinkTile(tile, direction);
                     tile.setLink(direction, link);
@@ -268,6 +285,7 @@ public class Level {
                     tile.setNeighbour(direction, neighbour);
                 }
 
+                // For every colour in the tile, draws it onto the canvas.
                 for (int i = 0; i < colours.length; i++) {
                     char c = colours[i];
                     Color color = getColorFromChar(c);
@@ -284,6 +302,8 @@ public class Level {
                 }
 
                 Item item = tile.getItem();
+                /* If there is an item, assign level and tile to item,
+                create an image and draw it. */
                 if (item != null) {
                     item.setLevel(this);
                     item.setTile(tile);
@@ -295,7 +315,11 @@ public class Level {
                 }
 
                 Character character = tile.getCharacter();
+                /* If there is a character, assign level and tile to
+                 character, create an image and draw it. */
                 if (character != null) {
+                    /* If character is a player, then assign it to
+                     the player of this level. */
                     if (character instanceof Player p) {
                         player = p;
                     }
@@ -314,7 +338,6 @@ public class Level {
 
     /**
      * Gets colour from a given character.
-     *
      * @param c character of the colour.
      * @return the colour.
      */
@@ -330,7 +353,6 @@ public class Level {
 
     /**
      * Gets the linking tile in direction.
-     *
      * @param tile      initial tile.
      * @param direction direction.
      * @return tile in the given direction of the given tile.
@@ -343,7 +365,6 @@ public class Level {
      * Recursively search through each tile that links with
      * the current tile and return the tile that has the
      * same colour(s) with initial tile.
-     *
      * @param current   current tile.
      * @param goal      initial tile.
      * @param direction direction
@@ -367,10 +388,19 @@ public class Level {
         int x = current.getX() + a;
         int y = current.getY() + b;
 
+        /* Index is out of bounds when:
+         y is below 0 or more than the number of rows in tile map;
+         x is below 0 or more than the number of tiles in a row. */
         boolean outOfBounds = y < 0 || y > tileMap.length - 1
                 || x < 0
                 || x > tileMap[0].length - 1;
 
+        /* If the index is out of bounds, then return null
+         as there are no tiles that can be linked within
+         this direction.
+         Otherwise, get the next tile and checks if it
+         has a linkable tile or call recursively until
+         one is found. */
         if (outOfBounds) {
             return null;
         } else {
@@ -381,6 +411,12 @@ public class Level {
         }
     }
 
+    /**
+     * Gets the neighbour tile of a tile.
+     * @param tile initial tile.
+     * @param direction direction to search for.
+     * @return the neighbour tile of the given tile.
+     */
     private Tile getNeighbourTile(Tile tile, Direction direction) {
         int x = tile.getX();
         int y = tile.getY();
@@ -398,6 +434,8 @@ public class Level {
     public void restart() {
         String playerName = file.getParentFile().getName();
 
+        /* Tries to copy the same level and replace the current level.
+         Catches if there is an I/O exception while loading the file. */
         try {
             File file = Data.copyLevel(id, playerName);
             Level newLevel = Data.readLevel(file);
@@ -413,8 +451,12 @@ public class Level {
     public void next() {
         String playerName = file.getParentFile().getName();
 
+        /* Tries to copy the next level to player profile.
+         Catches if there is an I/O exception while loading the file. */
         try {
             File nextFile = Data.copyLevel(id + 1, playerName);
+            /* Goes back to level menu if there's no next level.
+             Otherwise, start the next level. */
             if (nextFile == null) {
                 Controller controller = new Controller();
                 controller.loadFxml("fxml/levelMenu.fxml");
@@ -428,14 +470,11 @@ public class Level {
     }
 
     /**
-     * @return string of all contents in level.
+     * Call and concat all tiles toString from the level map.
+     * @return string of all tiles from the map.
      */
-    @Override
-    public String toString() {
-        int height = tileMap.length;
-        int width = tileMap[0].length;
-
-        String tiles = String.join("\n",
+    private String getMapString() {
+        return String.join("\n",
                 Arrays.stream(tileMap)
                         .map(ts -> String.join(" ",
                                 Arrays.stream(ts)
@@ -443,8 +482,14 @@ public class Level {
                                         .map(String::valueOf)
                                         .toArray(String[]::new)))
                         .toArray(String[]::new));
+    }
 
-        String characters = String.join(" ",
+    /**
+     * Call and concat all characters toString from the map.
+     * @return string of all characters from the map.
+     */
+    private String getCharactersString() {
+        return String.join(" ",
                 Arrays.stream(tileMap)
                         .map(ts -> String.join(" ",
                                 Arrays.stream(ts)
@@ -453,8 +498,14 @@ public class Level {
                                         .map(Character::toString)
                                         .toArray(String[]::new)))
                         .toArray(String[]::new));
+    }
 
-        String items = String.join(" ",
+    /**
+     * Call and concat all items toString from the map.
+     * @return string of all items from the map.
+     */
+    private String getItemsString() {
+        return String.join(" ",
                 Arrays.stream(tileMap)
                         .map(ts -> String.join(" ",
                                 Arrays.stream(ts)
@@ -469,15 +520,25 @@ public class Level {
                                         .filter(Objects::nonNull)
                                         .toArray(String[]::new)))
                         .toArray(String[]::new));
+    }
 
+    /**
+     * Returns the height of the map, width of the map, time of the level,
+     * score of the level, string data of all tiles, characters and items.
+     * @return string of all contents in level.
+     */
+    @Override
+    public String toString() {
+        int height = tileMap.length;
+        int width = tileMap[0].length;
 
         return String.format("%d %d %.2f %d\n%s\n%s %s",
                 width,
                 height,
                 time,
                 score,
-                tiles,
-                characters,
-                items);
+                getMapString(),
+                getCharactersString(),
+                getItemsString());
     }
 }

@@ -9,17 +9,20 @@ import java.io.IOException;
 
 /**
  * This class represents a controller. A controller contains
- * components of a stage.
+ * components of a stage. A controller controls the current
+ * stage and scene, and can load a scene from a fxml file.
  * @author Tristan Tsang
  * @version 1.0.0
  */
 public class Controller {
     /**
      * Stage of the game.
+     * @see javafx.stage
      */
     private static Stage stage;
 
     /**
+     * Sets the stage of the game.
      * @param stage stage of the game.
      */
     public static void setStage(Stage stage) {
@@ -27,6 +30,7 @@ public class Controller {
     }
 
     /**
+     * Sets the scene of the game.
      * @param scene scene of the game.
      */
     public static void setScene(Scene scene) {
@@ -40,6 +44,8 @@ public class Controller {
     protected void loadFxml(String source) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(source));
         AnchorPane pane;
+
+        // Try to load the fxml file, throws exception if loader fails.
         try {
             pane = fxmlLoader.load();
         } catch (IOException ex) {

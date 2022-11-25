@@ -1,8 +1,7 @@
 package com.example.spacechase;
 
 /**
- * This class represents the direction. A direction is made up
- * of four directions.
+ * This class represents game movement directions.
  * @author Tristan Tsang
  * @version 1.0.0
  */

@@ -12,27 +12,28 @@ import java.util.Objects;
  */
 public abstract class Character {
     /**
-     * path to images.
+     * Url path to images directory that contains images.
      */
     protected static final String PATH_TO_IMAGES = "images/";
     /**
-     * image path of the character.
+     * Url path of image of the character.
      */
     protected String imagePath;
     /**
-     * id of the character.
+     * ID of the character that defines the type.
      */
     protected char id;
     /**
-     * tile of the character.
+     * Tile of the character that is on.
      */
     protected Tile tile;
     /**
-     * image view of the character.
+     * Image view of the character.
+     * @see javafx.scene.image.ImageView
      */
     protected ImageView imageView;
     /**
-     * level of the character.
+     * Level of the character that is in.
      */
     protected Level level;
 
@@ -50,7 +51,8 @@ public abstract class Character {
     }
 
     /**
-     * @param tile tile of the character.
+     * Sets the tile of the character.
+     * @param tile tile that the character is in.
      */
     protected void setTile(Tile tile) {
         this.tile = tile;
@@ -58,13 +60,14 @@ public abstract class Character {
 
     /**
      * Sets level of the character.
-     * @param level level.
+     * @param level level that the character is in.
      */
     public void setLevel(Level level) {
         this.level = level;
     }
 
     /**
+     * Gets the image view.
      * @return image view of the character.
      */
     protected ImageView getImageView() {
@@ -91,7 +94,7 @@ public abstract class Character {
     }
 
     /**
-     * draw the image of the character to the center of the tile.
+     * Draws the image of the character to the center of the tile.
      */
     public void draw() {
         imageView.relocate(
@@ -103,12 +106,12 @@ public abstract class Character {
     }
 
     /**
-     * movement of a character.
+     * Movement of a character.
      */
     abstract void move();
 
     /**
-     * moves the character and draws it.
+     * Moves the character and draws it.
      */
     protected void update() {
         move();
@@ -116,7 +119,8 @@ public abstract class Character {
     }
 
     /**
-     * @return string for all characters.
+     * @return 'C' indicating as a character, an id defining its type,
+     * and its x, y position from the tile.
      */
     @Override
     public String toString() {

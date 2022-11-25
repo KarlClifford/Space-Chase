@@ -12,38 +12,41 @@ import java.util.Objects;
  */
 public abstract class Item {
     /**
-     * path to images.
+     * Url path to images directory which contains images.
      */
     protected static final String PATH_TO_IMAGES = "images/";
     /**
-     * image path of the item.
+     * Url path of the default item image.
      */
     protected String imagePath = "bin.png";
     /**
-     * image view of the item.
+     * Image view of the item.
+     * @see javafx.scene.image.ImageView
      */
     protected ImageView imageView;
     /**
-     * id of the item.
+     * ID of the item which indicates the type of item.
      */
     protected char id = '_';
     /**
-     * level of the item.
+     * Level of the item that is on.
      */
     protected Level level;
     /**
-     * tile of the item.
+     * Tile of the item that is on.
      */
     protected Tile tile;
 
     /**
-     * @return tile
+     * Gets the tile that the item is on.
+     * @return tile of the item.
      */
     public Tile getTile() {
         return tile;
     }
 
     /**
+     * Sets the level of the item that is on.
      * @param level level of the item.
      */
     protected void setLevel(Level level) {
@@ -51,6 +54,7 @@ public abstract class Item {
     }
 
     /**
+     * Sets the tile of the item that is on.
      * @param tile tile of the item.
      */
     protected void setTile(Tile tile) {
@@ -78,7 +82,7 @@ public abstract class Item {
     }
 
     /**
-     * removes the item from level as it is collected.
+     * Removes the item from level as it is collected.
      * @param collector collector of the item.
      */
     protected void interact(Collector collector) {
@@ -88,7 +92,8 @@ public abstract class Item {
     }
 
     /**
-     * @return string of the item.
+     * @return Character 'L' indicating as an item
+     * and id indicating its type of item.
      */
     @Override
     public String toString() {

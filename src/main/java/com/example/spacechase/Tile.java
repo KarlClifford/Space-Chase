@@ -12,43 +12,42 @@ import java.util.HashMap;
  */
 public class Tile {
     /**
-     * tile size.
+     * Tile size.
      */
     public static final double TILE_SIZE = 50;
     /**
-     * colours of the tile.
+     * Colours of the tile.
      */
     private final char[] colours;
     /**
-     * x position.
+     * X position in the map.
      */
     private final int x;
     /**
-     * y position.
+     * Y position in the map.
      */
     private final int y;
     /**
-     * links of the tile.
+     * Links of the tile.
      */
     private final HashMap<Direction, Tile> links;
     /**
-     * neighbours of the tile.
+     * Neighbours of the tile.
      */
     private final HashMap<Direction, Tile> neighbours;
     /**
-     * item of the tile.
+     * Item of the tile.
      */
     private Item item;
     /**
-     * character of the tile.
+     * Character of the tile.
      */
     private Character character;
 
     /**
      * Creates a new Tile instance.
-     *
-     * @param x       x position.
-     * @param y       y position.
+     * @param x x position.
+     * @param y y position.
      * @param colours colours of the tile.
      */
     public Tile(int x, int y, String colours) {
@@ -61,9 +60,8 @@ public class Tile {
 
     /**
      * Sets the linking tile with given direction.
-     *
      * @param direction direction.
-     * @param tile      linking tile.
+     * @param tile linking tile.
      */
     public void setLink(Direction direction, Tile tile) {
         links.put(direction, tile);
@@ -71,15 +69,15 @@ public class Tile {
 
     /**
      * Sets the neighbour tile with given direction.
-     *
      * @param direction direction.
-     * @param tile      neighbour tile.
+     * @param tile neighbour tile.
      */
     public void setNeighbour(Direction direction, Tile tile) {
         neighbours.put(direction, tile);
     }
 
     /**
+     * Sets the item of the tile.
      * @param item item of the tile.
      */
     public void setItem(Item item) {
@@ -87,6 +85,7 @@ public class Tile {
     }
 
     /**
+     * Sets the character of the tile.
      * @param character character of the tile.
      */
     public void setCharacter(Character character) {
@@ -94,6 +93,7 @@ public class Tile {
     }
 
     /**
+     * Gets the x position of the tile.
      * @return x position.
      */
     public int getX() {
@@ -101,6 +101,7 @@ public class Tile {
     }
 
     /**
+     * Gets the y position of the tile.
      * @return y position.
      */
     public int getY() {
@@ -108,6 +109,7 @@ public class Tile {
     }
 
     /**
+     * Gets the colours of the tile.
      * @return colours of the tile.
      */
     public char[] getColours() {
@@ -115,6 +117,7 @@ public class Tile {
     }
 
     /**
+     * Gets the item in the tile.
      * @return item of the tile.
      */
     public Item getItem() {
@@ -122,6 +125,7 @@ public class Tile {
     }
 
     /**
+     * Gets the character in the tile.
      * @return character of the tile.
      */
     public Character getCharacter() {
@@ -130,7 +134,6 @@ public class Tile {
 
     /**
      * Gets linking tile in given direction.
-     *
      * @param direction direction.
      * @return linked tile in direction.
      */
@@ -140,7 +143,6 @@ public class Tile {
 
     /**
      * Gets neighbour tile in given direction.
-     *
      * @param direction direction.
      * @return neighbour tile in direction.
      */
@@ -149,13 +151,20 @@ public class Tile {
     }
 
     /**
+     * Return true if two tiles has common colour(s).
      * @param t tile to be compared.
      * @return whether there are any elements in colours.
      * of the tiles are the same.
      */
     public boolean equalsColour(Tile t) {
+        /* Loop through both tile colours and return true
+         if same colour is found. */
         for (char x : (t).getColours()) {
+            /* Loop through colours of this tile to see
+             if there is any match of colours to this
+             colour. */
             for (char y : colours) {
+                // return true if same colour is found.
                 if (x == y) {
                     return true;
                 }
@@ -165,11 +174,17 @@ public class Tile {
     }
 
     /**
+     * Returns whether object equals to this tile.
      * @param o object to be compared.
      * @return whether is the same tile or not.
      */
     @Override
     public boolean equals(Object o) {
+        /* If object is a tile, return whether the
+         tile shares the same x y position on map
+         (same position should be same tile).
+         Otherwise, return false as nothing else should
+         be equal to this tile. */
         if (o instanceof Tile t) {
             return t.getX() == x && t.getY() == y;
         } else {
@@ -177,12 +192,9 @@ public class Tile {
         }
     }
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
     /**
+     * String of the tile that contains its
+     * x, y position and its colours.
      * @return string of the tile.
      */
     @Override

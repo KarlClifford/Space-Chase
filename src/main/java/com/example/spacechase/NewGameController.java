@@ -15,13 +15,15 @@ import java.io.IOException;
  */
 public class NewGameController extends Controller {
     /**
-     * name text field.
+     * Name text field.
+     * @see javafx.scene.control.TextField
      */
     @FXML
     private TextField nameTextField;
 
     /**
-     * error message label.
+     * Error message label.
+     * @see javafx.scene.control.Label
      */
     @FXML
     private Label errorMessageLabel;
@@ -30,13 +32,16 @@ public class NewGameController extends Controller {
      * Creates a new profile if the username is valid, and goes
      * to level menu of the player. Otherwise, an error message
      * is shown.
-     * @throws IOException
+     * @throws IOException This exception is thrown when it fails
+     * to load the level menu scene.
      */
     @FXML
     private void onConfirmButtonClicked() throws IOException {
         String name = nameTextField.getText();
         boolean success = Data.createProfile(name);
 
+        /* If successful in creating a profile, load the level menu.
+         Otherwise, show an error message. */
         if (success) {
             LevelMenuController.setPlayerName(name);
             loadFxml("fxml/levelMenu.fxml");
