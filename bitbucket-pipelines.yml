@@ -20,7 +20,7 @@ pipelines:
           caches:
             - maven
           script:
-            - mvn javadoc:javadoc
+            - mvn javadoc:aggregate
           after-script:
             - apt-get update && apt-get install -y zip
             - zip -r JAVADOC.zip target/site/apidocs
