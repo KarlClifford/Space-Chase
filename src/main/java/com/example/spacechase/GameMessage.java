@@ -6,11 +6,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-
 /**
  * This class handles fetching and verification of
  * messages from the message of the day API.
- *
  * @author Karl Clifford
  * @version 1.0.0
  */
@@ -49,7 +47,7 @@ public class GameMessage {
                 .build();
 
         HttpResponse<String> response;
-        // Try to send the request to the server.
+        // Send the request to the server and store the response.
         response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -128,7 +126,7 @@ public class GameMessage {
             }
         }
 
-        // Add required suffix.
+        // Add the required suffix to the end of the message.
         stringBuilder.append("CS-230");
         // Store the length of the key result to be added as a prefix.
         int messageLength = stringBuilder.length();
