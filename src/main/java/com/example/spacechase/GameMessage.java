@@ -82,12 +82,12 @@ public class GameMessage {
              * index in splitMessage.
              */
             while (sorting) {
+                // Reset the stored ascii value to Z when we drop bellow A.
+                if (ascii < LOWEST_ASCII_VALUE) {
+                    ascii = HIGHEST_ASCII_VALUE;
+                }
                 // The index isn't 0, the value isn't sorted yet.
                 if (index >= 0) {
-                    // Reset the stored ascii value to Z when we drop bellow A.
-                    if (ascii == LOWEST_ASCII_VALUE - 1) {
-                        ascii = HIGHEST_ASCII_VALUE;
-                    }
                     ascii--;
                     index--;
                 } else {
@@ -111,12 +111,12 @@ public class GameMessage {
                  * its index in splitMessage.
                  */
                 while (sorting) {
+                    // Reset the stored ascii value to A when we go above Z.
+                    if (ascii > HIGHEST_ASCII_VALUE) {
+                        ascii = LOWEST_ASCII_VALUE;
+                    }
                     // The index isn't 0, the value isn't sorted yet.
                     if (index >= 0) {
-                        // Reset the stored ascii value to A when we go above Z.
-                        if (ascii == HIGHEST_ASCII_VALUE + 1) {
-                            ascii = LOWEST_ASCII_VALUE;
-                        }
                         ascii++;
                         index--;
                     } else {
@@ -147,7 +147,7 @@ public class GameMessage {
     public static String fetch() throws IOException, InterruptedException {
         // Get the key and store it.
         final String key = decodeKey(
-                getMessage("http://cswebcat.swansea.ac.uk/message"));
+                getMessage("http://cswebcat.swansea.ac.uk/puzzle"));
         // Output the message.
         return getMessage(
                 "http://cswebcat.swansea.ac.uk/message?solution=" + key);
