@@ -32,8 +32,13 @@ public class GameMessage {
      * Fetches a message from the MOTD endpoint.
      * @param url The endpoint to query.
      * @return String message.
+     * @throws IOException When a connection to the endpoint can't be
+     * established.
+     * @throws InterruptedException When the connection to the endpoint is
+     * interrupted.
      */
-    private static String getMessage(String url) {
+    private static String getMessage(String url)
+            throws IOException, InterruptedException {
         // Instantiate the client to use for the request.
         HttpClient client = HttpClient.newHttpClient();
 
@@ -45,14 +50,8 @@ public class GameMessage {
 
         HttpResponse<String> response;
         // Try to send the request to the server.
-        try {
-            response =
-                    client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            // I/O error occurred or the program was interrupted.
-            throw new Error("The program was interrupted "
-                    + "before the MOTD get request could be completed.");
-        }
+        response =
+                client.send(request, HttpResponse.BodyHandlers.ofString());
 
         return response.body();
     }
@@ -135,5 +134,22 @@ public class GameMessage {
         int messageLength = stringBuilder.length();
 
         return "%d%s".formatted(messageLength, stringBuilder);
+    }
+
+    /**
+     * Fetches the message of the day.
+     * @return String message of the day.
+     * @throws IOException When a connection to the endpoint can't be
+     * established.
+     * @throws InterruptedException When the connection to the endpoint is
+     * interrupted.
+     */
+    public static String fetch() throws IOException, InterruptedException {
+        // Get the key and store it.
+        final String key = decodeKey(
+                getMessage("http://cswebcat.swansea.ac.uk/message"));
+        // Output the message.
+        return getMessage(
+                "http://cswebcat.swansea.ac.uk/message?solution=" + key);
     }
 }
