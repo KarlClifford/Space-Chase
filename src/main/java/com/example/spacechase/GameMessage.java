@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.*;
 
 /**
  * This class handles fetching and verification of
@@ -66,64 +67,52 @@ public class GameMessage {
         // Initialise a string builder to append sorted messages to.
         StringBuilder stringBuilder = new StringBuilder();
 
+        // Initialise a stack to add the scrambled message to.
+        Queue<String> scrambledStack = new LinkedList<>();
+
         /*
-         * Iterate through the scrambled key and move characters forwards
-         * or backwards depending on the MOTD rules.
+         * Add all the characters from
+         * the message into the scrambled stack for sorting.
          */
-        for (int i = 0; i < splitMessage.length; i++) {
-            // Store the ASCII value of the current character.
-            int ascii = splitMessage[i];
-            int index = i;
-            boolean sorting = true;
-            /*
-             * The first value should be decremented by the same value as its
-             * index in splitMessage.
-             */
-            while (sorting) {
-                // Reset the stored ascii value to Z when we drop bellow A.
-                if (ascii < LOWEST_ASCII_VALUE) {
-                    ascii = HIGHEST_ASCII_VALUE;
-                }
-                // The index isn't 0, the value isn't sorted yet.
-                if (index >= 0) {
-                    ascii--;
-                    index--;
-                } else {
-                    // The value has been sorted, store it.
-                    stringBuilder.append((char) ascii);
-                    sorting = false;
-                }
-            }
+        for (char character : splitMessage) {
+            scrambledStack.add(String.valueOf(character));
+        }
+
+        /*
+         * Iterate through the stack and convert the characters according to the
+         * key rules. The first value should be decremented by the same number
+         * that is its index. The second value should be incremented by the same
+         * number as its index.
+         */
+        int index = 1;
+        while (!scrambledStack.isEmpty()) {
+            int ascii = scrambledStack.remove().charAt(0);
+
+            ascii -= index;
+            int result =
+                    (ascii < LOWEST_ASCII_VALUE)
+                            ?
+                            (HIGHEST_ASCII_VALUE - (LOWEST_ASCII_VALUE - ascii)
+                                    + 1)
+                            : ascii;
+
+            stringBuilder.append((char) result);
 
             // Move onto the next character.
-            i++;
+            index++;
 
-            // Check that we actually have another character to sort.
-            if (i < splitMessage.length) {
-                // Store the ASCII value of the current character.
-                ascii = splitMessage[i];
-                sorting = true;
-                index = i;
-                /*
-                 * The second value should be incremented by the same value as
-                 * its index in splitMessage.
-                 */
-                while (sorting) {
-                    // Reset the stored ascii value to A when we go above Z.
-                    if (ascii > HIGHEST_ASCII_VALUE) {
-                        ascii = LOWEST_ASCII_VALUE;
-                    }
-                    // The index isn't 0, the value isn't sorted yet.
-                    if (index >= 0) {
-                        ascii++;
-                        index--;
-                    } else {
-                        // The value has been sorted, store it.
-                        stringBuilder.append((char) ascii);
-                        sorting = false;
-                    }
-                }
+            // Check that we still have another value to sort.
+            if (!scrambledStack.isEmpty()) {
+                ascii = scrambledStack.remove().charAt(0);
+
+                ascii += index;
+                result =
+                        (ascii > HIGHEST_ASCII_VALUE) ? (LOWEST_ASCII_VALUE
+                                + (ascii - HIGHEST_ASCII_VALUE) - 1) : ascii;
+                stringBuilder.append((char) result);
             }
+            // Move onto the next character.
+            index++;
         }
 
         // Add the required suffix to the end of the message.
