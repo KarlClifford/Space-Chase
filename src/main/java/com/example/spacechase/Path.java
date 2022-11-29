@@ -151,7 +151,7 @@ public class Path implements Comparable<Path> {
         Path path = new Path();
         path.setFront(front.clone());
         path.setRear();
-        path.setExists(exists);
+        path.setExists(new HashSet<>(exists));
 
         return path;
     }
