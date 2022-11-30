@@ -25,4 +25,11 @@ public class MainMenuController extends Controller {
     private void onLoadGameButtonClicked() {
         loadFxml("fxml/loadGame.fxml");
     }
+
+    @FXML
+    private void onHighScoreTableButtonClicked() {
+        loadFxml("fxml/highScoreTable.fxml");
+    }
+
+
 }
