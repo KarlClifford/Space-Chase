@@ -10,7 +10,7 @@
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="0fe123a7-1b2a-4cee-b0a6-1f413482fba2" type="LOCAL_FILE" scope="All" description="group 40">
+        <ConfigurationLocation id="347122ac-ea30-479f-97c2-2ac19e850ce7" type="LOCAL_FILE" scope="All" description="group 40">
           $PROJECT_DIR$/group40-checkstyle.xml
           <option name="properties">
             <map>
