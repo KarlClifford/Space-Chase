@@ -145,7 +145,10 @@ public class GameState {
             levelStateLabel.setText("Level failed!");
             levelStateLabel.setTextFill(Color.RED);
             levelButton.setText("restart");
-            levelButton.setOnMouseClicked(e -> level.restart());
+            levelButton.setOnMouseClicked(e -> {
+                Controller controller = new Controller();
+                controller.loadFxml("fxml/advert.fxml");
+            } );
         }
 
         Button menuButton = new Button();
