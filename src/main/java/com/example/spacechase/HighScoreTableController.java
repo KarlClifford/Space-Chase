@@ -65,7 +65,8 @@ public class HighScoreTableController extends Controller {
      */
     @FXML
     private void initialize() {
-        File[] levels = new File(Objects.requireNonNull(
+        // Get the directory that contains all level files.
+        File[] levelFiles = new File(Objects.requireNonNull(
                         getClass().getResource("data/levels"))
                 .getPath()
         ).listFiles();
@@ -74,19 +75,19 @@ public class HighScoreTableController extends Controller {
          * If levels directory exists, create button and score
          * table for each level in the directory.
          */
-        if (levels != null) {
+        if (levelFiles != null) {
             /*
              * For each level in directory, create a button that
              * opens up a score board for that level.
              */
-            for (File level : levels) {
-                String name = level.getName();
-                String id = name.replaceAll("(.txt)", "");
+            for (File levelFile : levelFiles) {
+                String levelFileName = levelFile.getName();
+                String levelId = levelFileName.replaceAll("(.txt)", "");
 
-                VBox scoreBox = createScoreBox(name);
+                VBox scoreBox = createScoreBox(levelFileName);
 
                 Button button = new Button();
-                button.setText(id);
+                button.setText(levelId);
                 button.setOnMouseClicked(e -> {
                     showNode(scoreBox);
                     brightenNode(button);
@@ -149,10 +150,10 @@ public class HighScoreTableController extends Controller {
      * Creates a high score table for given level,
      * lists out profile names and their score in
      * descending order of scores.
-     * @param level level of this score board.
+     * @param levelFileName level file name of this score board.
      * @return a vBox of score box of level.
      */
-    private VBox createScoreBox(String level) {
+    private VBox createScoreBox(String levelFileName) {
         VBox scoreBox = new VBox();
         scoreBox.setSpacing(SCORE_BOX_SPACING);
 
@@ -167,7 +168,7 @@ public class HighScoreTableController extends Controller {
          */
         for (String name : profiles) {
             URL url = getClass().getResource(
-                    String.format("data/profiles/%s/%s", name, level));
+                    String.format("data/profiles/%s/%s", name, levelFileName));
 
             /*
              * If the player has unlocked that level,
