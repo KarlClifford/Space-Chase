@@ -19,9 +19,22 @@ import java.util.Map.Entry;
  * menu. It contains buttons where they can show high score
  * table for each level after clicking them.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class HighScoreTableController extends Controller {
+    /**
+     * Fxml file path of main menu.
+     * @see javafx.fxml
+     */
+    private static final String MAIN_MENU_FXML_PATH = "fxml/mainMenu.fxml";
+    /**
+     * URL path to profiles that contains all profiles data.
+     */
+    private static final String PATH_TO_PROFILES = "data/profiles/";
+    /**
+     * URL path to levels that contains all default levels.
+     */
+    private static final String PATH_TO_LEVELS = "data/levels/";
     /**
      * Opacity when level button is darken.
      * @see javafx.scene.control.Button
@@ -44,17 +57,18 @@ public class HighScoreTableController extends Controller {
     private static final int PROFILE_BOX_SPACING = 20;
     /**
      * Spacing of a score box.
+     * @see javafx.scene.layout.VBox
      */
     private static final int SCORE_BOX_SPACING = 10;
     /**
      * Container for level buttons.
-     *
      * @see javafx.scene.layout.HBox
      */
     @FXML
     private HBox levelButtonContainer;
     /**
      * Container for high score tables.
+     * @see javafx.scene.layout.AnchorPane
      */
     @FXML
     private AnchorPane scoreBoxContainer;
@@ -67,7 +81,7 @@ public class HighScoreTableController extends Controller {
     private void initialize() {
         // Get the directory that contains all level files.
         File[] levelFiles = new File(Objects.requireNonNull(
-                        getClass().getResource("data/levels"))
+                        getClass().getResource(PATH_TO_LEVELS))
                 .getPath()
         ).listFiles();
 
@@ -107,7 +121,7 @@ public class HighScoreTableController extends Controller {
      */
     @FXML
     private void onBackButtonClicked() {
-        loadFxml("fxml/mainMenu.fxml");
+        loadFxml(MAIN_MENU_FXML_PATH);
     }
 
     /**
@@ -168,7 +182,8 @@ public class HighScoreTableController extends Controller {
          */
         for (String name : profiles) {
             URL url = getClass().getResource(
-                    String.format("data/profiles/%s/%s", name, levelFileName));
+                    String.format(PATH_TO_PROFILES
+                            + "%s/%s", name, levelFileName));
 
             /*
              * If the player has unlocked that level,
@@ -178,10 +193,9 @@ public class HighScoreTableController extends Controller {
                 File file = new File(url.getPath());
 
                 /*
-                 * If the level file exists, create a HBox
-                 * that contains a name label and score label
-                 * and add it to the scores sorted map, so
-                 * that they are sorted by the scores.
+                 * Create a profile box that contains player name
+                 * and score, and add it to the sorted map (scores) where
+                 * it sorts them in descending order of scores.
                  */
                 if (file.exists()) {
                     int score = readScoreFromFile(file);
