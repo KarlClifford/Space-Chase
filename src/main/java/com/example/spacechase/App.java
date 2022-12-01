@@ -10,12 +10,14 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+import javax.swing.JOptionPane;
 
 /**
  * This class represents the main app of the game. It loads
  * the required fonts and launch the game with main menu.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Karl Clifford
+ * @version 1.0.1
  */
 public class App extends Application {
     /**
@@ -78,6 +80,21 @@ public class App extends Application {
      */
     public static void main(final String[] args) {
         loadFonts();
+        String messageOfTheDay;
+        // Try to retrieve the message of the day.
+        try {
+            messageOfTheDay = GameMessage.fetch();
+        } catch (IOException e) {
+            // The user isn't connected to the internet.
+            messageOfTheDay = ("Error: Couldn't get the message of the day. "
+                    + "Are you connected to the internet?");
+            // The user disconnected from the internet while fetching the MOTD.
+        } catch (InterruptedException e) {
+            messageOfTheDay = ("Error: Couldn't get the message of the day.");
+        }
+        // Show message of the day.
+        JOptionPane.showMessageDialog(null, messageOfTheDay);
+        // Launch game.
         launch(args);
     }
 
