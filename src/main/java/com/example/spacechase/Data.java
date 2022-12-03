@@ -1,11 +1,13 @@
 package com.example.spacechase;
 
+import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,7 +15,8 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.1.0
  */
 public interface Data {
     /**
@@ -96,28 +99,26 @@ public interface Data {
          where an entity can be a character or an item. */
         while (scan.hasNext()) {
             String itemData = scan.next();
+            String[] itemDataList = itemData.split(" ");
 
-            /* If the data has the correct length,
-             create a new entity and assign it to the tile. */
-            if (itemData.length() == DATA_LENGTH) {
-                char type = itemData.charAt(0);
-                char subType = itemData.charAt(1);
-                int a = Integer.parseInt(itemData.substring(2, 3));
-                int b = Integer.parseInt(itemData.substring(3, 4));
-
-                Tile tile = tileMap[b][a];
-
-                /* If the type of entity is an item,
-                 create an item and assign it to the tile.
-                 Otherwise, create a character and assign it
-                 to the tile. */
-                if (type == 'L') {
-                    Item item = createItemFromType(subType);
-                    tile.setItem(item);
-                } else {
+            for (String piece: itemDataList) {
+                /* Splitting up the string of the entity
+                   to get their class and location */
+                ArrayList<String> properties =
+                        new ArrayList<>(Arrays.asList(piece.split(",")));
+                String type = properties.get(0);
+                properties.remove(0);
+                String subType = properties.get(0);
+                properties.remove(0);
+                Tile tile = tileMap[Integer.parseInt(properties.get(1))]
+                        [Integer.parseInt(properties.get(0))];
+                if (type.equals("C")) {
                     Character character = createCharacterFromType(subType);
                     tile.setCharacter(character);
                     character.setTile(tile);
+                } else {
+                    Item item = createItemFromType(subType);
+                    tile.setItem(item);
                 }
             }
         }
@@ -129,30 +130,33 @@ public interface Data {
 
     /**
      * Gets the instance of the corresponding item from given id.
-     * @param type id of the item.
+     * @param type id of the item in string form.
      * @return instance of the item.
      */
-    private static Item createItemFromType(char type) {
+    private static Item createItemFromType(String type) {
         return switch (type) {
-            case '*' -> new Bomb();
-            case '|' -> new Lever();
-            case '@' -> new Clock();
-            case 'D' -> new Door();
+            case "*" -> new Bomb();
+            case "@" -> new Clock();
+            case "D" -> new Door();
+            case "#R" -> new Gate(Color.RED);
+            case "#G" -> new Gate(Color.GREEN);
+            case "|R" -> new Lever(Color.RED);
+            case "|G" -> new Lever(Color.GREEN);
             default -> null;
         };
     }
 
     /**
      * Gets the instance of the corresponding character from given id.
-     * @param type id of the character.
+     * @param type id of the character in string form.
      * @return instance of the character.
      */
-    private static Character createCharacterFromType(char type) {
+    private static Character createCharacterFromType(String type) {
         return switch (type) {
-            case 'P' -> new Player();
-            case '^' -> new FlyingAssassin();
-            case 'F' -> new FloorFollowing();
-            case 'S' -> new SmartThief();
+            case "P" -> new Player();
+            case "^" -> new FlyingAssassin();
+            case "F" -> new FloorFollowing();
+            case "S" -> new SmartThief();
             default -> null;
         };
     }

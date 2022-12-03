@@ -8,7 +8,8 @@ import java.util.Objects;
  * This abstract class represents a character. A character contains
  * components of id, tile, image, level.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.0.1
  */
 public abstract class Character {
     /**
@@ -124,6 +125,6 @@ public abstract class Character {
      */
     @Override
     public String toString() {
-        return String.format("C%s%s%s", id, tile.getX(), tile.getY());
+        return String.format("C,%s,%s,%s", id, tile.getX(), tile.getY());
     }
 }

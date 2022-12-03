@@ -8,7 +8,8 @@ import java.util.Arrays;
  * components of follow colour, last tile, directions, and all shared components
  * from collector.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.0.1
  */
 public class FloorFollowing extends Collector {
     /**
@@ -57,8 +58,10 @@ public class FloorFollowing extends Collector {
         for (Direction direction : directions) {
             Tile link = tile.getLinkedTile(direction);
 
-            // If a link exists and does not have a character on it.
-            if (link != null && link.getCharacter() == null) {
+            /* If a link exists and does not have a character on it
+               nor a gate on it. */
+            if (link != null && link.getCharacter() == null
+                && !(link.getItem() instanceof Gate)) {
                 /* If the tile matches any tiles in last tile,
                  rotate the order of directions. */
                 if (Arrays.stream(lastTile).anyMatch(t -> t == link)) {

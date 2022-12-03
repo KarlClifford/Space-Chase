@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * A smart thief contains components of all shared components
  * from character.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.1.0
  */
 public class SmartThief extends Collector {
     /**
@@ -19,11 +20,19 @@ public class SmartThief extends Collector {
     }
 
     /**
-     * Find the shortest path to the closest item.
+     * Find the shortest path to the closest interactive item.
      * @return path to item.
      */
     private Path getShortestPathToItem() {
-        ArrayList<Item> items = level.getItems();
+
+        /* Puts all the interactive items
+           in a list. (checks the item isn't a gate) */
+        ArrayList<Item> items = new ArrayList<>();
+        for (Item item: level.getItems()) {
+            if (!(item instanceof Gate)) {
+                    items.add(item);
+            }
+        }
         int distance = Integer.MAX_VALUE;
         Path finalPath = null;
 

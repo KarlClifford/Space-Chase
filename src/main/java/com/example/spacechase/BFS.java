@@ -7,7 +7,8 @@ import java.util.PriorityQueue;
  * It contains components of paths and nodes. A graph can be created by
  * providing a root tile, a path can then be calculated with an end tile.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.0.1
  */
 public class BFS {
     /**
@@ -52,11 +53,11 @@ public class BFS {
                  and append new path to paths if link is valid. */
                 for (Direction direction : Direction.values()) {
                     Tile link = tile.getLinkedTile(direction);
-
                     /* If a link exists
                      where it does not exist in the path
-                     and have no character on it, add a new path. */
+                     and have no character or gate on it, add a new path. */
                     if (link != null
+                            && !(link.getItem() instanceof Gate)
                             && link.getCharacter() == null
                             && !path.contains(link)) {
                         Path newPath = path.clone();

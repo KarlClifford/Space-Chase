@@ -25,7 +25,8 @@ import java.util.Objects;
  * initialised by start, restarted by restart and proceed
  * to next level by next.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.0.1
  */
 public class Level {
     /**
@@ -515,6 +516,7 @@ public class Level {
                                                     ? null
                                                     : item.toString()
                                                     + t.getX()
+                                                    + ","
                                                     + t.getY();
                                         })
                                         .filter(Objects::nonNull)
