@@ -29,11 +29,7 @@ public class Player extends Collector {
     @Override
     public void remove() {
         super.remove();
-        GameClock clock = level.getClock();
-        clock.setRun(false);
-
-        GameState state = level.getState();
-        state.createEndLevelMenu(false);
+        level.end(false);
     }
 
     /**

@@ -23,10 +23,7 @@ public class Door extends Item {
     @Override
     public void interact(Collector collector) {
         super.interact(collector);
-        GameClock clock = level.getClock();
-        clock.setRun(false);
 
-        GameState state = level.getState();
-        state.createEndLevelMenu(collector instanceof Player);
+        level.end(collector instanceof Player);
     }
 }
