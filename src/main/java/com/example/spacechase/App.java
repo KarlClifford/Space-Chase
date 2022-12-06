@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.File;
@@ -25,7 +26,7 @@ public class App extends Application {
      * Width of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_WIDTH = 600;
+    public static final double STAGE_WIDTH = 800;
     /**
      * Height of the stage.
      * @see javafx.stage
@@ -61,7 +62,7 @@ public class App extends Application {
     public void start(final Stage stage) throws IOException {
         Controller.setStage(stage);
 
-        AnchorPane pane = FXMLLoader.load(
+        Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
                         getClass().getResource("fxml/mainMenu.fxml")));
 

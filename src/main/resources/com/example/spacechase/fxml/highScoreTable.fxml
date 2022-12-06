@@ -5,41 +5,62 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.HighScoreTableController">
-   <children>
-      <Label text="High score table" textFill="WHITE">
-          <font>
-              <Font name="NeuropolXRg-Regular" size="16.0" />
-          </font>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.HighScoreTableController">
+   <center>
+      <VBox spacing="5.0" style="-fx-background-color: BLACK;" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane>
+               <content>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+                     <children>
+                        <HBox fx:id="levelButtonContainer" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <ScrollPane prefHeight="9999999.0">
+               <content>
+                  <AnchorPane fx:id="scoreBoxContainer" />
+               </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Label alignment="CENTER" text="High score table" textFill="WHITE" BorderPane.alignment="TOP_LEFT">
+         <font>
+            <Font name="NeuropolXRg-Regular" size="16.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
       </Label>
-      <ScrollPane prefHeight="37.0" prefWidth="580.0">
-        <content>
-          <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
-               <children>
-                  <HBox fx:id="levelButtonContainer" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
-      <ScrollPane prefHeight="265.0" prefWidth="580.0">
-        <content>
-          <AnchorPane fx:id="scoreBoxContainer" />
-        </content>
-      </ScrollPane>
-      <Button mnemonicParsing="false" onAction="#onBackButtonClicked" text="back">
+   </top>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#onBackButtonClicked" text="back" BorderPane.alignment="BOTTOM_LEFT">
          <font>
             <Font name="NeuropolXRg-Regular" size="12.0" />
          </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" />
+         </BorderPane.margin>
       </Button>
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-</VBox>
+   </bottom>
+</BorderPane>
