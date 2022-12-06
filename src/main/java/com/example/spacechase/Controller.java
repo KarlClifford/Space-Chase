@@ -39,9 +39,11 @@ public class Controller {
 
     /**
      * Loads a scene from fxml file and casts it to the stage.
+     * Gets the controller of the fxml file.
      * @param source source of the fxml file.
+     * @return controller of the fxml file.
      */
-    protected void loadFxml(String source) {
+    protected Object loadFxml(String source) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(source));
         Pane pane;
 
@@ -55,5 +57,7 @@ public class Controller {
         Scene scene = new Scene(pane, App.STAGE_WIDTH, App.STAGE_HEIGHT);
 
         stage.setScene(scene);
+
+        return fxmlLoader.getController();
     }
 }

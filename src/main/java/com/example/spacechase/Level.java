@@ -24,12 +24,14 @@ import java.util.Objects;
  * characters, items, player, labels and scene. It can be
  * initialised by start, restarted by restart and proceed
  * to next level by next.
+ *
  * @author Tristan Tsang
  * @version 1.0.0
  */
 public class Level {
     /**
      * X offset of canvas.
+     *
      * @see javafx.scene.canvas
      */
     public static final int CANVAS_OFFSET_X = 100;
@@ -38,15 +40,42 @@ public class Level {
      */
     public static final int TILE_SPACING = 5;
     /**
+     * Fxml file path of level menu.
+     *
+     * @see javafx.fxml
+     */
+    private static final String LEVEL_MENU_FXML_PATH = "fxml/levelMenu.fxml";
+    /**
+     * Fxml file path of pause menu.
+     *
+     * @see javafx.fxml
+     */
+    private static final String PAUSE_MENU_FXML_PATH = "fxml/pauseMenu.fxml";
+    /**
+     * Fxml file path of level ended menu.
+     *
+     * @see javafx.fxml
+     */
+    private static final String LEVEL_ENDED_MENU_FXML_PATH =
+            "fxml/levelEndedMenu.fxml";
+    /**
      * Spacing of HBox.
+     *
      * @see javafx.scene.layout.HBox
      */
     private static final int HBOX_SPACING = 10;
     /**
      * Normal font size.
+     *
      * @see javafx.scene.text.Font
      */
     private static final int NORM_FONT_SIZE = 16;
+    /**
+     * Font family.
+     *
+     * @see javafx.scene.text.Font
+     */
+    private static final String FONT_FAMILY = "neuropol x rg";
     /**
      * ID of the level.
      */
@@ -72,10 +101,6 @@ public class Level {
      */
     private final GameClock clock;
     /**
-     * State of the level.
-     */
-    private final GameState state;
-    /**
      * Player in level.
      */
     private Player player;
@@ -97,11 +122,13 @@ public class Level {
     private Label scoreLabel;
     /**
      * Scene of the level.
+     *
      * @see javafx.scene
      */
     private Scene scene;
     /**
      * Pane of the level.
+     *
      * @see javafx.scene.layout.BorderPane
      */
     private BorderPane pane;
@@ -123,12 +150,12 @@ public class Level {
         this.tileMap = tileMap;
         this.characters = new ArrayList<>();
         this.items = new ArrayList<>();
-        this.state = new GameState(this);
         this.clock = new GameClock(this);
     }
 
     /**
      * Gets id of the level.
+     *
      * @return id of the level.
      */
     public int getId() {
@@ -137,6 +164,7 @@ public class Level {
 
     /**
      * Gets the file that the level is read from.
+     *
      * @return file of the level.
      */
     public File getFile() {
@@ -145,6 +173,7 @@ public class Level {
 
     /**
      * Gets the scene of the level.
+     *
      * @return the scene of the level.
      */
     public Scene getScene() {
@@ -153,6 +182,7 @@ public class Level {
 
     /**
      * Gets the characters in the level.
+     *
      * @return all the characters in the map.
      */
     public ArrayList<Character> getCharacters() {
@@ -161,6 +191,7 @@ public class Level {
 
     /**
      * Gets the items in the level.
+     *
      * @return all the items in the map.
      */
     public ArrayList<Item> getItems() {
@@ -169,6 +200,7 @@ public class Level {
 
     /**
      * Gets the current game time of the level.
+     *
      * @return game time.
      */
     public double getTime() {
@@ -177,6 +209,7 @@ public class Level {
 
     /**
      * Gets the game clock instance of the level.
+     *
      * @return game clock of the level.
      */
     public GameClock getClock() {
@@ -184,15 +217,8 @@ public class Level {
     }
 
     /**
-     * Gets the game state instance of the level.
-     * @return state of the level.
-     */
-    public GameState getState() {
-        return state;
-    }
-
-    /**
      * Sets the new time and updates it in the label.
+     *
      * @param time new time to be set.
      */
     public void setTime(double time) {
@@ -202,6 +228,7 @@ public class Level {
 
     /**
      * Removes the item from items.
+     *
      * @param item item.
      */
     public void removeItem(Item item) {
@@ -210,6 +237,7 @@ public class Level {
 
     /**
      * Removes the character from characters.
+     *
      * @param character character.
      */
     public void removeCharacter(Character character) {
@@ -221,17 +249,10 @@ public class Level {
      * and starts the level.
      */
     public void start() {
-        timeLabel = new Label();
-        timeLabel.setText("Time: " + time);
-        timeLabel.setTextFill(Color.WHITE);
-        timeLabel.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
+        createTimeLabel();
+        createScoreLabel();
 
-        scoreLabel = new Label();
-        scoreLabel.setText("Score: " + score);
-        scoreLabel.setTextFill(Color.WHITE);
-        scoreLabel.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
-
-        Button pauseButton = state.createPauseButton();
+        Button pauseButton = createPauseButton();
 
         HBox hBox = new HBox();
         hBox.setSpacing(HBOX_SPACING);
@@ -257,7 +278,64 @@ public class Level {
     }
 
     /**
+     * Creates a label for the time of level.
+     */
+    private void createTimeLabel() {
+        timeLabel = new Label("Time: " + time);
+        timeLabel.setTextFill(Color.WHITE);
+        timeLabel.setFont(Font.font(FONT_FAMILY, NORM_FONT_SIZE));
+    }
+
+    /**
+     * Creates a label for the score of level.
+     */
+    private void createScoreLabel() {
+        scoreLabel = new Label("Score: " + score);
+        scoreLabel.setTextFill(Color.WHITE);
+        scoreLabel.setFont(Font.font(FONT_FAMILY, NORM_FONT_SIZE));
+    }
+
+    /**
+     * Creates a pause button that can pause the level
+     * by stopping the game clock and showing the pause
+     * level menu.
+     *
+     * @return pause button.
+     */
+    private Button createPauseButton() {
+        Button pauseButton = new Button("||");
+        pauseButton.setFont(Font.font(FONT_FAMILY, NORM_FONT_SIZE));
+        pauseButton.setOnMouseClicked(e -> {
+            clock.setRun(false);
+
+            Data.saveLevel(this);
+            PauseMenuController controller = (PauseMenuController)
+                    new Controller()
+                            .loadFxml(PAUSE_MENU_FXML_PATH);
+            controller.start(this);
+        });
+
+        return pauseButton;
+    }
+
+    /**
+     * Ends the level by stopping the game clock
+     * and loads the level ended menu.
+     *
+     * @param isCleared level is cleared or not.
+     */
+    public void end(boolean isCleared) {
+        clock.setRun(false);
+
+        LevelEndedMenuController controller = (LevelEndedMenuController)
+                new Controller()
+                        .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
+        controller.start(this, isCleared);
+    }
+
+    /**
      * Draws all the tiles and entities.
+     *
      * @param group pane of the canvas.
      */
     private void draw(Group group) {
@@ -338,6 +416,7 @@ public class Level {
 
     /**
      * Gets colour from a given character.
+     *
      * @param c character of the colour.
      * @return the colour.
      */
@@ -353,6 +432,7 @@ public class Level {
 
     /**
      * Gets the linking tile in direction.
+     *
      * @param tile      initial tile.
      * @param direction direction.
      * @return tile in the given direction of the given tile.
@@ -365,6 +445,7 @@ public class Level {
      * Recursively search through each tile that links with
      * the current tile and return the tile that has the
      * same colour(s) with initial tile.
+     *
      * @param current   current tile.
      * @param goal      initial tile.
      * @param direction direction
@@ -413,7 +494,8 @@ public class Level {
 
     /**
      * Gets the neighbour tile of a tile.
-     * @param tile initial tile.
+     *
+     * @param tile      initial tile.
      * @param direction direction to search for.
      * @return the neighbour tile of the given tile.
      */
@@ -459,7 +541,7 @@ public class Level {
              Otherwise, start the next level. */
             if (nextFile == null) {
                 Controller controller = new Controller();
-                controller.loadFxml("fxml/levelMenu.fxml");
+                controller.loadFxml(LEVEL_MENU_FXML_PATH);
             } else {
                 Level newLevel = Data.readLevel(nextFile);
                 newLevel.start();
@@ -471,6 +553,7 @@ public class Level {
 
     /**
      * Call and concat all tiles toString from the level map.
+     *
      * @return string of all tiles from the map.
      */
     private String getMapString() {
@@ -486,6 +569,7 @@ public class Level {
 
     /**
      * Call and concat all characters toString from the map.
+     *
      * @return string of all characters from the map.
      */
     private String getCharactersString() {
@@ -502,6 +586,7 @@ public class Level {
 
     /**
      * Call and concat all items toString from the map.
+     *
      * @return string of all items from the map.
      */
     private String getItemsString() {
@@ -525,6 +610,7 @@ public class Level {
     /**
      * Returns the height of the map, width of the map, time of the level,
      * score of the level, string data of all tiles, characters and items.
+     *
      * @return string of all contents in level.
      */
     @Override
