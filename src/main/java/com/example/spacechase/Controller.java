@@ -2,7 +2,7 @@ package com.example.spacechase;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class Controller {
      */
     protected void loadFxml(String source) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(source));
-        AnchorPane pane;
+        Pane pane;
 
         // Try to load the fxml file, throws exception if loader fails.
         try {
