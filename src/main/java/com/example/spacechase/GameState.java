@@ -141,35 +141,43 @@ public class GameState {
             levelStateLabel.setTextFill(Color.GREEN);
             levelButton.setText("next");
             levelButton.setOnMouseClicked(e -> level.next());
+            Button menuButton = new Button();
+            menuButton.setText("menu");
+            menuButton.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
+            menuButton.setOnMouseClicked(e -> {
+                Controller controller = new Controller();
+                controller.loadFxml("fxml/levelMenu.fxml");
+            });
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.CENTER);
+            vBox.setSpacing(VBOX_SPACING);
+            vBox.setStyle("-fx-background-color: BLACK");
+            vBox.getChildren().addAll(levelStateLabel, levelButton, menuButton);
+            BorderPane pane = new BorderPane();
+            pane.setStyle("-fx-background-color: BLACK");
+            pane.setCenter(vBox);
+            Scene scene = new Scene(pane);
+            Controller.setScene(scene);
+
         } else {
             levelStateLabel.setText("Level failed!");
             levelStateLabel.setTextFill(Color.RED);
-            levelButton.setText("restart");
+            levelButton.setText("return to main menu");
             levelButton.setOnMouseClicked(e -> {
                 Controller controller = new Controller();
                 controller.loadFxml("fxml/advert.fxml");
             } );
+            VBox vBox = new VBox();
+            vBox.setAlignment(Pos.CENTER);
+            vBox.setSpacing(VBOX_SPACING);
+            vBox.setStyle("-fx-background-color: BLACK");
+            vBox.getChildren().addAll(levelStateLabel, levelButton);
+            BorderPane pane = new BorderPane();
+            pane.setStyle("-fx-background-color: BLACK");
+            pane.setCenter(vBox);
+            Scene scene = new Scene(pane);
+            Controller.setScene(scene);
         }
 
-        Button menuButton = new Button();
-        menuButton.setText("menu");
-        menuButton.setFont(Font.font("neuropol x rg", NORM_FONT_SIZE));
-        menuButton.setOnMouseClicked(e -> {
-            Controller controller = new Controller();
-            controller.loadFxml("fxml/levelMenu.fxml");
-        });
-
-        VBox vBox = new VBox();
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(VBOX_SPACING);
-        vBox.setStyle("-fx-background-color: BLACK");
-        vBox.getChildren().addAll(levelStateLabel, levelButton, menuButton);
-
-        BorderPane pane = new BorderPane();
-        pane.setStyle("-fx-background-color: BLACK");
-        pane.setCenter(vBox);
-
-        Scene scene = new Scene(pane);
-        Controller.setScene(scene);
     }
 }
