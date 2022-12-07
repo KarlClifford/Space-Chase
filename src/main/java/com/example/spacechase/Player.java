@@ -7,7 +7,8 @@ import javafx.scene.Scene;
  * A player contains components of direction and all shared
  * components from character.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Karl Clifford
+ * @version 1.0.1
  */
 public class Player extends Collector {
     /**
@@ -68,4 +69,26 @@ public class Player extends Collector {
 
         direction = null;
     }
+
+    /**
+     * Overrides the pickup method to add a pickup sound when
+     * the character interacts with an item on the level.
+     */
+    @Override
+    protected void update() {
+        super.update();
+
+        Item item = tile.getItem();
+        // If there is an item, interact with it.
+        if (item != null) {
+            // Initialise a new sound engine, so we can play a sound effect.
+            SoundEngine soundEngine = new SoundEngine();
+            // Play the reward sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.REWARD,
+                    SoundEngine.SOUND_EFFECT_VOLUME,
+                    false);
+            item.interact(this);
+        }
+        }
 }

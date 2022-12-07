@@ -26,7 +26,8 @@ import java.util.Objects;
  * to next level by next.
  *
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Karl Clifford
+ * @version 1.0.1
  */
 public class Level {
     /**
@@ -275,6 +276,13 @@ public class Level {
 
         player.initialize(scene);
         clock.initialize();
+
+        // Stop the playing music and start the level music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.LEVEL_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**
@@ -331,6 +339,22 @@ public class Level {
                 new Controller()
                         .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
         controller.start(this, isCleared);
+
+        // Stop the playing music.
+        App.MUSIC_PLAYER.stopMusic();
+        // Initialise the sound engine to play a sound effect.
+        SoundEngine soundEngine = new SoundEngine();
+        if (isCleared) {
+            // Play win sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.WIN,
+                    SoundEngine.MUSIC_VOLUME, false);
+        } else {
+            // Play loose sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.LOOSE,
+                    SoundEngine.MUSIC_VOLUME, false);
+        }
     }
 
     /**
@@ -525,6 +549,12 @@ public class Level {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        // Stop the playing music and start the level music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.LEVEL_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**
@@ -549,6 +579,13 @@ public class Level {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+
+        // Stop the playing music and start the level music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.LEVEL_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**
