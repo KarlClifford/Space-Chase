@@ -150,7 +150,10 @@ public interface Data {
     private static Character createCharacterFromType(char type) {
         return switch (type) {
             case 'P' -> new Player();
-            case '^' -> new FlyingAssassin();
+            case '^' -> new FlyingAssassin('^');
+            case '>' -> new FlyingAssassin('>');
+            case '<' -> new FlyingAssassin('<');
+            case '⌄' -> new FlyingAssassin('⌄');
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
             default -> null;
