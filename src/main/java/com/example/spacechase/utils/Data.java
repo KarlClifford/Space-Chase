@@ -21,7 +21,7 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
- * @version 1.0.1
+ * @version 1.0.2
  */
 public interface Data {
     /**
@@ -220,7 +220,9 @@ public interface Data {
             for (File f : file.listFiles()) {
                 deleteFiles(f);
             }
+
             file.delete();
+
         } else {
             file.delete();
         }
@@ -231,11 +233,14 @@ public interface Data {
      * @param name player name.
      */
     static void removeProfile(String name) {
-        URL url = getUrl(PROFILES_PATH + name);
+        URL url = getUrl(PROFILES_PATH);
+        File folder = new File(String.format("%s/%s",
+                url.getPath(),
+                name
+        ));
 
-        // If path to profile exists.
-        if (url != null) {
-            File folder = new File(url.getPath());
+        // Delete profile folder if exists.
+        if (folder.exists()) {
             deleteFiles(folder);
         }
     }
@@ -252,9 +257,9 @@ public interface Data {
     static File copyLevel(int id, String name) throws IOException {
         String fileName = id + ".txt";
 
-        File input = new File(getUrl(String.format("%s/%s",
-                LEVELS_PATH,
-                fileName)).getPath());
+        File input = new File(String.format("%s/%s",
+                getUrl(LEVELS_PATH).getPath(),
+                fileName));
         File output = new File(String.format("%s/%s/%s",
                 getUrl(PROFILES_PATH).getPath(),
                 name,

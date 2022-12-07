@@ -11,7 +11,7 @@ import java.util.Arrays;
  * This class represents a game clock. A game clock contains
  * components of a game loop and time interval for each character update.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class GameClock {
     /**
@@ -71,6 +71,7 @@ public class GameClock {
                 // If there is no more time, then stop the timer.
                 if (time <= 0) {
                     this.stop();
+                    level.end(false);
                 }
 
                 // If game is running, update every character in the map.

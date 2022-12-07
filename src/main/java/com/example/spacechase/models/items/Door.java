@@ -21,12 +21,18 @@ public class Door extends Item {
 
     /**
      * Begins the end game procedure.
-     * @param collector collector of this door.
+     * @param collector collector that reached this door.
      */
     @Override
     public void interact(Collector collector) {
-        super.interact(collector);
+        boolean haveItemsInMap = level.getItems()
+                .stream()
+                .anyMatch(item -> !(item instanceof Door));
 
-        level.end(collector instanceof Player);
+        // End the level if there is no other items in the map.
+        if (!haveItemsInMap) {
+            super.interact(collector);
+            level.end(collector instanceof Player);
+        }
     }
 }

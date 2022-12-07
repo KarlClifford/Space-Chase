@@ -20,9 +20,13 @@ import java.util.Map.Entry;
  * menu. It contains buttons where they can show high score
  * table for each level after clicking them.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @version 1.0.2
  */
 public class HighScoreTableController extends Controller {
+    /**
+     * Number limit of scores showing in table.
+     */
+    private static final int LIMIT = 10;
     /**
      * Opacity when level button is darken.
      * @see javafx.scene.control.Button
@@ -170,7 +174,10 @@ public class HighScoreTableController extends Controller {
          */
         for (String name : profiles) {
             URL url = Data.getUrl(
-                    String.format("%s/%s/%s", Data.PROFILES_PATH, name, levelFileName));
+                    String.format("%s/%s/%s",
+                            Data.PROFILES_PATH,
+                            name,
+                            levelFileName));
 
             /*
              * If the player has unlocked that level,
@@ -197,22 +204,26 @@ public class HighScoreTableController extends Controller {
         /*
          * Turn the map to a list and sort them by values in reverse order.
          */
-        List<Map.Entry<String,Integer>> sortedList = new LinkedList<>(scores.entrySet());
+        List<Map.Entry<String, Integer>> sortedList = new LinkedList<>(
+                scores.entrySet());
         sortedList.sort(Entry.comparingByValue(Comparator.reverseOrder()));
 
         /*
          * Add each HBox to the score box with their ranking labels.
          */
         int n = 1;
-        for (Map.Entry<String,Integer> entry : sortedList) {
-            String name = entry.getKey();
-            int score = entry.getValue();
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            // Only the top profiles up to limit.
+            if (n <= LIMIT) {
+                String name = entry.getKey();
+                int score = entry.getValue();
 
-            HBox profileBox = createProfileBox(name, score);
-            HBox hBox = new HBox(new Label(n + ". "), profileBox);
-            scoreBox.getChildren().add(hBox);
+                HBox profileBox = createProfileBox(name, score);
+                HBox hBox = new HBox(new Label(n + ". "), profileBox);
+                scoreBox.getChildren().add(hBox);
 
-            n++;
+                n++;
+            }
         }
 
         return scoreBox;

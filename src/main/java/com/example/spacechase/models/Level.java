@@ -35,7 +35,7 @@ import java.util.Arrays;
  * to next level by next.
  *
  * @author Tristan Tsang
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class Level {
     /**
@@ -276,7 +276,7 @@ public class Level {
 
         pane = new BorderPane();
         pane.setTop(hBox);
-        pane.setLeft(group);
+        pane.setCenter(group);
         pane.setStyle("-fx-background-color: BLACK");
 
         scene = new Scene(pane);
@@ -325,21 +325,6 @@ public class Level {
         });
 
         return pauseButton;
-    }
-
-    /**
-     * Ends the level by stopping the game clock
-     * and loads the level ended menu.
-     *
-     * @param isCleared level is cleared or not.
-     */
-    public void end(boolean isCleared) {
-        clock.setRun(false);
-
-        LevelEndedMenuController controller = (LevelEndedMenuController)
-                new Controller()
-                        .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
-        controller.start(this, isCleared);
     }
 
     /**
@@ -512,15 +497,45 @@ public class Level {
     }
 
     /**
+     * Ends the level by stopping the game clock
+     * and loads the level ended menu.
+     *
+     * @param isCleared level is cleared or not.
+     */
+    public void end(boolean isCleared) {
+        clock.setRun(false);
+
+        String playerName = file.getParentFile().getName();
+
+        /* Tries to replace this level with fresh start to player profile.
+         Copy next level if level is cleared.
+         Catches if there is an I/O exception while loading the file. */
+        try {
+            Data.copyLevel(id, playerName);
+
+            /* Copy the file for next level to player profile if level is
+             cleared. */
+            if (isCleared) {
+                Data.copyLevel(id + 1, playerName);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        LevelEndedMenuController controller = (LevelEndedMenuController)
+                new Controller()
+                        .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
+        controller.start(this, isCleared);
+    }
+
+    /**
      * Restarts the level.
      */
     public void restart() {
-        String playerName = file.getParentFile().getName();
-
-        /* Tries to copy the same level and replace the current level.
+        /* Tries to load the same level.
          Catches if there is an I/O exception while loading the file. */
         try {
-            File file = Data.copyLevel(id, playerName);
             Level newLevel = Data.readLevel(file);
             newLevel.start();
         } catch (IOException ex) {
@@ -532,15 +547,15 @@ public class Level {
      * Starts the next level.
      */
     public void next() {
-        String playerName = file.getParentFile().getName();
-
-        /* Tries to copy the next level to player profile.
+        /* Tries to load the next level from player profile.
          Catches if there is an I/O exception while loading the file. */
         try {
-            File nextFile = Data.copyLevel(id + 1, playerName);
+            File nextFile = new File(String.format("%s/%d.txt",
+                    file.getParentFile().getPath(),
+                    id + 1));
             /* Goes back to level menu if there's no next level.
              Otherwise, start the next level. */
-            if (nextFile == null) {
+            if (!nextFile.exists()) {
                 Controller controller = new Controller();
                 controller.loadFxml(LEVEL_MENU_FXML_PATH);
             } else {
