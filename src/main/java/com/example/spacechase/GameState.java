@@ -13,7 +13,8 @@ import javafx.scene.text.Font;
  * This class represents a game state. A game state contains
  * components of pause menu and end game menu.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Daniel Halsall
+ * @version 1.0.1
  */
 public class GameState {
     /**
@@ -166,7 +167,7 @@ public class GameState {
             levelButton.setOnMouseClicked(e -> {
                 Controller controller = new Controller();
                 controller.loadFxml("fxml/advert.fxml");
-            } );
+            });
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.CENTER);
             vBox.setSpacing(VBOX_SPACING);
