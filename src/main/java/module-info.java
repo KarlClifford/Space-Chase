@@ -4,6 +4,7 @@ module com.example.spacechase {
     requires javafx.media;
     requires java.net.http;
     requires java.desktop;
+    requires json.simple;
 
     opens com.example.spacechase to javafx.fxml;
     exports com.example.spacechase;

@@ -516,6 +516,7 @@ public class Level {
             /* Copy the file for next level to player profile if level is
              cleared. */
             if (isCleared) {
+                Data.addHighScore(id, playerName, score);
                 Data.copyLevel(id + 1, playerName);
             }
         } catch (IOException e) {

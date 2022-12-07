@@ -9,9 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -20,7 +19,7 @@ import java.util.Map.Entry;
  * menu. It contains buttons where they can show high score
  * table for each level after clicking them.
  * @author Tristan Tsang
- * @version 1.0.2
+ * @version 1.0.3
  */
 public class HighScoreTableController extends Controller {
     /**
@@ -160,52 +159,17 @@ public class HighScoreTableController extends Controller {
      * @return a vBox of score box of level.
      */
     private VBox createScoreBox(String levelFileName) {
-        System.out.println(levelFileName);
         VBox scoreBox = new VBox();
         scoreBox.setSpacing(SCORE_BOX_SPACING);
 
-        Map<String, Integer> scores = new HashMap<>();
-
-        String[] profiles = Data.getProfiles();
-
-        /*
-         * Check through each profile to see if is possible to add
-         * profile to the high score table.
-         */
-        for (String name : profiles) {
-            URL url = Data.getUrl(
-                    String.format("%s/%s/%s",
-                            Data.PROFILES_PATH,
-                            name,
-                            levelFileName));
-
-            /*
-             * If the player has unlocked that level,
-             * read that level file.
-             */
-            if (url != null) {
-                File file = new File(url.getPath());
-
-                /*
-                 * If the level file exists, create a HBox
-                 * that contains a name label and score label
-                 * and add it to the scores sorted map, so
-                 * that they are sorted by the scores.
-                 */
-                if (file.exists()) {
-                    int score = readScoreFromFile(file);
-
-                    scores.put(name, score);
-                }
-
-            }
-        }
+        int id = Integer.parseInt(levelFileName.replaceAll("(.txt)", ""));
+        Map<String, Integer> highScores = Data.getHighScore(id);
 
         /*
          * Turn the map to a list and sort them by values in reverse order.
          */
         List<Map.Entry<String, Integer>> sortedList = new LinkedList<>(
-                scores.entrySet());
+                highScores.entrySet());
         sortedList.sort(Entry.comparingByValue(Comparator.reverseOrder()));
 
         /*
@@ -250,24 +214,5 @@ public class HighScoreTableController extends Controller {
         return profileBox;
     }
 
-    /**
-     * Reads the score from the level.
-     * @param file file of a level.
-     * @return score of that level. Returns -1 if
-     * file is not found.
-     */
-    private int readScoreFromFile(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-            scanner.useDelimiter("\n");
 
-            String line = scanner.next();
-            String[] split = line.split("\\s");
-            String scoreInStr = split[split.length - 1];
-
-            return Integer.parseInt(scoreInStr);
-        } catch (FileNotFoundException e) {
-            return -1;
-        }
-    }
 }
