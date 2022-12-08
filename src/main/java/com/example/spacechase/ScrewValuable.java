@@ -1,26 +1,28 @@
 package com.example.spacechase;
 
 /**
- * Abstract class which models all the different
- * scoring items available in the game.
- * This class represents Score, as well as the
- * interact method to increase the score counter.
+ * Class that models the screw, which is the
+ * lowest scoring item. Worth 5 points.
  * @author Jamie Quinn
- *
+ * @version 1.0.0
  */
-public abstract class Valuable extends Item {
+public class ScrewValuable extends Valuable {
 
     /**
-     * Attribute that holds the score value per item.
+     * Creates a new instance of the item.
      */
-    protected int score;
+    public ScrewValuable() {
+        this.id = '+';
+        //TODO: check if image filename matches.
+        this.imagePath = "screw.png";
+        this.score = 5;
+    }
 
     /**
-     * Increases the score counter if the player picks
-     * up the valuable item.
+     * Increases the score counter if the player
+     * object interacts with it.
      * @param collector collector of the item.
      */
-    @Override
     public void interact(Collector collector) {
         super.interact(collector);
 
