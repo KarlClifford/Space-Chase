@@ -67,6 +67,11 @@
                   <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Button>
+            <Button alignment="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="35.0" prefWidth="163.0" style="-fx-background-color: BLACK;" text="Settings" textFill="WHITE" textOverrun="CLIP">
+               <font>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </center>

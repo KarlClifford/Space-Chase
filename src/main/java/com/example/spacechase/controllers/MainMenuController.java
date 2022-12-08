@@ -11,11 +11,32 @@ import javafx.fxml.FXML;
  */
 public class MainMenuController extends Controller {
     /**
+     * Fxml file path of new game.
+     * @see javafx.fxml
+     */
+    private static final String NEW_GAME_FXML_PATH = "fxml/newGame.fxml";
+    /**
+     * Fxml file path of load game.
+     * @see javafx.fxml
+     */
+    private static final String LOAD_GAME_FXML_PATH = "fxml/loadGame.fxml";
+    /**
+     * Fxml file path of high score table.
+     * @see javafx.fxml
+     */
+    private static final String HIGH_SCORE_TABLE_PATH = "fxml/highScoreTable.fxml";
+    /**
+     * Fxml file path of settings.
+     * @see javafx.fxml
+     */
+    private static final String SETTINGS_FXML_PATH = "fxml/settings.fxml";
+
+    /**
      * Goes to new game menu when clicked.
      */
     @FXML
     private void onNewGameButtonClicked() {
-        loadFxml("fxml/newGame.fxml");
+        loadFxml(NEW_GAME_FXML_PATH);
     }
 
     /**
@@ -23,12 +44,23 @@ public class MainMenuController extends Controller {
      */
     @FXML
     private void onLoadGameButtonClicked() {
-        loadFxml("fxml/loadGame.fxml");
+        loadFxml(LOAD_GAME_FXML_PATH);
     }
 
+    /**
+     * Goes to high score table when clicked.
+     */
     @FXML
     private void onHighScoreTableButtonClicked() {
-        loadFxml("fxml/highScoreTable.fxml");
+        loadFxml(HIGH_SCORE_TABLE_PATH);
+    }
+
+    /**
+     * Goes to settings when clicked.
+     */
+    @FXML
+    private void onSettingsButtonClicked() {
+        loadFxml(SETTINGS_FXML_PATH);
     }
 
 
