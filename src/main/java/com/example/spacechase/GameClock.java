@@ -1,14 +1,17 @@
 package com.example.spacechase;
 
 import javafx.animation.AnimationTimer;
+
 import java.time.Clock;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * This class represents a game clock. A game clock contains
  * components of a game loop and time interval for each character update.
+ *
+ * @author Rami Abdulrazzaq
  * @author Tristan Tsang
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class GameClock {
     /**
@@ -27,6 +30,10 @@ public class GameClock {
      * Time interval between each tick of the npc.
      */
     private static final double NPC_TICK = 1000.0;
+
+    private static final double BOMB_TICK = 1000.0;
+
+    private static final double BOMB_EXPLODE = 3000.0;
     /**
      * Determines whether game is running.
      */
@@ -38,6 +45,7 @@ public class GameClock {
 
     /**
      * Creates a new GameClock instance.
+     *
      * @param level level of the clock.
      */
     public GameClock(Level level) {
@@ -55,15 +63,14 @@ public class GameClock {
             private long last = clock.millis();
             private long playerLast = last;
             private long npcLast = last;
+            private long bombLast = last;
 
             @Override
             public void handle(long l) {
                 long now = clock.millis();
                 double time = level.getTime();
-                final Character[] characters = level
-                        .getCharacters()
-                        .toArray(Character[]::new)
-                        .clone();
+                final ArrayList<Character> characters = level.getCharacters();
+                final ArrayList<Item> items = level.getItems();
 
                 // If there is no more time, then stop the timer.
                 if (time <= 0) {
@@ -83,7 +90,7 @@ public class GameClock {
                      then update the player in level. */
                     if (now - playerLast >= PLAYER_TICK) {
                         // Update each player in all the characters of level.
-                        for (Player player : Arrays.stream(characters)
+                        for (Player player : characters.stream()
                                 .filter(c -> c instanceof Player)
                                 .toArray(Player[]::new)) {
                             player.update();
@@ -106,6 +113,25 @@ public class GameClock {
 
                         npcLast = now;
                     }
+                    for (Item item : items) {
+                        if (item instanceof Bomb && ((Bomb) item).isTriggered()) {
+
+                        }
+                    }
+                        /*
+                        if (now - bombLast >= BOMB_TICK &&
+                                item instanceof Bomb &&
+                                ((Bomb) item).isTriggered()) {
+
+                            //change image here
+                        /* Update each non-player in all the characters
+                         of level.
+                            if (now - bombLast >= BOMB_EXPLODE) {
+                                ((Bomb) item).destroyItems();
+                            }
+
+                        }
+                    bombLast = now;*/
                 }
             }
         };
@@ -115,6 +141,7 @@ public class GameClock {
 
     /**
      * Sets run.
+     *
      * @param r boolean of run.
      */
     public void setRun(boolean r) {
