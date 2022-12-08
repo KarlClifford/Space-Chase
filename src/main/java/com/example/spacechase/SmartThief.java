@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * A smart thief contains components of all shared components
  * from character.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public class SmartThief extends Collector {
     /**
@@ -15,7 +16,7 @@ public class SmartThief extends Collector {
      */
     public SmartThief() {
         this.id = 'S';
-        this.imagePath = "smart_thief.png";
+        this.imagePath = "SmartThief.gif";
     }
 
     /**

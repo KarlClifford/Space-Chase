@@ -26,7 +26,8 @@ import java.util.Objects;
  * to next level by next.
  *
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public class Level {
     /**
@@ -223,7 +224,7 @@ public class Level {
      */
     public void setTime(double time) {
         this.time = time;
-        timeLabel.setText(String.format("Time: %.2f", time));
+        timeLabel.setText(String.format("Oxygen: %.2f", time));
     }
 
     /**
@@ -281,7 +282,7 @@ public class Level {
      * Creates a label for the time of level.
      */
     private void createTimeLabel() {
-        timeLabel = new Label("Time: " + time);
+        timeLabel = new Label("Oxygen: " + time);
         timeLabel.setTextFill(Color.WHITE);
         timeLabel.setFont(Font.font(FONT_FAMILY, NORM_FONT_SIZE));
     }
@@ -386,8 +387,7 @@ public class Level {
                     item.setLevel(this);
                     item.setTile(tile);
 
-                    ImageView image = item.createImageView(tile.getX(),
-                            tile.getY());
+                    ImageView image = item.createImageView();
                     group.getChildren().add(image);
                     items.add(item);
                 }

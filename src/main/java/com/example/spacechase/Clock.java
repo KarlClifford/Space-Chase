@@ -4,7 +4,8 @@ package com.example.spacechase;
  * This class represents a clock.
  * A clock keeps track of the remaining time left while playing the game.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public class Clock extends Item {
     /**
@@ -17,7 +18,7 @@ public class Clock extends Item {
      */
     public Clock() {
         this.id = '@';
-        this.imagePath = "clock.png";
+        this.imagePath = "OxygenTank.gif";
     }
 
     /**
