@@ -63,7 +63,7 @@ public class App extends Application {
 
         Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        getClass().getResource("fxml/mainMenu.fxml")));
+                        getClass().getResource("fxml/titleScreen.fxml")));
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
