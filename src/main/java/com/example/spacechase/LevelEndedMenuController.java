@@ -8,10 +8,11 @@ import javafx.scene.paint.Color;
 /**
  * This class represents a controller for level ended
  * menu. This menu contains an action button that can
- * either restarts the level or proceeds to the next
+ * either loads an advert or proceeds to the next
  * level.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Daniel Halsall
+ * @version 1.0.1
  */
 public class LevelEndedMenuController extends Controller {
     /**
@@ -29,7 +30,7 @@ public class LevelEndedMenuController extends Controller {
     /**
      * Text that shows on restart button.
      */
-    private static final String RESTART_TEXT = "restart";
+    private static final String ADD_TEXT = "restart";
     /**
      * Fxml file path of level menu.
      * @see javafx.fxml
@@ -42,8 +43,8 @@ public class LevelEndedMenuController extends Controller {
     @FXML
     private Label levelEndedLabel;
     /**
-     * Button that either restarts the level
-     * or transfers to the next level.
+     * Button that transfers to the next level
+     * or loads advert depending on win or loss.
      * @see javafx.scene.control.Button
      */
     @FXML
@@ -61,7 +62,7 @@ public class LevelEndedMenuController extends Controller {
          * If the level is cleared, display a level cleared
          * scene with next button that leads to next level.
          * Otherwise, display a level failed scene with
-         * restart button that restarts the level.
+         * restart button that loads an advert.
          */
         if (isLevelCleared) {
             levelEndedLabel.setText(LEVEL_CLEARED_TEXT);
@@ -71,8 +72,13 @@ public class LevelEndedMenuController extends Controller {
         } else {
             levelEndedLabel.setText(LEVEL_FAILED_TEXT);
             levelEndedLabel.setTextFill(Color.RED);
-            actionButton.setText(RESTART_TEXT);
-            actionButton.setOnMouseClicked(e -> level.restart());
+            actionButton.setText(ADD_TEXT);
+            actionButton.setOnMouseClicked(e -> {
+            AdvertController controller = (AdvertController)
+                    new Controller()
+                            .loadFxml("fxml/advert.fxml");
+            controller.start(level);
+            });
         }
     }
 
