@@ -13,7 +13,8 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Daniel Halsall
+ * @version 1.0.1
  */
 public interface Data {
     /**
