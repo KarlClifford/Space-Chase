@@ -11,7 +11,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -23,9 +22,8 @@ import java.util.Objects;
 
 /**
  * Data interface handles game file loading.
- *
  * @author Tristan Tsang
- * @version 1.0.3
+ * @version 1.0.4
  */
 public interface Data {
     /**
@@ -33,17 +31,29 @@ public interface Data {
      */
     String DATA_FORMAT = "[RYGB]{1,4}|[RYGB]{1,4}[*|@DP^FS][RYGB_]";
     /**
+     * Name of directory that contains all data of the game.
+     */
+    String DATA_DIRECT = "data";
+    /**
+     * Name of directory that contains all profiles of the game.
+     */
+    String PROFILES_DIRECT = "profiles";
+    /**
+     * Name of directory that contains all levels of the game.
+     */
+    String LEVELS_DIRECT = "levels";
+    /**
      * Path of directory that contains all profiles data.
      */
-    String PROFILES_PATH = "data/profiles";
+    String PROFILES_PATH = DATA_DIRECT + "/" + PROFILES_DIRECT;
     /**
      * Path of directory that contains all default levels.
      */
-    String LEVELS_PATH = "data/levels";
+    String LEVELS_PATH = DATA_DIRECT + "/" + LEVELS_DIRECT;
     /**
      * Path to high scores json file.
      */
-    String HIGH_SCORE_PATH = "data/highscores.json";
+    String HIGH_SCORE_PATH = DATA_DIRECT + "/highscores.json";
     /**
      * Fixed length for each tile data.
      */
@@ -51,7 +61,6 @@ public interface Data {
 
     /**
      * Gets the url object from a path.
-     *
      * @param path path of the source.
      * @return url object for the path.
      * @see java.net.URL
@@ -61,8 +70,56 @@ public interface Data {
     }
 
     /**
+     * Gets a file object from given path.
+     * @param path path of file.
+     * @return File in given path.
+     */
+    static File getFileFromPath(String path) {
+        /*
+         * Tries to get the file from url.
+         * Catches if directory is not found.
+         */
+        try {
+            URL url = getUrl(path);
+            return new File(url.getPath());
+
+        } catch (Exception e) {
+            // Creates the directory and gets the file again.
+            int currentPathIndex = path.lastIndexOf("/");
+            String directoryPath = path.substring(0, currentPathIndex);
+            String fileName = path.substring(currentPathIndex + 1);
+
+            createFileFromPath(directoryPath, fileName);
+
+            return getFileFromPath(path);
+        }
+    }
+
+    /**
+     * Creates a file of given name in path.
+     * @param path path of the file.
+     * @param fileName name of the file.
+     */
+    static void createFileFromPath(String path, String fileName) {
+        File directory = getFileFromPath(path);
+        File file = new File(directory.getPath() + fileName);
+        file.mkdirs();
+    }
+
+    /**
+     * Gets the directory of the player data.
+     * @param name name of the player.
+     * @return directory of the player data.
+     */
+    static File getPlayerDirectory(String name) {
+        return new File(String.format("%s/%s",
+                getFileFromPath(PROFILES_PATH).getPath(),
+                name
+        ));
+    }
+
+    /**
      * Reads the level file and returns a level object.
-     *
      * @param file level file.
      * @return Level object.
      * @throws FileNotFoundException This exception is thrown
@@ -143,7 +200,6 @@ public interface Data {
 
     /**
      * Creates an entity from type.
-     *
      * @param type character code for the entity type.
      * @return an entity created from given type.
      */
@@ -164,17 +220,13 @@ public interface Data {
 
     /**
      * Gets all the levels for a player.
-     *
      * @param name player name.
      * @return a list of level objects created from the player's profile folder.
      */
     static Level[] getLevelsFromProfile(String name) {
-        URL url = getUrl(String.format("%s/%s", PROFILES_PATH, name));
-        File playerFolder = new File(url.getPath());
-
         return Arrays.stream(
                         Objects.requireNonNull(
-                                playerFolder.listFiles()
+                                getPlayerDirectory(name).listFiles()
                         ))
                 .map(file -> {
                     /* Try to read levels out of a file,
@@ -190,16 +242,12 @@ public interface Data {
 
     /**
      * Gets all the profiles from profile directory.
-     *
      * @return names of all the profiles.
      */
     static String[] getProfiles() {
-        URL url = getUrl(PROFILES_PATH);
-        File profileFolders = new File(url.getPath());
-
         return Arrays.stream(
                         Objects.requireNonNull(
-                                profileFolders.listFiles()
+                                getFileFromPath(PROFILES_PATH).listFiles()
                         ))
                 .map(File::getName)
                 .toArray(String[]::new);
@@ -207,16 +255,18 @@ public interface Data {
 
     /**
      * Creates a new profile from given name.
-     *
      * @param name player name.
      * @return whether it is a successful creation or not.
      * @throws IOException This exception is thrown when
      *                     fail to copy the level.
      */
     static boolean createProfile(String name) throws IOException {
-        URL url = getUrl(PROFILES_PATH);
-        File folder = new File(url.getPath() + name);
+        File folder = getPlayerDirectory(name);
 
+        /*
+         * Returns true if success in creating a new profile directory.
+         * Otherwise, returns false.
+         */
         if (folder.exists()) {
             return false;
         } else {
@@ -228,7 +278,6 @@ public interface Data {
 
     /**
      * Deletes the file or all the sub files in the directory.
-     *
      * @param file file or folder to be deleted.
      */
     private static void deleteFiles(File file) {
@@ -248,16 +297,11 @@ public interface Data {
     }
 
     /**
-     * Removes a profile of given name in the files.
-     *
+     * Removes a profile and all high scores of given name in the files.
      * @param name player name.
      */
     static void removeProfile(String name) {
-        URL url = getUrl(PROFILES_PATH);
-        File folder = new File(String.format("%s/%s",
-                url.getPath(),
-                name
-        ));
+        File folder = getPlayerDirectory(name);
 
         // Delete profile folder if exists.
         if (folder.exists()) {
@@ -270,25 +314,25 @@ public interface Data {
     /**
      * Copies a level file with given id and pastes it in player's
      * profile folder.
-     *
      * @param id   id of the level.
      * @param name player name.
-     * @return The file copied.
      * @throws IOException This exception is thrown when it fails
      *                     in copying the files.
      */
     static void copyLevel(int id, String name) throws IOException {
         String fileName = id + ".txt";
 
+        // Level file to copy from.
         File input = new File(String.format("%s/%s",
-                getUrl(LEVELS_PATH).getPath(),
-                fileName));
-        File output = new File(String.format("%s/%s/%s",
-                getUrl(PROFILES_PATH).getPath(),
-                name,
+                getFileFromPath(LEVELS_PATH).getPath(),
                 fileName));
 
-        // Copy file if input file exists.
+        // Level file to be pasted to.
+        File output = new File(String.format("%s/%s",
+                getPlayerDirectory(name).getPath(),
+                fileName));
+
+        // Copy file to output if input file exists.
         if (input.exists()) {
             Files.copy(input.toPath(),
                     output.toPath(),
@@ -298,7 +342,6 @@ public interface Data {
 
     /**
      * Saves the snapshot of the given level.
-     *
      * @param level level to be saved.
      */
     static void saveLevel(Level level) {
@@ -326,10 +369,12 @@ public interface Data {
         HashMap<Integer, HashMap<String, Integer>> highScores = getHighScores();
         HashMap<String, Integer> level = highScores.get(id);
 
+        // Replace the score if new score is higher or there's no old score.
         int lastScore = level.getOrDefault(name, score);
         score = Math.max(lastScore, score);
         level.put(name, score);
 
+        // Write the map as json string and write it to the file.
         String jsonString = JSONValue.toJSONString(highScores);
         writeJson(HIGH_SCORE_PATH, jsonString);
     }
@@ -347,6 +392,7 @@ public interface Data {
             level.remove(name);
         }
 
+        // Write the map as json string and write it to the file.
         String jsonString = JSONValue.toJSONString(highScores);
         writeJson(HIGH_SCORE_PATH, jsonString);
     }
