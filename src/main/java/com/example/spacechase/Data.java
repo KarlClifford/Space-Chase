@@ -77,9 +77,11 @@ public interface Data {
         while (!isLastTile) {
             String colours = scan.next();
 
-            /* If the colour string has the correct length,
-             create a tile and assign it to corresponding position
-             to the 2D tile map array. */
+            /*
+             * If the colour string has the correct length,
+             * create a tile and assign it to corresponding position
+             * to the 2D tile map array.
+             */
             if (colours.length() == DATA_LENGTH) {
                 tileMap[y][x] = new Tile(x, y, colours);
 
@@ -95,15 +97,23 @@ public interface Data {
             }
         }
 
-        /* While there is entity data, creates a new entity
-         where an entity can be a character or an item. */
+        /*
+         * While there is entity data, creates a new entity
+         * where an entity can be a character or an item.
+         */
         while (scan.hasNext()) {
             String itemData = scan.next();
             String[] itemDataList = itemData.split(" ");
 
+            /*
+             * Looping through each piece of item data
+             * and creating either an item or character
+             */
             for (String piece: itemDataList) {
-                /* Splitting up the string of the entity
-                   to get their class and location */
+                /*
+                 * Splitting up the string of the entity
+                 * to get their class and location.
+                 */
                 ArrayList<String> properties =
                         new ArrayList<>(Arrays.asList(piece.split(",")));
                 String type = properties.get(0);
@@ -112,6 +122,11 @@ public interface Data {
                 properties.remove(0);
                 Tile tile = tileMap[Integer.parseInt(properties.get(1))]
                         [Integer.parseInt(properties.get(0))];
+                /*
+                 * Checking the type of the data
+                 * if it's a character type it will make a character
+                 * otherwise it'll create an item.
+                 */
                 if (type.equals("C")) {
                     Character character = createCharacterFromType(subType);
                     tile.setCharacter(character);
@@ -174,8 +189,10 @@ public interface Data {
                         playerFolder.listFiles()
                 ))
                 .map(file -> {
-                    /* Try to read levels out of a file,
-                     Catches exception when file is not found. */
+                    /*
+                     * Try to read levels out of a file,
+                     * Catches exception when file is not found.
+                     */
                     try {
                         return Data.readLevel(file);
                     } catch (FileNotFoundException e) {
@@ -224,9 +241,11 @@ public interface Data {
      * @param file file or folder to be deleted.
      */
     private static void deleteFiles(File file) {
-        /* If this file is a directory, delete all of its sub-files
-         and delete this directory.
-         Otherwise, delete the file. */
+        /*
+         * If this file is a directory, delete all of its sub-files
+         * and delete this directory.
+         * Otherwise, delete the file.
+         */
         if (file.isDirectory()) {
             for (File f : file.listFiles()) {
                 deleteFiles(f);
@@ -285,8 +304,10 @@ public interface Data {
         File file = level.getFile();
         String content = level.toString();
 
-        /* Try to overwrite the file with contents of the level.
-         Catch if there is an I/O exception on writing file. */
+        /*
+         * Try to overwrite the file with contents of the level.
+         * Catch if there is an I/O exception on writing file.
+         */
         try {
             FileWriter writer = new FileWriter(file);
             writer.write(content);

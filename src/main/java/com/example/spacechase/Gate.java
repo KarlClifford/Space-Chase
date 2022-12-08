@@ -21,6 +21,11 @@ public class Gate extends Item {
      */
     public Gate(Color type) {
         this.id = '#';
+        /*
+         * Assigns the correct imagePath
+         * to the gate. If the gate is red
+         * the file will be the red gate etc
+         */
         if (type == Color.RED) {
             this.imagePath = "gate_red.png";
         } else {

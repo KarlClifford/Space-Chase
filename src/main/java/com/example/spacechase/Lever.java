@@ -22,6 +22,10 @@ public class Lever extends Item {
      */
     public Lever(Color type) {
         this.id = '|';
+        /*
+         * Matches the right image file
+         * to the corresponding colour of lever
+         */
         if (type == Color.RED) {
             this.imagePath = "lever_red.png";
         } else {
@@ -40,23 +44,32 @@ public class Lever extends Item {
 
     /**
      * Removes all gates of the same colour as the lever.
+     * @param opener opener of the gate.
      */
-    public void removeGates() {
+    public void removeGates(Collector opener) {
         ArrayList<Item> gates = new ArrayList<>();
         /*
-        Gets all the gates of the same colour.
+         * Gets all the gates of the same colour
+         * and adds it to a list with others.
          */
         for (Item item : level.getItems()) {
+            // If item's class is a Gate
             if (item.getClass() == Gate.class) {
+                /*
+                 * If gate's colour is the same as this lever
+                 * add it to the list of gates of that colour
+                 */
                 if (((Gate) item).getColour() == getColour()) {
                     gates.add(item);
                 }
             }
         }
+        /*
+         * Goes through a list of gates of the same colour
+         * Removes them from the game.
+         */
         for (Item gate : gates) {
-            level.removeItem(gate);
-            gate.tile.setItem(null);
-            gate.imageView.setOpacity(0);
+            gate.interact(opener);
         }
     }
 
@@ -67,7 +80,6 @@ public class Lever extends Item {
     @Override
     public void interact(Collector collector) {
         super.interact(collector);
-
-        removeGates();
+            removeGates(collector);
     }
 }

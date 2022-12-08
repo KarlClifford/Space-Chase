@@ -25,10 +25,13 @@ public class SmartThief extends Collector {
      */
     private Path getShortestPathToItem() {
 
-        /* Puts all the interactive items
-           in a list. (checks the item isn't a gate) */
+        /*
+         * Puts all the interactive items
+         * in a list. (checks the item isn't a gate)
+         */
         ArrayList<Item> items = new ArrayList<>();
         for (Item item: level.getItems()) {
+            // Checks if item is not a gate
             if (!(item instanceof Gate)) {
                     items.add(item);
             }
@@ -36,21 +39,32 @@ public class SmartThief extends Collector {
         int distance = Integer.MAX_VALUE;
         Path finalPath = null;
 
-        /* Calculate a path for each item in the map
-        and use the path that has the shortest
-        distance. */
+        /*
+         * Calculate a path for each item in the map
+         * and use the path that has the shortest
+         * distance.
+         */
         for (Item item : items) {
             Tile itemTile = item.getTile();
 
             BFS graph = new BFS(tile);
             Path path = graph.search(itemTile);
-            int tileDistance = path.size();
 
-            /* If this path is a shorter path than
-             the last path, then use this path. */
-            if (tileDistance < distance) {
-                distance = tileDistance;
-                finalPath = path;
+            /*
+             * Checks if the path is null
+             * meaning the path is unblocked
+             */
+            if (path != null) {
+                int tileDistance = path.size();
+                /*
+                 * If this path is a shorter path than
+                 * the last path, then use this path.
+                 */
+                if (tileDistance < distance) {
+                    distance = tileDistance;
+                    finalPath = path;
+                }
+
             }
         }
         return finalPath;
@@ -63,14 +77,18 @@ public class SmartThief extends Collector {
     void move() {
         Path path = getShortestPathToItem();
 
-        /* If a path is found, dequeue the first
-         tile (as first would be current tile),
-         and move onto the second tile if it exists. */
+        /*
+         * If a path is found, dequeue the first
+         * tile (as first would be current tile),
+         * and move onto the second tile if it exists.
+         */
         if (path != null) {
             path.dequeue();
 
-            /* If the path is not empty, dequeue the
-            tile and move onto that tile. */
+            /*
+             * If the path is not empty, dequeue the
+             * tile and move onto that tile.
+             */
             if (!path.isEmpty()) {
                 Tile newTile = path.dequeue();
                 changeTile(newTile);
