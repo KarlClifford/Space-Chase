@@ -181,7 +181,7 @@ public interface Data {
      * @param name player name.
      * @return a list of level objects created from the player's profile folder.
      */
-    static Level[] getLevels(String name) {
+    static Level[] getLevelsFromProfile(String name) {
         File playerFolder = new File(PATH_TO_PROFILES + name);
 
         return Arrays.stream(

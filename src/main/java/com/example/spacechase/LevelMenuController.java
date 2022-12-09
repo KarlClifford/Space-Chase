@@ -37,7 +37,7 @@ public class LevelMenuController extends Controller {
      */
     @FXML
     private void initialize() {
-        Level[] levels = Data.getLevels(playerName);
+        Level[] levels = Data.getLevelsFromProfile(playerName);
 
         // Creates a button for each level exists in player profile.
         for (Level level : levels) {
