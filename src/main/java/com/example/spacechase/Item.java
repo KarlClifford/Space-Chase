@@ -8,7 +8,8 @@ import java.util.Objects;
  * This abstract class represents an item. An item contains
  * components of id, tile, level and image.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public abstract class Item {
     /**
@@ -63,21 +64,19 @@ public abstract class Item {
 
     /**
      * Creates an image of the item at position (x,y).
-     * @param x x position.
-     * @param y y position.
+     *
      * @return image of the item.
      */
-    protected ImageView createImageView(int x, int y) {
+    protected ImageView createImageView() {
         imageView = new ImageView(Objects.requireNonNull(getClass()
                         .getResource(PATH_TO_IMAGES + imagePath))
                 .toExternalForm());
-        imageView.setFitHeight(Tile.TILE_SIZE / 2);
+        //imageView.setFitHeight(Tile.TILE_SIZE / 2);
         imageView.setPreserveRatio(true);
-        imageView.relocate((Tile.TILE_SIZE + Level.TILE_SPACING) * x
-                        + Tile.TILE_SIZE / 2 / 2,
+        imageView.relocate(
+                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
                 Level.CANVAS_OFFSET_X
-                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * y
-                        + Tile.TILE_SIZE / 2 / 2);
+                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
         return imageView;
     }
 

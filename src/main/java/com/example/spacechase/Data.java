@@ -138,6 +138,10 @@ public interface Data {
             case '|' -> new Lever();
             case '@' -> new Clock();
             case 'D' -> new Door();
+            case 'Y' -> new Valuable('Y');
+            case '+' -> new Valuable('+');
+            case 'T' -> new Valuable('T');
+            case 'G' -> new Valuable('G');
             default -> null;
         };
     }
