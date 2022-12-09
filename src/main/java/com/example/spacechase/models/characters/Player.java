@@ -9,7 +9,8 @@ import javafx.scene.Scene;
  * A player contains components of direction and all shared
  * components from character.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public class Player extends Collector {
     /**
@@ -21,7 +22,7 @@ public class Player extends Collector {
      */
     public Player() {
         this.id = 'P';
-        this.imagePath = "player.png";
+        this.imagePath = "AstronautGif.gif";
     }
 
     /**
