@@ -151,7 +151,6 @@ public interface Data {
     private static Item createItemFromType(char type) {
         return switch (type) {
             case '*' -> new Bomb();
-            case '|' -> new Lever();
             case '@' -> new Clock();
             case 'D' -> new Door();
             case 'Y' -> new Valuable('Y');
