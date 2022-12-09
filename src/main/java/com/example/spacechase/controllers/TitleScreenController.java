@@ -67,7 +67,19 @@ public class TitleScreenController extends Controller {
         fadeIn.setCycleCount(1);
         fadeIn.setNode(titleLabel);
         fadeIn.play();
-        fadeIn.setOnFinished(e -> fadeOutTitle());
+        fadeIn.setOnFinished(e -> {
+            try {
+                /*
+                 * Pause the fade animation to give enough opportunity to
+                 * read the game message.
+                 */
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                // The sleep operation was cancelled.
+                throw new RuntimeException(ex);
+            }
+            fadeOutTitle();
+        });
     }
 
     /**
