@@ -73,7 +73,7 @@ public class Bomb extends Item {
      * @param y y position of an item.
      */
     private void destroyItem(int x, int y) {
-        Image explosion = createImage("images/blackHolecounting.gif");
+        Image explosion = createImage("images/blackHoleexplosion.gif");
 
         Tile[][] tiles = level.getTileMap();
         Tile tile = tiles[y][x];
