@@ -2,6 +2,7 @@ package com.example.spacechase;
 
 import com.example.spacechase.controllers.Controller;
 import com.example.spacechase.services.GameMessage;
+import com.example.spacechase.utils.Data;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  * the required fonts and launch the game with main menu.
  * @author Tristan Tsang
  * @author Karl Clifford
- * @version 1.0.1
+ * @version 1.0.2
  */
 public class App extends Application {
     /**
@@ -47,10 +48,9 @@ public class App extends Application {
      */
     public static final int FONT_SIZE = 10;
     /**
-     * Path of fonts.
+     * Name of directory that contains all fonts.
      */
-    private static final String PATH_TO_FONTS =
-            "src/main/resources/com/example/spacechase/fonts";
+    private static final String FONTS_DIRECT = "fonts";
 
     /**
      * @param stage primary stage of the game.
@@ -103,9 +103,10 @@ public class App extends Application {
      * Loads every font from the font resource folder.
      */
     private static void loadFonts() {
+        File fontsDirect = Data.getFileFromPath(FONTS_DIRECT);
+
         // For every font file in fonts directory, load the font.
-        for (File file : Objects.requireNonNull(
-                new File(PATH_TO_FONTS).listFiles())) {
+        for (File file : Objects.requireNonNull(fontsDirect.listFiles())) {
             Font.loadFont("file:" + file.getPath(), FONT_SIZE);
         }
     }

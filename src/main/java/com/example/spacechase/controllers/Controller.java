@@ -24,6 +24,14 @@ public class Controller {
     private static Stage stage;
 
     /**
+     * Gets the stage of the game.
+     * @return stage of the game.
+     */
+    public static Stage getStage() {
+        return stage;
+    }
+
+    /**
      * Sets the stage of the game.
      * @param stage stage of the game.
      */

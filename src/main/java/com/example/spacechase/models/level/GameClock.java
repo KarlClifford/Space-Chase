@@ -5,7 +5,7 @@ import com.example.spacechase.models.characters.Character;
 import com.example.spacechase.models.characters.Player;
 import javafx.animation.AnimationTimer;
 import java.time.Clock;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * This class represents a game clock. A game clock contains
@@ -63,10 +63,7 @@ public class GameClock {
             public void handle(long l) {
                 long now = clock.millis();
                 double time = level.getTime();
-                final Character[] characters = level
-                        .getCharacters()
-                        .toArray(Character[]::new)
-                        .clone();
+                final ArrayList<Character> characters = level.getCharacters();
 
                 // If there is no more time, then stop the timer.
                 if (time <= 0) {
@@ -87,7 +84,7 @@ public class GameClock {
                      then update the player in level. */
                     if (now - playerLast >= PLAYER_TICK) {
                         // Update each player in all the characters of level.
-                        for (Player player : Arrays.stream(characters)
+                        for (Player player : characters.stream()
                                 .filter(c -> c instanceof Player)
                                 .toArray(Player[]::new)) {
                             player.update();
