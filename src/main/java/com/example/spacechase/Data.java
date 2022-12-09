@@ -13,7 +13,8 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Daniel Halsall
+ * @version 1.0.1
  */
 public interface Data {
     /**
@@ -154,7 +155,10 @@ public interface Data {
     private static Character createCharacterFromType(char type) {
         return switch (type) {
             case 'P' -> new Player();
-            case '^' -> new FlyingAssassin();
+            case '^' -> new FlyingAssassin('^');
+            case '>' -> new FlyingAssassin('>');
+            case '<' -> new FlyingAssassin('<');
+            case '⌄' -> new FlyingAssassin('⌄');
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
             default -> null;
