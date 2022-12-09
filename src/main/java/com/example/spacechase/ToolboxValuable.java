@@ -7,15 +7,17 @@ package com.example.spacechase;
  * @version 1.0.0
  */
 public class ToolboxValuable extends Valuable {
-
+    /**
+     * The score value of the toolbox item that will increase
+     * the score counter after it is interacted.
+     */
+    private static final int SCORE = 15;
     /**
      * Creates a new instance of the item.
      */
     public ToolboxValuable() {
         this.id = 'T';
-        //TODO: check if image filename matches.
         this.imagePath = "toolbox.png";
-        this.score = 15;
     }
 
     /**
@@ -30,7 +32,7 @@ public class ToolboxValuable extends Valuable {
 
         /* if the player collects the item, increase the score counter.*/
         if (collector instanceof Player) {
-            level.setScore(score + score);
+            level.setScore(score + SCORE);
         }
     }
 }

@@ -7,15 +7,18 @@ package com.example.spacechase;
  * @version 1.0.0
  */
 public class GasValuable extends Valuable {
-    
+    /**
+     * The score value of the gas item that will increase the
+     * score counter after it is interacted with.
+     */
+    private static final int SCORE = 20;
+
     /**
      * Creates a new instance of the item.
      */
     public GasValuable() {
         this.id = 'G';
-        //TODO: check if image filename matches.
-        this.imagePath = "gascan.png";
-        this.score = 20;
+        this.imagePath = "gas.png";
     }
 
     /**
@@ -30,7 +33,7 @@ public class GasValuable extends Valuable {
 
         /* if the player collects the item, increase the score counter.*/
         if (collector instanceof Player) {
-            level.setScore(score + score);
+            level.setScore(score + SCORE);
         }
     }
 }

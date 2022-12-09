@@ -9,12 +9,6 @@ package com.example.spacechase;
  *
  */
 public abstract class Valuable extends Item {
-
-    /**
-     * Attribute that holds the score value per item.
-     */
-    protected int score;
-
     /**
      * Increases the score counter if the player picks
      * up the valuable item.

@@ -7,15 +7,17 @@ package com.example.spacechase;
  * @version 1.0.0
  */
 public class ScrewdriverValuable extends Valuable {
-
+    /**
+     * The score value of the screwdriver item that will increase
+     * the score counter after it is interacted with.
+     */
+    private static final int SCORE = 10;
     /**
      * Creates a new instance of the item.
      */
     public ScrewdriverValuable() {
         this.id = 'Y';
-        //TODO: check if image filename matches.
         this.imagePath = "screwdriver.png";
-        this.score = 10;
     }
 
     /**
@@ -30,7 +32,7 @@ public class ScrewdriverValuable extends Valuable {
 
         /* if the player collects the item, increase the score counter.*/
         if (collector instanceof Player) {
-            level.setScore(score + score);
+            level.setScore(score + SCORE);
         }
     }
 }

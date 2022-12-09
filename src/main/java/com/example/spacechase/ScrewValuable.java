@@ -7,15 +7,17 @@ package com.example.spacechase;
  * @version 1.0.0
  */
 public class ScrewValuable extends Valuable {
-
+    /**
+     * The score value of the screw item that will increase the
+     * score counter after it is interacted with.
+     */
+    private static final int SCORE = 5;
     /**
      * Creates a new instance of the item.
      */
     public ScrewValuable() {
         this.id = '+';
-        //TODO: check if image filename matches.
         this.imagePath = "screw.png";
-        this.score = 5;
     }
 
     /**
@@ -30,7 +32,7 @@ public class ScrewValuable extends Valuable {
 
         /* if the player collects the item, increase the score counter.*/
         if (collector instanceof Player) {
-            level.setScore(score + score);
+            level.setScore(score + SCORE);
         }
     }
 }
