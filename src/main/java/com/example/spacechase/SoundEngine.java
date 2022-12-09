@@ -14,7 +14,6 @@ import java.util.Objects;
  * @version 1.0.0
  */
 public class SoundEngine {
-
     /**
      * Volume the game music should play at.
      */
@@ -40,6 +39,7 @@ public class SoundEngine {
 
     /**
      * Media player for playing the music.
+     * @see javafx.scene.media
      */
     private MediaPlayer mediaPlayer;
 
@@ -141,9 +141,11 @@ public class SoundEngine {
         while (volume > 0) {
             volume -= VOLUME_DECREMENT_VALUE;
             mediaPlayer.setVolume(volume);
+            // Pause the thread before decreasing the volume again.
             try {
                 Thread.sleep(duration);
             } catch (InterruptedException e) {
+                // Volume has already reached zero.
                 System.out.println("Error: Has the sound already stopped?");
             }
         }
