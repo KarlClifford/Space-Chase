@@ -156,10 +156,10 @@ public interface Data {
             case '+' -> new Valuable('+');
             case 'T' -> new Valuable('T');
             case 'G' -> new Valuable('G');
-            //case "#R" -> new Gate(Color.RED);
-            //case "#G" -> new Gate(Color.GREEN);
-            //case "|R" -> new Lever(Color.RED);
-            //case "|G" -> new Lever(Color.GREEN);
+            case '(' -> new Gate(type);
+            case ')' -> new Gate(type);
+            case '{' -> new Lever(type);
+            case '}' -> new Lever(type);
             default -> null;
         };
     }
@@ -234,7 +234,11 @@ public interface Data {
         if (folder.exists()) {
             return false;
         } else {
-            folder.mkdirs();
+            boolean success = folder.mkdirs();
+            // Warn if directory already exists.
+            if (!success) {
+                System.out.println("WARN: Directory already exists.");
+            }
             copyLevel(1, name);
             return true;
         }
@@ -254,7 +258,8 @@ public interface Data {
             for (File f : Objects.requireNonNull(file.listFiles())) {
                 deleteFiles(f);
             }
-            file.delete();
+
+            deleteFile(file);
         } else {
             deleteFile(file);
         }
