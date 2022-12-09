@@ -34,7 +34,6 @@ public class Bomb extends Item {
      * And the linkedList of items that are on te
      * Same row and column of the bomb.
      */
-
     public Bomb() {
         this.id = '*';
         this.imagePath = "blackHole.png";
@@ -51,46 +50,95 @@ public class Bomb extends Item {
         Tile[][] tiles = level.getTileMap();
         int yMax = tiles.length;
         int xMax = tiles[0].length;
-        //loops from x0 to xMax
+        // Loops from x coordinate 0 to x coordinate Max.
         for (int x = 0; x < xMax; x++) {
-            Tile tileX = tiles[bombY][x];
-            Item item = tileX.getItem();
-            if (item != null
-                    && !(item instanceof Bomb)
-                    && !(item instanceof Door)
-                    && !(item instanceof Gate)) {
-                item.remove();
-            } else if (item instanceof Bomb bomb
-                    && bomb != this
-                    && !(bomb.isDetonated)) {
-                bomb.setIsDetonated();
-                bomb.destroyItems();
-            }
+            destroyItem(x, bombY);
         }
+
+        // Destroy every item the bomb comes into contact with.
         for (int y = 0; y < yMax; y++) {
-            Tile tileY = tiles[y][bombX];
-            Item item = tileY.getItem();
-            if (item != null
-                    && !(item instanceof Bomb)
-                    && !(item instanceof Door)
-                    && !(item instanceof Gate)) {
-                item.remove();
-            } else if (item instanceof Bomb bomb
-                    && bomb != this
-                    && !(bomb.isDetonated)) {
-                bomb.setIsDetonated();
-                bomb.destroyItems();
-            }
+            destroyItem(bombX, y);
         }
         this.remove();
+    }
+
+    /**
+     * Destroys an item in given position.
+     * @param x x position of an item.
+     * @param y y position of an item.
+     */
+    private void destroyItem(int x, int y) {
+        // TODO: Changed to explosion.gif
+        Image explosion = createImage("images/blackHolecounting.gif");
+
+        Tile[][] tiles = level.getTileMap();
+        Tile tile = tiles[y][x];
+        Item item = tile.getItem();
+
+        // Check that there is an item to destroy.
+        if (item != null
+                && !(item instanceof Bomb)
+                && !(item instanceof Door)
+                && !(item instanceof Gate)) {
+            ImageView itemImage = item.getImageView();
+            itemImage.setImage(explosion);
+
+            AnimationTimer timer = new AnimationTimer() {
+                final Clock clock = Clock.systemDefaultZone();
+                final long last = clock.millis();
+                @Override
+                public void handle(long l) {
+                    long now = clock.millis();
+
+                    /*
+                     * Check that we have past the time threshold to destroy
+                     * the item.
+                     */
+                    if (now - last >= EXPLOSION_TIME) {
+                        item.remove();
+                        this.stop();
+                    }
+                }
+            };
+
+            timer.start();
+            /*
+             * Item is a bomb so should be immediately destroyed
+             * with no countdown.
+             */
+        } else if (item instanceof Bomb bomb
+                && bomb != this
+                && !(bomb.isDetonated)) {
+            imageView.setImage(explosion);
+
+            AnimationTimer timer = new AnimationTimer() {
+                final Clock clock = Clock.systemDefaultZone();
+                final long last = clock.millis();
+                @Override
+                public void handle(long l) {
+                    long now = clock.millis();
+
+                    /*
+                     * Check that we have past the time threshold to destroy
+                     * the bomb.
+                     */
+                    if (now - last >= EXPLOSION_TIME) {
+                        bomb.setIsDetonated();
+                        bomb.destroyItems();
+                        this.stop();
+                    }
+                }
+            };
+
+            timer.start();
+        }
     }
 
 
     /**
      * checks if a character is on any of
      * the tiles a block away from the bomb.
-     *
-     * @return boolean if bomb should be triggered
+     * @return true if the bomb should be triggered.
      */
     public boolean canTrigger() {
         boolean trigger = false;
@@ -107,6 +155,7 @@ public class Bomb extends Item {
 
 
     /**
+     * Checks if the bomb has been triggered.
      * @return getter for the variable isTriggered.
      */
     public boolean getIsTriggered() {
@@ -124,20 +173,15 @@ public class Bomb extends Item {
     }
 
     /**
-     * @return initTime
+     * Gets the initial time interval.
+     * @return the initial time interval.
      */
     public long getInitTime() {
         return initTime;
     }
 
     /**
-     * @return lastTime
-     */
-    public long getLastTime() {
-        return lastTime;
-    }
-
-    /**
+     * Sets the initial time for the initial time interval.
      * @param initTime Setter for initial time.
      */
     public void setInitTime(long initTime) {
@@ -145,21 +189,15 @@ public class Bomb extends Item {
     }
 
     /**
-     * @param lastTime Setter for last time.
-     */
-    public void setLastTime(long lastTime) {
-        this.lastTime = lastTime;
-    }
-
-    /**
-     * @return isDetonated
+     * Checks if the bomb has finished exploding.
+     * @return whether a bomb has been detonated or not.
      */
     public boolean getIsDetonated() {
         return isDetonated;
     }
 
     /**
-     * sets isDetonated to true.
+     * Sets the bomb to detonate by changing the isDetonated variable to true.
      */
     public void setIsDetonated() {
         isDetonated = true;
