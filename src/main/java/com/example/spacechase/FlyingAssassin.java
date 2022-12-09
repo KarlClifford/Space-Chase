@@ -30,7 +30,7 @@ public class FlyingAssassin extends Character {
      * @return the direction the flying assassin will be.
      */
     public Direction setDirection(char direc) {
-        switch (direc){
+        switch (direc) {
             case '^':
                 direction = Direction.UP;
                 break;
@@ -66,10 +66,10 @@ public class FlyingAssassin extends Character {
     @Override
     void move() {
         Tile neighbour = tile.getNeighbourTile(direction);
-        /** If there's no neighbour tile in that direction
-         * reverse the direction **/
+        // If there's no neighbour tile in that direction
+        // reverse the direction
         if (neighbour == null) {
-            switch (direction){
+            switch (direction) {
                 case UP:
                     direction = Direction.DOWN;
                     move();
@@ -92,8 +92,8 @@ public class FlyingAssassin extends Character {
         } else {
             Character character = neighbour.getCharacter();
 
-            /** Eliminate the character if there is a character
-             on the tile. **/
+            // Eliminate the character if there is a character
+            //on the tile.
             if (character != null) {
                 character.remove();
             }
