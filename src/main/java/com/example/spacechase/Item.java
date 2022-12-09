@@ -65,8 +65,6 @@ public abstract class Item {
 
     /**
      * Creates an image of the item at position (x,y).
-     * @param x x position.
-     * @param y y position.
      * @return image of the item.
      */
     protected ImageView createImageView() {
