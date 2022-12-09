@@ -14,19 +14,19 @@ import java.util.HashMap;
  */
 public class Valuable extends Item {
     /**
-     * Constants holding the screw item score value.
+     * Constant holding the screw item score value.
      */
     private static final int SCREW_VALUE = 5;
     /**
-     * Constants holding the screwdriver item score value.
+     * Constant holding the screwdriver item score value.
      */
     private static final int SCREWDRIVER_VALUE = 10;
     /**
-     * Constants holding the toolbox item score value.
+     * Constant holding the toolbox item score value.
      */
     private static final int TOOLBOX_VALUE = 15;
     /**
-     * Constants holding the gas item score value.
+     * Constant holding the gas item score value.
      */
     private static final int GAS_VALUE = 20;
     /**
