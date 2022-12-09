@@ -4,7 +4,8 @@ package com.example.spacechase;
  * This class represents a flying assassin. A flying assassin contains
  * components of directions and all shared components from character.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public class FlyingAssassin extends Character {
     /**
@@ -17,7 +18,7 @@ public class FlyingAssassin extends Character {
      */
     public FlyingAssassin() {
         this.id = '^';
-        this.imagePath = "flying_assassin.png";
+        this.imagePath = "FlyingAssassin.gif";
         this.direction = Direction.LEFT;
     }
 

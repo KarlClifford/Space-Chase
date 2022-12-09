@@ -8,6 +8,7 @@ import javafx.scene.Scene;
  * components from character.
  * @author Tristan Tsang
  * @author Alex Hallsworth
+ * @author Ben Thornber
  * @version 1.0.1
  */
 public class Player extends Collector {
@@ -20,7 +21,7 @@ public class Player extends Collector {
      */
     public Player() {
         this.id = 'P';
-        this.imagePath = "player.png";
+        this.imagePath = "AstronautGif.gif";
     }
 
     /**

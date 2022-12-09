@@ -8,6 +8,7 @@ import java.util.Arrays;
  * components of follow colour, last tile, directions, and all shared components
  * from collector.
  * @author Tristan Tsang
+ * @author Ben Thornber
  * @author Alex Hallsworth
  * @version 1.0.1
  */
@@ -30,7 +31,7 @@ public class FloorFollowing extends Collector {
      */
     public FloorFollowing() {
         this.id = 'F';
-        this.imagePath = "floor_following.png";
+        this.imagePath = "FloorFollower.gif";
         this.directions = Direction.values();
         this.lastTile = new Tile[2];
     }

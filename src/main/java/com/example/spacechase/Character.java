@@ -9,6 +9,7 @@ import java.util.Objects;
  * components of id, tile, image, level.
  * @author Tristan Tsang
  * @author Alex Hallsworth
+ * @author Ben Thornber
  * @version 1.0.1
  */
 public abstract class Character {
@@ -47,7 +48,7 @@ public abstract class Character {
                 Objects.requireNonNull(getClass()
                                 .getResource(PATH_TO_IMAGES + imagePath))
                         .toExternalForm());
-        imageView.setFitHeight(Tile.TILE_SIZE / 2);
+        imageView.setFitHeight(Tile.TILE_SIZE);
         imageView.setPreserveRatio(true);
     }
 
@@ -99,11 +100,9 @@ public abstract class Character {
      */
     public void draw() {
         imageView.relocate(
-                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX()
-                        + Tile.TILE_SIZE / 2 / 2,
+                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
                 Level.CANVAS_OFFSET_X
-                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY()
-                        + Tile.TILE_SIZE / 2 / 2);
+                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
     }
 
     /**

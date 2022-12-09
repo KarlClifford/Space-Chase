@@ -27,6 +27,7 @@ import java.util.Objects;
  *
  * @author Tristan Tsang
  * @author Alex Hallsworth
+ * @author Ben Thornber
  * @version 1.0.1
  */
 public class Level {
@@ -224,7 +225,24 @@ public class Level {
      */
     public void setTime(double time) {
         this.time = time;
-        timeLabel.setText(String.format("Time: %.2f", time));
+        timeLabel.setText(String.format("Oxygen: %.2f", time));
+    }
+
+    /**
+     * Gets the player's current score in the level.
+     * @return current score of the player.
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Sets the new score and updates it in the label.
+     * @param score new score to be set.
+     */
+    public void setScore(int score) {
+        this.score = score;
+        scoreLabel.setText(String.format("Score: %s", score));
     }
 
     /**
@@ -282,7 +300,7 @@ public class Level {
      * Creates a label for the time of level.
      */
     private void createTimeLabel() {
-        timeLabel = new Label("Time: " + time);
+        timeLabel = new Label("Oxygen: " + time);
         timeLabel.setTextFill(Color.WHITE);
         timeLabel.setFont(Font.font(FONT_FAMILY, NORM_FONT_SIZE));
     }
@@ -387,8 +405,7 @@ public class Level {
                     item.setLevel(this);
                     item.setTile(tile);
 
-                    ImageView image = item.createImageView(tile.getX(),
-                            tile.getY());
+                    ImageView image = item.createImageView();
                     group.getChildren().add(image);
                     items.add(item);
                 }

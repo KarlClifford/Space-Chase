@@ -16,7 +16,7 @@ import java.util.Objects;
  * Data interface handles game file loading.
  * @author Tristan Tsang
  * @author Alex Hallsworth
- * @version 1.1.0
+ * @version 1.0.1
  */
 public interface Data {
     /**
@@ -118,7 +118,7 @@ public interface Data {
                         new ArrayList<>(Arrays.asList(piece.split(",")));
                 String type = properties.get(0);
                 properties.remove(0);
-                String subType = properties.get(0);
+                char subType = properties.get(0).charAt(0);
                 properties.remove(0);
                 Tile tile = tileMap[Integer.parseInt(properties.get(1))]
                         [Integer.parseInt(properties.get(0))];
@@ -148,15 +148,19 @@ public interface Data {
      * @param type id of the item in string form.
      * @return instance of the item.
      */
-    private static Item createItemFromType(String type) {
+    private static Item createItemFromType(char type) {
         return switch (type) {
-            case "*" -> new Bomb();
-            case "@" -> new Clock();
-            case "D" -> new Door();
-            case "#R" -> new Gate(Color.RED);
-            case "#G" -> new Gate(Color.GREEN);
-            case "|R" -> new Lever(Color.RED);
-            case "|G" -> new Lever(Color.GREEN);
+            case '*' -> new Bomb();
+            case '@' -> new Clock();
+            case 'D' -> new Door();
+            case 'Y' -> new Valuable('Y');
+            case '+' -> new Valuable('+');
+            case 'T' -> new Valuable('T');
+            case 'G' -> new Valuable('G');
+            //case "#R" -> new Gate(Color.RED);
+            //case "#G" -> new Gate(Color.GREEN);
+            //case "|R" -> new Lever(Color.RED);
+            //case "|G" -> new Lever(Color.GREEN);
             default -> null;
         };
     }
@@ -166,12 +170,12 @@ public interface Data {
      * @param type id of the character in string form.
      * @return instance of the character.
      */
-    private static Character createCharacterFromType(String type) {
+    private static Character createCharacterFromType(char type) {
         return switch (type) {
-            case "P" -> new Player();
-            case "^" -> new FlyingAssassin();
-            case "F" -> new FloorFollowing();
-            case "S" -> new SmartThief();
+            case 'P' -> new Player();
+            case '^' -> new FlyingAssassin();
+            case 'F' -> new FloorFollowing();
+            case 'S' -> new SmartThief();
             default -> null;
         };
     }
@@ -247,7 +251,7 @@ public interface Data {
          * Otherwise, delete the file.
          */
         if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
+            for (File f : Objects.requireNonNull(file.listFiles())) {
                 deleteFiles(f);
             }
             file.delete();
