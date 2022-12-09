@@ -1,6 +1,5 @@
 package com.example.spacechase;
 
-import javafx.scene.paint.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -231,6 +230,7 @@ public interface Data {
     static boolean createProfile(String name) throws IOException {
         File folder = new File(PATH_TO_PROFILES + name);
 
+        // Check for the directory and create it if it doesn't exist.
         if (folder.exists()) {
             return false;
         } else {
@@ -256,7 +256,19 @@ public interface Data {
             }
             file.delete();
         } else {
-            file.delete();
+            deleteFile(file);
+        }
+    }
+
+    /**
+     * Deletes a file.
+     * @param file target file for deletion.
+     */
+    private static void deleteFile(File file) {
+        boolean success = file.delete();
+        // Warn if file has been deleted.
+        if (!success) {
+            System.out.println("WARN: File has already been deleted.");
         }
     }
 
