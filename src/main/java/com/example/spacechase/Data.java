@@ -138,10 +138,10 @@ public interface Data {
             case '|' -> new Lever();
             case '@' -> new Clock();
             case 'D' -> new Door();
-            case 'Y' -> new ScrewdriverValuable();
-            case '+' -> new ScrewValuable();
-            case 'T' -> new ToolboxValuable();
-            case 'G' -> new GasValuable();
+            case 'Y' -> new Valuable('Y');
+            case '+' -> new Valuable('+');
+            case 'T' -> new Valuable('T');
+            case 'G' -> new Valuable('G');
             default -> null;
         };
     }
