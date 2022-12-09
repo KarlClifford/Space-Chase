@@ -41,7 +41,6 @@ public abstract class Item {
 
     /**
      * Gets the tile that the item is on.
-     *
      * @return tile of the item.
      */
     public Tile getTile() {
@@ -49,8 +48,15 @@ public abstract class Item {
     }
 
     /**
+     * Gets the image view of the item.
+     * @return image view of the item.
+     */
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    /**
      * Sets the level of the item that is on.
-     *
      * @param level level of the item.
      */
     protected void setLevel(Level level) {
@@ -59,7 +65,6 @@ public abstract class Item {
 
     /**
      * Sets the tile of the item that is on.
-     *
      * @param tile tile of the item.
      */
     protected void setTile(Tile tile) {
@@ -68,7 +73,6 @@ public abstract class Item {
 
     /**
      * Creates an image of the item at position (x,y).
-     *
      * @param x x position.
      * @param y y position.
      * @return image of the item.
@@ -89,7 +93,6 @@ public abstract class Item {
 
     /**
      * Removes the item from level as it is collected.
-     *
      * @param collector collector of the item.
      */
     protected void interact(Collector collector) {

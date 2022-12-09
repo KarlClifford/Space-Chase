@@ -1,27 +1,32 @@
-
 package com.example.spacechase;
 
+import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.time.Clock;
+import java.util.Objects;
+
 /**
+ * This class represents a bomb. It can be triggered
+ * by any collector and explode after counting down
+ * 3 seconds.
  * @author Rami Abdulrazzaq
  * @version 1.0.0
  */
 public class Bomb extends Item {
-
+    /**
+     * Duration of explosion animation in milliseconds.
+     */
+    private static final int EXPLOSION_TIME = 500;
     /**
      * Boolean variable to check if the bomb is triggered.
      */
     private boolean isTriggered;
     /**
-     * Variable initTime(initial time).
-     * stores the time interval
-     * Bomb was triggered
+     * Variable initTime(initial time) stores the time interval
+     * when bomb was triggered.
      */
     private long initTime;
-    /**
-     * Variable lastTime to store the time
-     * Of the last tick of Bomb.
-     */
-    private long lastTime;
     /**
      * Variable boolean that determines
      * whether a bomb is detonated or not.
@@ -29,14 +34,14 @@ public class Bomb extends Item {
     private boolean isDetonated;
 
     /**
-     * Creates a bomb.
-     * And each instance of bomb holds the triggers
-     * And the linkedList of items that are on te
-     * Same row and column of the bomb.
+     * Creates a bomb
+     * and each instance of bomb holds the triggers
+     * and the linkedList of items that are on the
+     * same row and column of the bomb.
      */
     public Bomb() {
         this.id = '*';
-        this.imagePath = "blackHole.png";
+        this.imagePath = "blackHole.gif";
 
     }
 
@@ -45,8 +50,8 @@ public class Bomb extends Item {
      * Vertical and Horizontal to the bomb and destroys them.
      */
     public void destroyItems() {
-        int bombX = this.getTile().getX();
-        int bombY = this.getTile().getY();
+        int bombX = tile.getX();
+        int bombY = tile.getY();
         Tile[][] tiles = level.getTileMap();
         int yMax = tiles.length;
         int xMax = tiles[0].length;
@@ -134,9 +139,22 @@ public class Bomb extends Item {
         }
     }
 
+    /**
+     * Creates an image from the path.
+     * @param path path of image.
+     * @return image.
+     */
+    private Image createImage(String path) {
+        return new Image(
+                Objects.requireNonNull(
+                                this.getClass()
+                                        .getResource(path))
+                        .toExternalForm());
+    }
+
 
     /**
-     * checks if a character is on any of
+     * Checks if a character is on any of
      * the tiles a block away from the bomb.
      * @return true if the bomb should be triggered.
      */
@@ -168,7 +186,9 @@ public class Bomb extends Item {
      * @param currentTime time the bomb is triggered.
      */
     public void trigger(long currentTime) {
-        initTime = lastTime = currentTime;
+        Image countdownImage = createImage("images/blackHolecounting.gif");
+        imageView.setImage(countdownImage);
+        initTime = currentTime;
         this.isTriggered = true;
     }
 
