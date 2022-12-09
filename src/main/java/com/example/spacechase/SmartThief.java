@@ -1,7 +1,5 @@
 package com.example.spacechase;
 
-import java.util.ArrayList;
-
 /**
  * This class represents a smart thief.
  * A smart thief contains components of all shared components
@@ -53,6 +51,7 @@ public class SmartThief extends Collector {
             /*
              * Checks if the path is null
              * meaning the path is unblocked
+             * ignores gates.
              */
             if (path != null) {
                 int tileDistance = path.size();
