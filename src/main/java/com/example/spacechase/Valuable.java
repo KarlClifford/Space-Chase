@@ -5,8 +5,9 @@ import java.util.HashMap;
 /**
  * Class which models all the different
  * scoring items available in the game.
- * This class represents Score, as well as the
- * interact method to increase the score counter.
+ * This class represents the score attributes/values
+ * and relevant image paths for each item as
+ * well as a method to increase the score counter.
  * @author Jamie Quinn
  * @version 1.0.0
  *
