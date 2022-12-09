@@ -24,7 +24,7 @@ public class Lever extends Item {
         this.id = '|';
         /*
          * Matches the right image file
-         * to the corresponding colour of lever
+         * to the corresponding colour of lever.
          */
         if (type == Color.RED) {
             this.imagePath = "lever_red.png";
@@ -36,7 +36,7 @@ public class Lever extends Item {
 
     /**
      * Gets the colour of the gate.
-     * @return colour of the gate
+     * @return colour of the gate.
      */
     public Color getColour() {
         return this.colour;
