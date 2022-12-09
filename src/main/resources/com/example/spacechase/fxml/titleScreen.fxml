@@ -19,6 +19,11 @@
                   <Font name="Wingdings2" size="16.0" />
                </font>
             </Label>
+             <Label fx:id="message" contentDisplay="CENTER" text=" " textAlignment="CENTER" textFill="YELLOW">
+                 <font>
+                     <Font name="RobotoMono-VariableFont_wght.ttf" size="14" />
+                 </font>
+             </Label>
          </children>
       </VBox>
    </center>
