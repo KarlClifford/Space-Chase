@@ -213,8 +213,7 @@ public interface Data {
             case '^' -> new FlyingAssassin();
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
-            default -> throw new IllegalStateException(
-                    "Unexpected value: " + type);
+            default -> new Valuable(type);
         };
     }
 
