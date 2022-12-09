@@ -28,7 +28,7 @@ public class Lever extends Item {
         if (type == Color.RED) {
             this.imagePath = "lever_red.png";
         } else {
-            this.imagePath = "lever_green.png";
+            this.imagePath = "greenKeycard.gif";
         }
         this.colour = type;
     }

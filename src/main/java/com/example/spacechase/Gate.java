@@ -29,7 +29,7 @@ public class Gate extends Item {
         if (type == Color.RED) {
             this.imagePath = "gate_red.png";
         } else {
-            this.imagePath = "gate_green.png";
+            this.imagePath = "greenGate.gif";
         }
         this.colour = type;
     }
