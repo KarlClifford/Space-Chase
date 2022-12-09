@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>10.4</checkstyleVersion>
+    <checkstyleVersion>10.0</checkstyleVersion>
     <scanScope>JavaOnly</scanScope>
     <copyLibs>true</copyLibs>
     <option name="thirdPartyClasspath" />
-    <option name="activeLocationIds" />
+    <option name="activeLocationIds">
+      <option value="15cf9bd3-3f19-4351-8299-5952f9875585" />
+    </option>
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="347122ac-ea30-479f-97c2-2ac19e850ce7" type="LOCAL_FILE" scope="All" description="group 40">
+        <ConfigurationLocation id="15cf9bd3-3f19-4351-8299-5952f9875585" type="LOCAL_FILE" scope="All" description="Group 40 Checkstyle ">
           $PROJECT_DIR$/group40-checkstyle.xml
           <option name="properties">
             <map>
