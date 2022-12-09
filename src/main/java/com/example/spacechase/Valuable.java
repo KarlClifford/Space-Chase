@@ -14,19 +14,19 @@ import java.util.HashMap;
  */
 public class Valuable extends Item {
     /**
-     * Constant holding the screw item score value.
+     * Holds the screw item score value.
      */
     private static final int SCREW_VALUE = 5;
     /**
-     * Constant holding the screwdriver item score value.
+     * Holds the screwdriver item score value.
      */
     private static final int SCREWDRIVER_VALUE = 10;
     /**
-     * Constant holding the toolbox item score value.
+     * Holds the toolbox item score value.
      */
     private static final int TOOLBOX_VALUE = 15;
     /**
-     * Constant holding the gas item score value.
+     * Holds the gas item score value.
      */
     private static final int GAS_VALUE = 20;
     /**
@@ -53,13 +53,13 @@ public class Valuable extends Item {
         ITEM_IMAGES.put('G', "gas.png");
     }
     /**
-     * Blank attributes representing the score and image path of each item.
+     * This represents the score value of each item.
      */
     private final int score;
 
     /**
      * Constructor that will build each item type and
-     * assign its appropriate score value and imagepath.
+     * assign its appropriate score value and image path.
      * @param itemType the identifying character for
      *                 each item.
      */
@@ -78,7 +78,7 @@ public class Valuable extends Item {
 
         int currentScore = level.getScore();
 
-        /* If the player collects the item, increase the score counter.*/
+        /*If the player collects the item, increase the score counter.*/
         if (collector instanceof Player) {
             level.setScore(currentScore + score);
         }
