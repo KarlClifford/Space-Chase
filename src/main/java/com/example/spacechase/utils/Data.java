@@ -89,9 +89,7 @@ public interface Data {
             String directoryPath = path.substring(0, currentPathIndex);
             String fileName = path.substring(currentPathIndex + 1);
 
-            createFileFromPath(directoryPath, fileName);
-
-            return getFileFromPath(path);
+            return createFileFromPath(directoryPath, fileName);
         }
     }
 
@@ -99,11 +97,13 @@ public interface Data {
      * Creates a file of given name in path.
      * @param path path of the file.
      * @param fileName name of the file.
+     * @return File created.
      */
-    static void createFileFromPath(String path, String fileName) {
+    static File createFileFromPath(String path, String fileName) {
         File directory = getFileFromPath(path);
         File file = new File(directory.getPath() + fileName);
         file.mkdirs();
+        return file;
     }
 
     /**
