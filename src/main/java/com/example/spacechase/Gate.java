@@ -2,6 +2,8 @@ package com.example.spacechase;
 
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
+
 /**
  * This class represents a gate.
  * A gate prevents the collectors from going on the tile it is on.
@@ -11,27 +13,35 @@ import javafx.scene.paint.Color;
  */
 public class Gate extends Item {
     /**
+     * Stores the colours that can be used to set the gate.
+     */
+    private static final HashMap<java.lang.Character, Color>
+            COLOUR_TYPES = new HashMap<>();
+    static {
+        COLOUR_TYPES.put('(', Color.RED);
+        COLOUR_TYPES.put(')', Color.GREEN);
+    }
+    /**
      * Colour of the Gate.
      */
     private final Color colour;
-
     /**
      * Creates a gate item.
      * @param type colour of the gate.
      */
-    public Gate(Color type) {
-        this.id = '#';
+    public Gate(char type) {
+        this.id = type;
         /*
          * Assigns the correct imagePath
          * to the gate. If the gate is red
          * the file will be the red gate etc.
          */
-        if (type == Color.RED) {
-            this.imagePath = "gate_red.png";
+        if (type == '(') {
+            this.imagePath = "redGate.gif";
         } else {
             this.imagePath = "greenGate.gif";
         }
-        this.colour = type;
+        this.colour = COLOUR_TYPES.get(type);
     }
 
     /**

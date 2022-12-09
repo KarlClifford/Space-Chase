@@ -2,6 +2,8 @@ package com.example.spacechase;
 
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
+
 /**
  * This class represents a lever.
  * A lever opens all gates of the same colour and can be picked up.
@@ -9,6 +11,15 @@ import javafx.scene.paint.Color;
  * @version 1.0.0
  */
 public class Lever extends Item {
+    /**
+     * Stores the colours that can be used to set the lever.
+     */
+    private static final HashMap<java.lang.Character, Color>
+            COLOUR_TYPES = new HashMap<>();
+    static {
+        COLOUR_TYPES.put('{', Color.RED);
+        COLOUR_TYPES.put('}', Color.GREEN);
+    }
     /**
      * Colour of the lever.
      */
@@ -19,18 +30,18 @@ public class Lever extends Item {
      * Creates a lever.
      * @param type colour of the gate.
      */
-    public Lever(Color type) {
-        this.id = '|';
+    public Lever(char type) {
+        this.id = type;
         /*
          * Matches the right image file
          * to the corresponding colour of lever.
          */
-        if (type == Color.RED) {
-            this.imagePath = "lever_red.png";
+        if (type == '{') {
+            this.imagePath = "redKeycard.gif";
         } else {
             this.imagePath = "greenKeycard.gif";
         }
-        this.colour = type;
+        this.colour = COLOUR_TYPES.get(type);
     }
 
     /**
