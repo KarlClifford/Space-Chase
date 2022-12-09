@@ -236,6 +236,23 @@ public class Level {
     }
 
     /**
+     * Gets the player's current score in the level.
+     * @return current score of the player.
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Sets the new score and updates it in the label.
+     * @param score new score to be set.
+     */
+    public void setScore(int score) {
+        this.score = score;
+        scoreLabel.setText(String.format("Score: %s", score));
+    }
+
+    /**
      * Removes the item from items.
      *
      * @param item item.
