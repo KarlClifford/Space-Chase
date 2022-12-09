@@ -12,6 +12,7 @@ import java.util.Objects;
 
 /**
  * Data interface handles game file loading.
+ *
  * @author Tristan Tsang
  * @version 1.0.0
  */
@@ -47,10 +48,11 @@ public interface Data {
 
     /**
      * Reads the level file and returns a level object.
+     *
      * @param file level file.
      * @return Level object.
      * @throws FileNotFoundException This exception is thrown
-     * when file is not found.
+     *                               when file is not found.
      */
     static Level readLevel(File file) throws FileNotFoundException {
         Scanner scan = new Scanner(file);
@@ -106,7 +108,6 @@ public interface Data {
                 int b = Integer.parseInt(itemData.substring(3, 4));
 
                 Tile tile = tileMap[b][a];
-
                 /* If the type of entity is an item,
                  create an item and assign it to the tile.
                  Otherwise, create a character and assign it
@@ -129,6 +130,7 @@ public interface Data {
 
     /**
      * Gets the instance of the corresponding item from given id.
+     *
      * @param type id of the item.
      * @return instance of the item.
      */
@@ -144,6 +146,7 @@ public interface Data {
 
     /**
      * Gets the instance of the corresponding character from given id.
+     *
      * @param type id of the character.
      * @return instance of the character.
      */
@@ -159,6 +162,7 @@ public interface Data {
 
     /**
      * Gets all the levels for a player.
+     *
      * @param name player name.
      * @return a list of level objects created from the player's profile folder.
      */
@@ -166,9 +170,9 @@ public interface Data {
         File playerFolder = new File(PATH_TO_PROFILES + name);
 
         return Arrays.stream(
-                Objects.requireNonNull(
-                        playerFolder.listFiles()
-                ))
+                        Objects.requireNonNull(
+                                playerFolder.listFiles()
+                        ))
                 .map(file -> {
                     /* Try to read levels out of a file,
                      Catches exception when file is not found. */
@@ -183,25 +187,27 @@ public interface Data {
 
     /**
      * Gets all the profiles from profile directory.
+     *
      * @return names of all the profiles.
      */
     static String[] getProfiles() {
         File profileFolders = new File(PATH_TO_PROFILES);
 
         return Arrays.stream(
-                Objects.requireNonNull(
-                        profileFolders.listFiles()
-                ))
+                        Objects.requireNonNull(
+                                profileFolders.listFiles()
+                        ))
                 .map(File::getName)
                 .toArray(String[]::new);
     }
 
     /**
      * Creates a new profile from given name.
+     *
      * @param name player name.
      * @return whether it is a successful creation or not.
      * @throws IOException This exception is thrown when
-     * fail to copy the level.
+     *                     fail to copy the level.
      */
     static boolean createProfile(String name) throws IOException {
         File folder = new File(PATH_TO_PROFILES + name);
@@ -217,6 +223,7 @@ public interface Data {
 
     /**
      * Deletes the file or all the sub files in the directory.
+     *
      * @param file file or folder to be deleted.
      */
     private static void deleteFiles(File file) {
@@ -235,6 +242,7 @@ public interface Data {
 
     /**
      * Removes a profile of given name in the files.
+     *
      * @param name player name.
      */
     static void removeProfile(String name) {
@@ -245,11 +253,12 @@ public interface Data {
     /**
      * Copies a level file with given id and pastes it in player's
      * profile folder.
-     * @param id id of the level.
+     *
+     * @param id   id of the level.
      * @param name player name.
      * @return The file copied.
      * @throws IOException This exception is thrown when it fails
-     * in copying the files.
+     *                     in copying the files.
      */
     static File copyLevel(int id, String name) throws IOException {
         String fileName = id + ".txt";
@@ -275,6 +284,7 @@ public interface Data {
 
     /**
      * Saves the snapshot of the given level.
+     *
      * @param level level to be saved.
      */
     static void saveLevel(Level level) {

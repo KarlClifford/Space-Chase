@@ -216,6 +216,14 @@ public class Level {
         return clock;
     }
 
+
+    /**
+     * @return tileMap
+     */
+    public Tile[][] getTileMap() {
+        return tileMap;
+    }
+
     /**
      * Sets the new time and updates it in the label.
      *
@@ -347,7 +355,6 @@ public class Level {
          Draws the item and character if they exist on a tile. */
         for (int y = 0; y < tileMap.length; y++) {
             Tile[] row = tileMap[y];
-
             // For every tile in a row.
             for (int x = 0; x < row.length; x++) {
                 Tile tile = row[x];
@@ -391,7 +398,6 @@ public class Level {
                     group.getChildren().add(image);
                     items.add(item);
                 }
-
                 Character character = tile.getCharacter();
                 /* If there is a character, assign level and tile to
                  character, create an image and draw it. */

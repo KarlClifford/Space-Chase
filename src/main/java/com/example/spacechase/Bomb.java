@@ -1,6 +1,5 @@
-package com.example.spacechase;
 
-import java.util.LinkedList;
+package com.example.spacechase;
 
 /**
  * @author Rami Abdulrazzaq
@@ -13,26 +12,21 @@ public class Bomb extends Item {
      */
     private boolean isTriggered;
     /**
-     * Tile variable that refers to the tile above the bomb.
+     * Variable initTime(initial time).
+     * stores the time interval
+     * Bomb was triggered
      */
-    private final Tile bombTriggerUp;
+    private long initTime;
     /**
-     * Tile variable that refers to the tile below the bomb.
+     * Variable lastTime to store the time
+     * Of the last tick of Bomb.
      */
-    private final Tile bombTriggerDown;
+    private long lastTime;
     /**
-     * Tile variable that refers to the tile left to the bomb.
+     * Variable boolean that determines
+     * whether a bomb is detonated or not.
      */
-    private final Tile bombTriggerLeft;
-    /**
-     * Tile variable that refers to the tile right to the bomb.
-     */
-    private final Tile bombTriggerRight;
-    /**
-     * LinkedList of items that are on the
-     * Same row and column of the bomb.
-     */
-    private LinkedList<Item> itemsXY = new LinkedList<>();
+    private boolean isDetonated;
 
     /**
      * Creates a bomb.
@@ -44,143 +38,130 @@ public class Bomb extends Item {
     public Bomb() {
         this.id = '*';
         this.imagePath = "blackHole.png";
-        this.bombTriggerUp = getTile().getNeighbourTile(Direction.UP);
-        this.bombTriggerDown = getTile().getNeighbourTile(Direction.DOWN);
-        this.bombTriggerLeft = getTile().getNeighbourTile(Direction.LEFT);
-        this.bombTriggerRight = getTile().getNeighbourTile(Direction.RIGHT);
-        this.itemsXY = getItemsXY();
+
     }
 
     /**
-     * Method that gets the itemsXY and
-     * Loop through the list to destroy each item.
+     * Method that gets the items(except doors and gates)
+     * Vertical and Horizontal to the bomb and destroys them.
      */
     public void destroyItems() {
-        do {
-            if (this.itemsXY.peek() instanceof Bomb) {
-                this.itemsXY.add(this.itemsXY.poll());
-            } else {
-                level.removeItem(this.itemsXY.peek());
-                this.itemsXY.peek().getTile().setItem(null);
-                imageView.setOpacity(0);
-                this.itemsXY.poll();
+        int bombX = this.getTile().getX();
+        int bombY = this.getTile().getY();
+        Tile[][] tiles = level.getTileMap();
+        int yMax = tiles.length;
+        int xMax = tiles[0].length;
+        //loops from x0 to xMax
+        for (int x = 0; x < xMax; x++) {
+            Tile tileX = tiles[bombY][x];
+            Item item = tileX.getItem();
+            if (item != null
+                    && !(item instanceof Bomb)
+                    && !(item instanceof Door)
+                    && !(item instanceof Gate)) {
+                item.remove();
+            } else if (item instanceof Bomb bomb
+                    && bomb != this
+                    && !(bomb.isDetonated)) {
+                bomb.setIsDetonated();
+                bomb.destroyItems();
             }
-        } while (this.itemsXY.size() > 0 &&
-                !(this.itemsXY.peek() instanceof Bomb));
-        while (this.itemsXY.size() > 0) {
-            level.removeItem(this.itemsXY.peek());
-            this.itemsXY.peek().getTile().setItem(null);
-            imageView.setOpacity(0);
-            ((Bomb) this.itemsXY.peek()).destroyItems();
         }
+        for (int y = 0; y < yMax; y++) {
+            Tile tileY = tiles[y][bombX];
+            Item item = tileY.getItem();
+            if (item != null
+                    && !(item instanceof Bomb)
+                    && !(item instanceof Door)
+                    && !(item instanceof Gate)) {
+                item.remove();
+            } else if (item instanceof Bomb bomb
+                    && bomb != this
+                    && !(bomb.isDetonated)) {
+                bomb.setIsDetonated();
+                bomb.destroyItems();
+            }
+        }
+        this.remove();
     }
 
-    /**
-     * Finds the items on the same row and column of the bomb
-     * and adds them to this the list.
-     *
-     * @return the list of itemsXY.
-     */
-    public LinkedList<Item> getItemsXY() {
-        boolean neighbourExists = true;
-        Tile neighbour = this.getTile();
-        Tile neighbourUp = neighbour.getNeighbourTile(Direction.UP);
-        Tile neighbourRight = neighbour.getNeighbourTile(Direction.RIGHT);
-        Tile neighbourDown = neighbour.getNeighbourTile(Direction.DOWN);
-        Tile neighbourLeft = neighbour.getNeighbourTile(Direction.LEFT);
-        /*
-        neighbourExists is a boolean variable
-        while there are neighbors keep looping
-        if any of the neighbours are not null else
-        set neighbour Exists to false
-         */
-        while (neighbourExists) {
-            if (neighbourUp != null || neighbourRight != null ||
-                    neighbourDown != null || neighbourLeft != null) {
-                if (neighbourRight != null) {
-                    /*
-                    rest of the conditions check if the next tile is not empty
-                    then check if the item of that tile
-                    is not an instanceOf a Gate or a Door
-                    then add that item to the list
-                     */
-                    if ((neighbourUp != null)) {
-                        if (!(neighbourUp.getItem() instanceof Gate ||
-                                neighbourUp.getItem() instanceof Door)) {
-                            this.itemsXY.add(neighbourUp.getItem());
-                            neighbourUp = neighbourUp.getNeighbourTile(Direction.UP);
-                        }
-                    }
-                }
-                if (neighbourRight != null) {
-                    if (!(neighbourRight.getItem() instanceof Gate ||
-                            neighbourRight.getItem() instanceof Door)) {
-                        this.itemsXY.add(neighbourRight.getItem());
-                        neighbourRight = neighbourRight.getNeighbourTile(Direction.RIGHT);
-                    }
-                }
 
-                if (neighbourDown != null) {
-                    if (!(neighbourDown.getItem() instanceof Gate ||
-                            neighbourDown.getItem() instanceof Door)) {
-                        this.itemsXY.add(neighbourDown.getItem());
-                        neighbourDown = neighbourDown.getNeighbourTile(Direction.RIGHT);
-                    }
-                }
-                if (neighbourLeft != null) {
-                    if (!(neighbourLeft.getItem() instanceof Gate ||
-                            neighbourLeft.getItem() instanceof Door)) {
-                        this.itemsXY.add(neighbourLeft.getItem());
-                        neighbourLeft = neighbourLeft.getNeighbourTile(Direction.RIGHT);
-                    }
-                }
-            } else {
-                neighbourExists = false;
+    /**
+     * checks if a character is on any of
+     * the tiles a block away from the bomb.
+     *
+     * @return boolean if bomb should be triggered
+     */
+    public boolean canTrigger() {
+        boolean trigger = false;
+        for (Direction direction : Direction.values()) {
+            Tile neighbourTile = tile.getNeighbourTile(direction);
+            if (neighbourTile != null
+                    && neighbourTile
+                    .getCharacter() != null) {
+                trigger = true;
             }
         }
-        return this.itemsXY;
+        return trigger;
     }
 
 
     /**
      * @return getter for the variable isTriggered.
      */
-    public boolean isTriggered() {
+    public boolean getIsTriggered() {
         return this.isTriggered;
     }
 
     /**
-     * setter for variable isTriggered.
+     * Method that triggers our bomb
+     * by setting the triggered variable to true.
+     * @param currentTime time the bomb is triggered.
      */
-    public void trigger() {
-        isTriggered = true;
+    public void trigger(long currentTime) {
+        initTime = lastTime = currentTime;
+        this.isTriggered = true;
     }
 
     /**
-     * @return bombTriggerUp.
+     * @return initTime
      */
-    public Tile getBombTriggerUp() {
-        return this.bombTriggerUp;
+    public long getInitTime() {
+        return initTime;
     }
 
     /**
-     * @return BombTriggerDown
+     * @return lastTime
      */
-    public Tile getBombTriggerDown() {
-        return this.bombTriggerDown;
+    public long getLastTime() {
+        return lastTime;
     }
 
     /**
-     * @return BombTriggerLeft
+     * @param initTime Setter for initial time.
      */
-    public Tile getBombTriggerLeft() {
-        return this.bombTriggerLeft;
+    public void setInitTime(long initTime) {
+        this.initTime = initTime;
     }
 
     /**
-     * @return BombTriggerRight
+     * @param lastTime Setter for last time.
      */
-    public Tile getBombTriggerRight() {
-        return this.bombTriggerRight;
+    public void setLastTime(long lastTime) {
+        this.lastTime = lastTime;
+    }
+
+    /**
+     * @return isDetonated
+     */
+    public boolean getIsDetonated() {
+        return isDetonated;
+    }
+
+    /**
+     * sets isDetonated to true.
+     */
+    public void setIsDetonated() {
+        isDetonated = true;
     }
 }
