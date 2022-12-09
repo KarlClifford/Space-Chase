@@ -22,18 +22,6 @@ public class SmartThief extends Collector {
      * @return path to item.
      */
     private Path getShortestPathToItem() {
-
-        /*
-         * Puts all the interactive items
-         * in a list. (checks the item isn't a gate)
-         */
-        ArrayList<Item> items = new ArrayList<>();
-        for (Item item: level.getItems()) {
-            // Checks if item is not a gate
-            if (!(item instanceof Gate)) {
-                    items.add(item);
-            }
-        }
         int distance = Integer.MAX_VALUE;
         Path finalPath = null;
 
@@ -42,7 +30,7 @@ public class SmartThief extends Collector {
          * and use the path that has the shortest
          * distance.
          */
-        for (Item item : items) {
+        for (Item item : level.getItems()) {
             Tile itemTile = item.getTile();
 
             BFS graph = new BFS(tile);
@@ -53,7 +41,7 @@ public class SmartThief extends Collector {
              * meaning the path is unblocked
              * ignores gates.
              */
-            if (path != null) {
+            if (path != null && !(item instanceof Gate)) {
                 int tileDistance = path.size();
                 /*
                  * If this path is a shorter path than

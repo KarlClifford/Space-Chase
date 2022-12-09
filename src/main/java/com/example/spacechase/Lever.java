@@ -1,7 +1,6 @@
 package com.example.spacechase;
 
 import javafx.scene.paint.Color;
-import java.util.ArrayList;
 
 /**
  * This class represents a lever.
@@ -47,29 +46,23 @@ public class Lever extends Item {
      * @param opener opener of the gate.
      */
     public void removeGates(Collector opener) {
-        ArrayList<Item> gates = new ArrayList<>();
+        Gate[] gates = level.getItems()
+                .stream()
+                .filter(item -> item instanceof Gate)
+                .toArray(Gate[]::new)
+                .clone();
         /*
          * Gets all the gates of the same colour
          * and adds it to a list with others.
          */
-        for (Item item : level.getItems()) {
-            // If item's class is a Gate
-            if (item.getClass() == Gate.class) {
-                /*
-                 * If gate's colour is the same as this lever
-                 * add it to the list of gates of that colour
-                 */
-                if (((Gate) item).getColour() == getColour()) {
-                    gates.add(item);
-                }
+        for (Gate gate : gates) {
+            /*
+             * If gate's colour is the same as this lever
+             * add it to the list of gates of that colour.
+             */
+            if (gate.getColour() == colour) {
+                gate.interact(opener);
             }
-        }
-        /*
-         * Goes through a list of gates of the same colour
-         * Removes them from the game.
-         */
-        for (Item gate : gates) {
-            gate.interact(opener);
         }
     }
 
@@ -80,6 +73,6 @@ public class Lever extends Item {
     @Override
     public void interact(Collector collector) {
         super.interact(collector);
-            removeGates(collector);
+        removeGates(collector);
     }
 }
