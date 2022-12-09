@@ -1,10 +1,8 @@
 package com.example.spacechase;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 
 import java.time.Clock;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -70,6 +68,7 @@ public class GameClock {
             private long last = clock.millis();
             private long playerLast = last;
             private long npcLast = last;
+
             @Override
             public void handle(long l) {
                 long now = clock.millis();
@@ -124,21 +123,17 @@ public class GameClock {
                          */
                         if (!bomb.getIsTriggered()) {
                             if (bomb.canTrigger()) {
-                                System.out.println("trigger");
                                 bomb.trigger(now);
                             }
-                            //if the bomb isn't detonated then detonate it
+                            //if the bomb isn't detonated then detonate it.
                         } else if (!bomb.getIsDetonated()) {
-                            /*if 3 seconds have passed since it has been triggered
-                            detonate it.
+                            /*if 3 seconds have passed
+                            since it has been triggered
+                            then detonate it.
                              */
                             if (now - bomb.getInitTime() >= BOMB_EXPLODE) {
                                 bomb.setIsDetonated();
                                 bomb.destroyItems();
-                                //if a second has passed since last tick change image
-                            } else if (now - bomb.getLastTime() >= BOMB_TICK) {
-                                //change image
-                                bomb.setLastTime(now);
                             }
                         }
                     }

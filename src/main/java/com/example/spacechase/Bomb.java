@@ -160,6 +160,12 @@ public class Bomb extends Item {
      */
     public boolean canTrigger() {
         boolean trigger = false;
+        /* Loops through the trigger tiles
+        that are one block away from
+        the bomb and checks if a character
+        is on the trigger tile if(true) then
+        trigger the bomb.
+         */
         for (Direction direction : Direction.values()) {
             Tile neighbourTile = tile.getNeighbourTile(direction);
             if (neighbourTile != null
