@@ -23,8 +23,8 @@ public class AdvertController extends Controller {
     private Button button;
     /**
      * Variable holing a file.
+     * @see javafx.scene.control.Button
      */
-    @FXML
     private File file;
     /**
      * Variable holing a media object.
@@ -33,17 +33,20 @@ public class AdvertController extends Controller {
     private Media media;
     /**
      * Variable holing a mediaView object.
+     * @see javafx.scene.media.Media
      */
     @FXML
     private MediaView mediaView;
     /**
      * Variable holing a mediaPayer object.
+     * @see javafx.scene.media.MediaView
      */
     @FXML
     private MediaPlayer mediaPlayer;
     /**
      * Integer variable representing the time
      * taken before the button will appear.
+     * @see javafx.scene.media.MediaPlayer
      */
     private final int timer = 5;
     /**
