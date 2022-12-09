@@ -8,6 +8,7 @@ import java.util.Objects;
  * This abstract class represents an item. An item contains
  * components of id, tile, level and image.
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
  */
@@ -64,7 +65,6 @@ public abstract class Item {
 
     /**
      * Creates an image of the item at position (x,y).
-     *
      * @return image of the item.
      */
     protected ImageView createImageView() {
@@ -92,10 +92,11 @@ public abstract class Item {
 
     /**
      * @return Character 'L' indicating as an item
-     * and id indicating its type of item.
+     * and id indicating its type of item with
+     * a comma acting as a separator.
      */
     @Override
     public String toString() {
-        return "L" + id;
+        return "L," + id + ",";
     }
 }
