@@ -8,7 +8,8 @@ import com.example.spacechase.models.characters.Player;
  * player to finish a level, or fail a level if an enemy interact
  * with it.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Ben Thornber
+ * @version 1.0.1
  */
 public class Door extends Item {
     /**
@@ -16,7 +17,7 @@ public class Door extends Item {
      */
     public Door() {
         this.id = 'D';
-        this.imagePath = "door.png";
+        this.imagePath = "Rocket.gif";
     }
 
     /**

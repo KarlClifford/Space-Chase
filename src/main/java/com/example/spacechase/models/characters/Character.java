@@ -8,7 +8,8 @@ import com.example.spacechase.models.level.Tile;
  * This abstract class represents a character. A character contains
  * components of id, tile, image, level.
  * @author Tristan Tsang
- * @version 1.0.1
+ * @author Ben Thornber
+ * @version 1.0.2
  */
 public abstract class Character extends Entity {
     /**
@@ -35,11 +36,9 @@ public abstract class Character extends Entity {
      */
     public void draw() {
         imageView.relocate(
-                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX()
-                        + Tile.TILE_SIZE / 2 / 2,
+                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
                 Level.CANVAS_OFFSET_X
-                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY()
-                        + Tile.TILE_SIZE / 2 / 2);
+                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
     }
 
     /**
