@@ -24,6 +24,11 @@
                      <Font name="RobotoMono-VariableFont_wght.ttf" size="14" />
                  </font>
              </Label>
+             <Label contentDisplay="BOTTOM" text="©2022 Grwp 40" textAlignment="CENTER" textFill="GRAY">
+                 <font>
+                     <Font name="RobotoMono-VariableFont_wght.ttf" size="14" />
+                 </font>
+             </Label>
          </children>
       </VBox>
    </center>
