@@ -58,12 +58,11 @@ public class LevelEndedMenuController extends Controller {
      * @param isLevelCleared level is cleared or not.
      */
     public void start(Level level, boolean isLevelCleared) {
-        /*
-         * If the level is cleared, display a level cleared
-         * scene with next button that leads to next level.
-         * Otherwise, display a level failed scene with
-         * restart button that loads an advert.
-         */
+        //If the level is cleared, display a level cleared
+        //scene with next button that leads to next level.
+        //Otherwise, display a level failed scene with
+        //restart button that loads an advert.
+        //
         if (isLevelCleared) {
             levelEndedLabel.setText(LEVEL_CLEARED_TEXT);
             levelEndedLabel.setTextFill(Color.GREEN);
