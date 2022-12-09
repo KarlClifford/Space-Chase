@@ -32,11 +32,6 @@ public class GameClock {
     private static final double NPC_TICK = 1000.0;
 
     /**
-     * Time interval between each tick of the Bomb.
-     */
-    private static final double BOMB_TICK = 1000.0;
-
-    /**
      * Time until bomb explodes.
      */
     private static final double BOMB_EXPLODE = 3000.0;
