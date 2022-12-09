@@ -26,6 +26,7 @@ import java.util.Objects;
  * to next level by next.
  *
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
  */
@@ -617,6 +618,7 @@ public class Level {
                                                     ? null
                                                     : item.toString()
                                                     + t.getX()
+                                                    + ","
                                                     + t.getY();
                                         })
                                         .filter(Objects::nonNull)
