@@ -50,6 +50,17 @@ public class Player extends Collector {
     }
 
     /**
+     * Plays the sound effect of player movement.
+     */
+    private void playMoveSound() {
+        SoundEngine soundEngine = new SoundEngine();
+        soundEngine.playSound(
+                SoundEngine.Sound.MOVE,
+                SoundEngine.SOUND_EFFECT_VOLUME,
+                false);
+    }
+
+    /**
      * Changes the tile of the character if player
      * is trying to move towards a direction.
      */
@@ -64,6 +75,7 @@ public class Player extends Collector {
             character on it. */
             if (link != null && link.getCharacter() == null) {
                 changeTile(link);
+                playMoveSound();
             }
         }
 
