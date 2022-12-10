@@ -51,10 +51,10 @@ public class Level {
      */
     public static final int TILE_SPACING = 5;
     /**
-     * Fxml file path of level menu.
+     * Fxml file path of end credits.
      * @see javafx.fxml
      */
-    private static final String LEVEL_MENU_FXML_PATH = "fxml/levelMenu.fxml";
+    private static final String END_CREDITS_FXML_PATH = "fxml/endCredits.fxml";
     /**
      * Fxml file path of pause menu.
      * @see javafx.fxml
@@ -608,11 +608,11 @@ public class Level {
             File nextFile = new File(String.format("%s/%d.txt",
                     file.getParentFile().getPath(),
                     id + 1));
-            /* Goes back to level menu if there's no next level.
+            /* Goes back to end credits if there's no next level.
              Otherwise, start the next level. */
             if (!nextFile.exists()) {
                 Controller controller = new Controller();
-                controller.loadFxml(LEVEL_MENU_FXML_PATH);
+                controller.loadFxml(END_CREDITS_FXML_PATH);
             } else {
                 Level newLevel = Data.readLevel(nextFile);
                 newLevel.start();
