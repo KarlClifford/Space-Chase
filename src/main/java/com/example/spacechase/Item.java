@@ -7,7 +7,9 @@ import java.util.Objects;
 /**
  * This abstract class represents an item. An item contains
  * components of id, tile, level and image.
+ *
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
  */
@@ -22,6 +24,7 @@ public abstract class Item {
     protected String imagePath = "bin.png";
     /**
      * Image view of the item.
+     *
      * @see javafx.scene.image.ImageView
      */
     protected ImageView imageView;
@@ -47,6 +50,14 @@ public abstract class Item {
     }
 
     /**
+     * Gets the image view of the item.
+     * @return image view of the item.
+     */
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    /**
      * Sets the level of the item that is on.
      * @param level level of the item.
      */
@@ -64,7 +75,6 @@ public abstract class Item {
 
     /**
      * Creates an image of the item at position (x,y).
-     *
      * @return image of the item.
      */
     protected ImageView createImageView() {
@@ -91,11 +101,23 @@ public abstract class Item {
     }
 
     /**
+     * Removes an item
+     * mainly used in Bomb class
+     * to destroy items.
+     */
+    protected void remove() {
+        level.removeItem(this);
+        tile.setItem(null);
+        imageView.setOpacity(0);
+    }
+
+    /**
      * @return Character 'L' indicating as an item
-     * and id indicating its type of item.
+     * and id indicating its type of item with
+     * a comma acting as a separator.
      */
     @Override
     public String toString() {
-        return "L" + id;
+        return "L," + id + ",";
     }
 }

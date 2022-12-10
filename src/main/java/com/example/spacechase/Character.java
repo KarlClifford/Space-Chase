@@ -8,6 +8,7 @@ import java.util.Objects;
  * This abstract class represents a character. A character contains
  * components of id, tile, image, level.
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
  */
@@ -76,6 +77,13 @@ public abstract class Character {
     }
 
     /**
+     * @return tile the character is stepping on.
+     */
+    public Tile getTile() {
+        return tile;
+    }
+
+    /**
      * Changes the current tile to the new tile.
      * @param link the tile to move on to.
      */
@@ -123,6 +131,6 @@ public abstract class Character {
      */
     @Override
     public String toString() {
-        return String.format("C%s%s%s", id, tile.getX(), tile.getY());
+        return String.format("C,%s,%s,%s", id, tile.getX(), tile.getY());
     }
 }
