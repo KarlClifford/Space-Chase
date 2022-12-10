@@ -1,13 +1,12 @@
 package com.example.spacechase.controllers;
 
-import com.example.spacechase.App;
+import com.example.spacechase.utils.Data;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
-import com.example.spacechase.utils.Data;
 
 /**
  * This class represents a controller. A controller contains
@@ -56,8 +55,8 @@ public class Controller {
     public Object loadFxml(String source) {
         URL url = Data.getUrl(source);
         FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Pane pane;
 
+        Pane pane;
         // Try to load the fxml file, throws exception if loader fails.
         try {
             pane = fxmlLoader.load();
@@ -65,8 +64,7 @@ public class Controller {
             throw new RuntimeException(ex);
         }
 
-        Scene scene = new Scene(pane, App.STAGE_WIDTH, App.STAGE_HEIGHT);
-
+        Scene scene = new Scene(pane);
         stage.setScene(scene);
 
         return fxmlLoader.getController();

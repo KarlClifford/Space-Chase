@@ -1,6 +1,7 @@
 package com.example.spacechase.models.items;
 
 import com.example.spacechase.models.level.Tile;
+import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
 import com.example.spacechase.utils.Direction;
 import javafx.animation.AnimationTimer;

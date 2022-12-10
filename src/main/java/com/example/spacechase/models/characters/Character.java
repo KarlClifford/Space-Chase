@@ -33,16 +33,6 @@ public abstract class Character extends Entity {
     }
 
     /**
-     * Draws the image of the character to the center of the tile.
-     */
-    public void draw() {
-        imageView.relocate(
-                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
-                Level.CANVAS_OFFSET_X
-                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
-    }
-
-    /**
      * Movement of a character.
      */
     abstract void move();

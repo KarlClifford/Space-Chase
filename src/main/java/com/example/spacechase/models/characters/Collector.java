@@ -3,6 +3,7 @@ package com.example.spacechase.models.characters;
 import com.example.spacechase.models.items.Bomb;
 import com.example.spacechase.models.items.Item;
 import com.example.spacechase.models.level.Tile;
+import com.example.spacechase.services.SoundEngine;
 
 /**
  * This class represents a collector. A collector handles
