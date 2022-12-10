@@ -1,6 +1,8 @@
 package com.example.spacechase;
 
 import com.example.spacechase.controllers.Controller;
+import com.example.spacechase.controllers.SettingsController;
+import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -71,8 +73,6 @@ public class App extends Application {
         stage.setScene(scene);
 
         stage.setTitle(TITLE);
-        stage.setWidth(STAGE_WIDTH);
-        stage.setHeight(STAGE_HEIGHT);
         stage.setResizable(RESIZEABLE);
         stage.show();
 
