@@ -7,7 +7,6 @@ import com.example.spacechase.utils.Direction;
 import com.example.spacechase.services.SoundEngine;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-
 import java.util.HashMap;
 
 /**
