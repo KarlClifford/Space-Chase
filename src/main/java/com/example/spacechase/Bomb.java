@@ -100,6 +100,7 @@ public class Bomb extends Item {
                      */
                     if (now - last >= EXPLOSION_TIME) {
                         item.remove();
+                        playDestroySound();
                         this.stop();
                     }
                 }
@@ -129,6 +130,7 @@ public class Bomb extends Item {
                     if (now - last >= EXPLOSION_TIME) {
                         bomb.setIsDetonated();
                         bomb.destroyItems();
+                        playDestroySound();
                         this.stop();
                     }
                 }
@@ -136,6 +138,17 @@ public class Bomb extends Item {
 
             timer.start();
         }
+    }
+
+    /**
+     * Plays the sound effect of explosion.
+     */
+    private void playDestroySound() {
+        SoundEngine soundEngine = new SoundEngine();
+        soundEngine.playSound(
+                SoundEngine.Sound.DESTROY,
+                SoundEngine.SOUND_EFFECT_VOLUME,
+                false);
     }
 
     /**

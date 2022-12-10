@@ -25,17 +25,32 @@ public abstract class Collector extends Character {
        }
     }
 
+    /**
+     * Plays the sound effect of reward.
+     */
+    private void playRewardSound() {
+        // Initialise a new sound engine, so we can play a sound effect.
+        SoundEngine soundEngine = new SoundEngine();
+        // Play the reward sound effect.
+        soundEngine.playSound(
+                SoundEngine.Sound.REWARD,
+                SoundEngine.SOUND_EFFECT_VOLUME,
+                false);
+    }
 
     /**
      * Collector picks up item from the tile.
      */
-
     @Override
     protected void update() {
         super.update();
         Item item = tile.getItem();
         // If there is an item, interact with it.
         if (item != null) {
+            // Plays reward sound if it is a player collecting it.
+            if (this instanceof Player) {
+                playRewardSound();
+            }
             item.interact(this);
         }
     }

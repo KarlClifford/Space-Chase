@@ -12,7 +12,8 @@ import javafx.scene.paint.Color;
  * level.
  * @author Tristan Tsang
  * @author Daniel Halsall
- * @version 1.0.1
+ * @author Karl Clifford
+ * @version 1.0.2
  */
 public class LevelEndedMenuController extends Controller {
     /**
@@ -88,5 +89,12 @@ public class LevelEndedMenuController extends Controller {
     @FXML
     private void onMainMenuButtonClicked() {
         loadFxml(LEVEL_MENU_FXML_PATH);
+
+        // Stop the playing music and start the menu music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.MENU_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 }
