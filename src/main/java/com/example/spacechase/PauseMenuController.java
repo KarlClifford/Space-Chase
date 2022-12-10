@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
  * that goes to main menu, and quit game button that quits
  * the game.
  * @author Tristan Tsang
+ * @author Karl Clifford
  * @version 1.0.0
  */
 public class PauseMenuController extends Controller {
@@ -58,6 +59,13 @@ public class PauseMenuController extends Controller {
     @FXML
     private void onMainMenuButtonClicked() {
         loadFxml(LEVEL_MENU_FXML_PATH);
+
+        // Stop the playing music and start the menu music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.MENU_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**
