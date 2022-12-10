@@ -17,47 +17,41 @@ public class FlyingAssassin extends Character {
     /**
      * Creates a flying assassin instance where
      * the initial direction is determined by the id.
-     * @param var the character used to identify the flying assassin.
+     * @param id the character used to identify the flying assassin.
      */
-    public FlyingAssassin(char var) {
-        this.id = setid(var);
+    public FlyingAssassin(char id) {
+        this.id = id;
         this.imagePath = "FlyingAssassin.gif";
-        this.direction = setDirection(id);
+        this.direction = getDirection(id);
     }
 
     /**
-     * Sets the initial direction of the flying assassin.
-     * @param direc the id used in the text file for the flying assassin.
+     * Gets the initial direction of the flying assassin.
+     * @param id the id used in the text file for the flying assassin.
      * @return the direction the flying assassin will be.
      */
-    public Direction setDirection(char direc) {
-        switch (direc) {
-            case '^':
-                direction = Direction.UP;
-                break;
-            case '>':
-                direction = Direction.RIGHT;
-                break;
-            case '<':
-                direction = Direction.LEFT;
-                break;
-            case '⌄':
-                direction = Direction.DOWN;
-                break;
-
-        }
-        return direction;
+    public Direction getDirection(char id) {
+        return switch (id) {
+            case '^' -> Direction.UP;
+            case '>' -> Direction.RIGHT;
+            case '<' -> Direction.LEFT;
+            case '⌄' -> Direction.DOWN;
+            default -> null;
+        };
     }
 
     /**
-     * Sets the id to the char used in the text file.
-     * @param id character representing
-     * the flying assassin in the level text file.
-     * @return the character representing
-     * the id of the flying assassin.
+     * Gets the opposite direction of the given direction.
+     * @param direction direction.
+     * @return opposite direction.
      */
-    public char setid(char id) {
-        return id;
+    private Direction getOppositeDirection(Direction direction) {
+        return  switch (direction) {
+            case UP -> Direction.DOWN;
+            case DOWN -> Direction.UP;
+            case RIGHT -> Direction.LEFT;
+            case LEFT -> Direction.RIGHT;
+        };
     }
 
     /**
@@ -72,26 +66,8 @@ public class FlyingAssassin extends Character {
          * reverse the direction.
          */
         if (neighbour == null) {
-            switch (direction) {
-                case UP:
-                    direction = Direction.DOWN;
-                    move();
-                    break;
-                case DOWN:
-                    direction = Direction.UP;
-                    move();
-                    break;
-                case RIGHT:
-                    direction = Direction.LEFT;
-                    move();
-                    break;
-                case LEFT:
-                    direction = Direction.RIGHT;
-                    move();
-                    break;
-
-
-            }
+            direction = getOppositeDirection(direction);
+            move();
         } else {
             Character character = neighbour.getCharacter();
 
