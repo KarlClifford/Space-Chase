@@ -153,14 +153,9 @@ public interface Data {
             case '*' -> new Bomb();
             case '@' -> new Clock();
             case 'D' -> new Door();
-            case 'Y' -> new Valuable('Y');
-            case '+' -> new Valuable('+');
-            case 'T' -> new Valuable('T');
-            case 'G' -> new Valuable('G');
-            case '(' -> new Gate(type);
-            case ')' -> new Gate(type);
-            case '{' -> new Lever(type);
-            case '}' -> new Lever(type);
+            case 'Y', '+', 'T', 'G' -> new Valuable(type);
+            case '(', ')' -> new Gate(type);
+            case '{', '}' -> new Lever(type);
             default -> null;
         };
     }
@@ -173,10 +168,7 @@ public interface Data {
     private static Character createCharacterFromType(char type) {
         return switch (type) {
             case 'P' -> new Player();
-            case '^' -> new FlyingAssassin('^');
-            case '>' -> new FlyingAssassin('>');
-            case '<' -> new FlyingAssassin('<');
-            case '⌄' -> new FlyingAssassin('⌄');
+            case '^', '>', '<', '⌄' -> new FlyingAssassin(type);
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
             default -> null;
