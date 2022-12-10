@@ -20,6 +20,13 @@ import java.util.HashMap;
  * @version 1.0.1
  */
 public class Player extends Collector {
+    private static final HashMap<KeyCode, Control> KEYBINDS = new HashMap<>();
+    static {
+        KEYBINDS.put(KeyCode.W, Control.UP);
+        KEYBINDS.put(KeyCode.A, Control.LEFT);
+        KEYBINDS.put(KeyCode.S, Control.RIGHT);
+        KEYBINDS.put(KeyCode.D, Control.DOWN);
+    }
     /**
      * Direction of the player.
      */
@@ -47,15 +54,21 @@ public class Player extends Collector {
      * @param scene scene of the level.
      */
     public void initialize(Scene scene) {
-        scene.setOnKeyPressed(keyEvent ->
-                direction = switch (keyEvent.getCode()) {
-                    case W -> Direction.UP;
-                    case A -> Direction.LEFT;
-                    case S -> Direction.DOWN;
-                    case D -> Direction.RIGHT;
+        scene.setOnKeyPressed(keyEvent -> {
+            Control control = KEYBINDS.getOrDefault(keyEvent.getCode(), Control.NULL);
+                direction = switch (control) {
+                    case UP -> Direction.UP;
+                    case LEFT -> Direction.LEFT;
+                    case DOWN -> Direction.DOWN;
+                    case RIGHT -> Direction.RIGHT;
                     default -> null;
-                }
+                };
+            }
         );
+    }
+
+    public static void setKeybind(Control control, KeyCode keyCode) {
+        KEYBINDS.put(keyCode, control);
     }
 
     /**

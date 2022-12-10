@@ -26,10 +26,6 @@ public abstract class Entity {
      */
     protected Tile tile;
     /**
-     * Colour of the entity.
-     */
-    protected char colour = '_';
-    /**
      * Url path of image of the entity.
      */
     protected String imagePath;
@@ -52,6 +48,13 @@ public abstract class Entity {
                         .toExternalForm());
         imageView.setFitHeight(Tile.TILE_SIZE);
         imageView.setPreserveRatio(true);
+        draw();
+    }
+
+    /**
+     * Draws the image of the entity to the center of the tile.
+     */
+    public void draw() {
         imageView.relocate(
                 (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
                 Level.CANVAS_OFFSET_X
@@ -91,19 +94,11 @@ public abstract class Entity {
     }
 
     /**
-     * Sets the colour of this entity.
-     * @param colour colour of this entity.
-     */
-    public void setColour(char colour) {
-        this.colour = colour;
-    }
-
-    /**
-     * Gets the id and colour of this entity in string.
+     * Gets the id of this entity in string.
      * @return string data of this entity.
      */
     @Override
     public String toString() {
-        return String.valueOf(id) + colour;
+        return String.valueOf(id);
     }
 }

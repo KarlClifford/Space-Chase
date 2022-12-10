@@ -9,6 +9,7 @@ import com.example.spacechase.models.characters.Character;
 import com.example.spacechase.models.characters.Player;
 import com.example.spacechase.models.items.Item;
 import com.example.spacechase.models.level.Tile;
+import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
 import com.example.spacechase.utils.Direction;
 import javafx.scene.Group;
@@ -130,11 +131,6 @@ public class Level {
      * @see javafx.scene
      */
     private Scene scene;
-    /**
-     * Pane of the level.
-     * @see javafx.scene.layout.BorderPane
-     */
-    private BorderPane pane;
 
     /**
      * Creates a level object.
@@ -291,12 +287,12 @@ public class Level {
 
         draw(group);
 
-        pane = new BorderPane();
+        BorderPane pane = new BorderPane();
         pane.setTop(hBox);
         pane.setCenter(group);
         pane.setStyle("-fx-background-color: BLACK");
 
-        scene = new Scene(pane);
+        scene = new Scene(pane, App.STAGE_WIDTH, App.STAGE_HEIGHT);
         Controller.setScene(scene);
 
         player.initialize(scene);
@@ -309,6 +305,8 @@ public class Level {
                 SoundEngine.MUSIC_VOLUME,
                 true);
     }
+
+
 
     /**
      * Creates a label for the time of level.
@@ -348,37 +346,6 @@ public class Level {
         });
 
         return pauseButton;
-    }
-
-    /**
-     * Ends the level by stopping the game clock
-     * and loads the level ended menu.
-     *
-     * @param isCleared level is cleared or not.
-     */
-    public void end(boolean isCleared) {
-        clock.setRun(false);
-
-        LevelEndedMenuController controller = (LevelEndedMenuController)
-                new Controller()
-                        .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
-        controller.start(this, isCleared);
-
-        // Stop the playing music.
-        App.MUSIC_PLAYER.stopMusic();
-        // Initialise the sound engine to play a sound effect.
-        SoundEngine soundEngine = new SoundEngine();
-        if (isCleared) {
-            // Play win sound effect.
-            soundEngine.playSound(
-                    SoundEngine.Sound.WIN,
-                    SoundEngine.MUSIC_VOLUME, false);
-        } else {
-            // Play loose sound effect.
-            soundEngine.playSound(
-                    SoundEngine.Sound.LOOSE,
-                    SoundEngine.MUSIC_VOLUME, false);
-        }
     }
 
     /**
@@ -462,6 +429,8 @@ public class Level {
             case 'Y' -> Color.YELLOW;
             case 'B' -> Color.BLUE;
             case 'G' -> Color.GREEN;
+            case 'C' -> Color.CYAN;
+            case 'M' -> Color.MAGENTA;
             default -> Color.BLACK;
         };
     }
@@ -569,11 +538,26 @@ public class Level {
             throw new RuntimeException(e);
         }
 
-
         LevelEndedMenuController controller = (LevelEndedMenuController)
                 new Controller()
                         .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
         controller.start(this, isCleared);
+
+        // Stop the playing music.
+        App.MUSIC_PLAYER.stopMusic();
+        // Initialise the sound engine to play a sound effect.
+        SoundEngine soundEngine = new SoundEngine();
+        if (isCleared) {
+            // Play win sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.WIN,
+                    SoundEngine.MUSIC_VOLUME, false);
+        } else {
+            // Play loose sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.LOOSE,
+                    SoundEngine.MUSIC_VOLUME, false);
+        }
     }
 
     /**

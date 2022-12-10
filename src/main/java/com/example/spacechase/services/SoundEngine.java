@@ -1,27 +1,27 @@
 package com.example.spacechase.services;
 
+import com.example.spacechase.utils.Data;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * The SoundEngine class handles playing audio files such as music
  * and sound effects.
  * @author Karl Clifford
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class SoundEngine {
     /**
      * Volume the game music should play at.
      */
-    public static final int MUSIC_VOLUME = 30;
+    public static int MUSIC_VOLUME = 30;
     /**
      * Volume that sound effects should play at.
      */
-    public static final int SOUND_EFFECT_VOLUME = 100;
+    public static int SOUND_EFFECT_VOLUME = 100;
     /**
      * The maximum volume sound is allowed to play at.
      */
@@ -109,8 +109,7 @@ public class SoundEngine {
     public void playSound(Sound effect, int volume, boolean loop) {
         // Load the audio file for the specified sound effect.
         Media sound = new Media(
-                Objects.requireNonNull(getClass()
-                        .getResource(getFilename(effect))).toString());
+                Data.getUrl(getFilename(effect)).toString());
 
         // Create a media player for the audio file.
         this.mediaPlayer = new MediaPlayer(sound);
@@ -181,6 +180,23 @@ public class SoundEngine {
     public void setPlaybackSpeed(double speed) {
         // Set the playback speed of the media player.
         mediaPlayer.setRate(speed);
+    }
+
+    /**
+     * Sets the volume of the music.
+     * @param volume volume of the music.
+     */
+    public static void setMusicVolume(int volume) {
+        MUSIC_VOLUME = volume;
+
+    }
+
+    /**
+     * Sets the volume of the sound effects.
+     * @param volume volume of the sound effects.
+     */
+    public static void setFxMusicVolume(int volume) {
+        SOUND_EFFECT_VOLUME = volume;
     }
 
 }
