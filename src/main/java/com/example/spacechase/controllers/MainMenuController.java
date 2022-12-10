@@ -264,11 +264,11 @@ public class MainMenuController extends Controller {
      * @param node node to be anchored.
      * @param anchor value of anchor.
      */
-    private void setAnchor(Node node, double anchor) {
-        AnchorPane.setTopAnchor(node, anchor);
-        AnchorPane.setRightAnchor(node, anchor);
-        AnchorPane.setLeftAnchor(node, anchor);
-        AnchorPane.setBottomAnchor(node, anchor);
+    private void setAnchor(Node node) {
+        AnchorPane.setTopAnchor(node, 0.0);
+        AnchorPane.setRightAnchor(node, 0.0);
+        AnchorPane.setLeftAnchor(node, 0.0);
+        AnchorPane.setBottomAnchor(node, 0.0);
     }
 
     /**
