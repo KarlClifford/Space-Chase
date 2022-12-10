@@ -2,6 +2,7 @@ package com.example.spacechase.controllers;
 
 import com.example.spacechase.models.Level;
 import com.example.spacechase.models.level.GameClock;
+import com.example.spacechase.services.SoundEngine;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
