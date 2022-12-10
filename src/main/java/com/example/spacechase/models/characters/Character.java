@@ -1,7 +1,6 @@
 package com.example.spacechase.models.characters;
 
 import com.example.spacechase.models.level.Entity;
-import com.example.spacechase.models.Level;
 import com.example.spacechase.models.level.Tile;
 
 /**
