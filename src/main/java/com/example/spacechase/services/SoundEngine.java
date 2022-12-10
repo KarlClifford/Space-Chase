@@ -1,4 +1,4 @@
-package com.example.spacechase;
+package com.example.spacechase.services;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

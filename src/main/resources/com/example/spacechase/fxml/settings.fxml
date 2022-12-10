@@ -21,6 +21,13 @@
                   <Label fx:id="volumeLabel" text="30" textFill="WHITE" />
                </children>
             </HBox>
+             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                 <children>
+                     <Label text="Sound FX" textFill="WHITE" />
+                     <Slider fx:id="fxSlider" value="30.0" />
+                     <Label fx:id="fxLabel" text="30" textFill="WHITE" />
+                 </children>
+             </HBox>
          </children>
       </VBox>
    </center>
