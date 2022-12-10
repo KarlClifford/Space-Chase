@@ -53,7 +53,6 @@ public class AdvertController extends Controller {
      * Start will play a
      * video and load a button after a determined amount of time
      * to restart the level.
-     * @author Daniel Halsall.
      * @param level the current level the player is on.
      */
     public void start(Level level) {

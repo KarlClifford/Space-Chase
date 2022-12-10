@@ -11,7 +11,8 @@ import javafx.scene.paint.Color;
  * either restarts the level or proceeds to the next
  * level.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Daniel Halsall
+ * @version 1.0.1
  */
 public class LevelEndedMenuController extends Controller {
     /**
@@ -72,7 +73,12 @@ public class LevelEndedMenuController extends Controller {
             levelEndedLabel.setText(LEVEL_FAILED_TEXT);
             levelEndedLabel.setTextFill(Color.RED);
             actionButton.setText(RESTART_TEXT);
-            actionButton.setOnMouseClicked(e -> level.restart());
+            actionButton.setOnMouseClicked(e -> {
+                AdvertController controller = (AdvertController)
+                        new Controller()
+                                .loadFxml("fxml/advert.fxml");
+                controller.start(level);
+            });
         }
     }
 
