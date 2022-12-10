@@ -72,12 +72,7 @@ public class LevelEndedMenuController extends Controller {
             levelEndedLabel.setText(LEVEL_FAILED_TEXT);
             levelEndedLabel.setTextFill(Color.RED);
             actionButton.setText(RESTART_TEXT);
-            actionButton.setOnMouseClicked(e -> {
-                AdvertController controller = (AdvertController)
-                    new Controller()
-                            .loadFxml("fxml/advert.fxml");
-            controller.start(level);
-        });
+            actionButton.setOnMouseClicked(e -> level.restart());
         }
     }
 
