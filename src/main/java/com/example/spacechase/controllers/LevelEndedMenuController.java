@@ -1,6 +1,8 @@
 package com.example.spacechase.controllers;
 
+import com.example.spacechase.App;
 import com.example.spacechase.models.Level;
+import com.example.spacechase.services.SoundEngine;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
