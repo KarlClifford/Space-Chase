@@ -102,9 +102,8 @@ public class MainMenuController extends Controller {
      */
     @FXML
     private void initialize() {
-        setAnchor(menuBox, 0.0);
+        setAnchor(menuBox);
         menuBox.setViewOrder(0);
-
         spawnImages();
     }
 
@@ -262,7 +261,6 @@ public class MainMenuController extends Controller {
     /**
      * Anchors the given node in the scene with value of anchor.
      * @param node node to be anchored.
-     * @param anchor value of anchor.
      */
     private void setAnchor(Node node) {
         AnchorPane.setTopAnchor(node, 0.0);
