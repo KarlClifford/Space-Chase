@@ -2,6 +2,7 @@ package com.example.spacechase.models.items;
 
 import com.example.spacechase.models.characters.Collector;
 import com.example.spacechase.models.characters.Player;
+import com.example.spacechase.services.SoundEngine;
 
 /**
  * This class represents a clock.
