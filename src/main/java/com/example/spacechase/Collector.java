@@ -47,6 +47,7 @@ public abstract class Collector extends Character {
         Item item = tile.getItem();
         // If there is an item, interact with it.
         if (item != null) {
+            // Plays reward sound if it is a player collecting it.
             if (this instanceof Player) {
                 playRewardSound();
             }
