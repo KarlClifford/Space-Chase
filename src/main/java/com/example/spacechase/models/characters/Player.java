@@ -2,8 +2,13 @@ package com.example.spacechase.models.characters;
 
 import com.example.spacechase.models.items.Gate;
 import com.example.spacechase.models.level.Tile;
+import com.example.spacechase.utils.Control;
 import com.example.spacechase.utils.Direction;
+import com.example.spacechase.services.SoundEngine;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+
+import java.util.HashMap;
 
 /**
  * This class represents a player.
