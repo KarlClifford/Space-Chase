@@ -30,12 +30,12 @@ public class App extends Application {
      * Width of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_WIDTH = 800;
+    public static final double STAGE_WIDTH = 1920.0;
     /**
      * Height of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_HEIGHT = 500;
+    public static final double STAGE_HEIGHT = 1080.0;
     /**
      * Title of the stage.
      * @see javafx.stage
@@ -63,12 +63,14 @@ public class App extends Application {
      */
     @Override
     public void start(final Stage stage) throws IOException {
+        SettingsController settingsController = new SettingsController();
+        settingsController.loadSettings();
+
         Controller.setStage(stage);
 
         Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
                         getClass().getResource("fxml/titleScreen.fxml")));
-
         Scene scene = new Scene(pane);
         stage.setScene(scene);
 
@@ -76,10 +78,15 @@ public class App extends Application {
         stage.setResizable(RESIZEABLE);
         stage.show();
 
-        // Start the game music.
-        MUSIC_PLAYER.playSound(
-                SoundEngine.Sound.MENU_MUSIC,
-                SoundEngine.MUSIC_VOLUME, true);
+        stage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            // Plays music if it changes scene from title screen.
+            if (oldScene == scene) {
+                // Start the game music.
+                App.MUSIC_PLAYER.playSound(
+                        SoundEngine.Sound.MENU_MUSIC,
+                        SoundEngine.MUSIC_VOLUME, true);
+            }
+        });
     }
 
     /**
