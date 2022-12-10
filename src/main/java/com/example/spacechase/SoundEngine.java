@@ -59,6 +59,9 @@ public class SoundEngine {
                 "sounds/time-passing-sound-effect-fast-clock-108403.mp3");
         soundFiles.put(Sound.WIN, "sounds/winsquare-6993.mp3");
         soundFiles.put(Sound.LOOSE, "sounds/game-over-38511.mp3");
+        soundFiles.put(Sound.MOVE, "sounds/gameboy-pluck-41265.mp3");
+        soundFiles.put(Sound.DESTROY,
+                "sounds/hit-brutal-puncher-cinematic-trailer-sound-effects-124760.mp3");
     }
 
     // Enumerated type for the different sound effects.
@@ -86,9 +89,15 @@ public class SoundEngine {
         /**
          * Will form part of the key to retrieve the loose sound effect file.
          */
-        LOOSE
-
-
+        LOOSE,
+        /**
+         * Will form part of the key to retrieve the move sound effect file.
+         */
+        MOVE,
+        /**
+         * Will form part of the key to retrieve destroy sound effect file.
+         */
+        DESTROY
     }
 
     /**
