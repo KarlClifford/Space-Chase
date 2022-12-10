@@ -23,8 +23,9 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
+ * @author Daniel Halsall
  * @author Alex Hallsworth
- * @version 1.0.1
+ * @version 1.0.2
  */
 public interface Data {
     /**
@@ -210,16 +211,13 @@ public interface Data {
     private static Entity createEntity(char type) {
         return switch (type) {
             case 'P' -> new Player();
-            case '^' -> new FlyingAssassin();
+            case '^', '>', '<', '⌄' -> new FlyingAssassin(type);
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
             case '*' -> new Bomb();
             case '@' -> new Clock();
             case 'D' -> new Door();
-            case 'Y' -> new Valuable('Y');
-            case '+' -> new Valuable('+');
-            case 'T' -> new Valuable('T');
-            case 'G' -> new Valuable('G');
+            case 'Y', '+', 'T', 'G' -> new Valuable(type);
             case '(', ')' -> new Gate(type);
             case '{', '}' -> new Lever(type);
             default -> null;
