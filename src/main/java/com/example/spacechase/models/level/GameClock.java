@@ -1,8 +1,9 @@
-package com.example.spacechase;
+package com.example.spacechase.models.level;
 
 import com.example.spacechase.models.Level;
 import com.example.spacechase.models.characters.Character;
 import com.example.spacechase.models.characters.Player;
+import com.example.spacechase.models.items.Bomb;
 import javafx.animation.AnimationTimer;
 import java.time.Clock;
 import java.util.Arrays;

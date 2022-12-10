@@ -1,5 +1,6 @@
 package com.example.spacechase.utils;
 
+import com.example.spacechase.models.items.Gate;
 import com.example.spacechase.models.level.Tile;
 import java.util.PriorityQueue;
 

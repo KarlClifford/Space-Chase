@@ -4,7 +4,6 @@ import com.example.spacechase.models.Level;
 import com.example.spacechase.utils.Data;
 import javafx.scene.image.ImageView;
 
-import java.util.Objects;
 
 /**
  * This class represents an entity, where it is an object
@@ -53,6 +52,10 @@ public abstract class Entity {
                         .toExternalForm());
         imageView.setFitHeight(Tile.TILE_SIZE);
         imageView.setPreserveRatio(true);
+        imageView.relocate(
+                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
+                Level.CANVAS_OFFSET_X
+                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
     }
 
     /**

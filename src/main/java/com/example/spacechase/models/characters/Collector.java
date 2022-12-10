@@ -1,6 +1,8 @@
 package com.example.spacechase.models.characters;
 
+import com.example.spacechase.models.items.Bomb;
 import com.example.spacechase.models.items.Item;
+import com.example.spacechase.models.level.Tile;
 
 /**
  * This class represents a collector. A collector handles

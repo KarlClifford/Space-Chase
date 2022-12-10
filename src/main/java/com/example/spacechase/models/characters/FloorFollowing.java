@@ -1,5 +1,6 @@
 package com.example.spacechase.models.characters;
 
+import com.example.spacechase.models.items.Gate;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.utils.Direction;
 import java.util.ArrayList;

@@ -8,6 +8,7 @@ import com.example.spacechase.models.level.Tile;
  * This abstract class represents a character. A character contains
  * components of id, tile, image, level.
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.2
  */

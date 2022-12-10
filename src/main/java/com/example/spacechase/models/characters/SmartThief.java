@@ -1,10 +1,10 @@
 package com.example.spacechase.models.characters;
 
+import com.example.spacechase.models.items.Gate;
 import com.example.spacechase.models.items.Item;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.utils.BFS;
 import com.example.spacechase.utils.Path;
-import java.util.ArrayList;
 
 /**
  * This class represents a smart thief.

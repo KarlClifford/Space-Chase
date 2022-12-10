@@ -1,13 +1,13 @@
-package com.example.spacechase;
+package com.example.spacechase.models;
 
 import com.example.spacechase.App;
+import com.example.spacechase.models.level.GameClock;
 import com.example.spacechase.controllers.Controller;
 import com.example.spacechase.controllers.LevelEndedMenuController;
 import com.example.spacechase.controllers.PauseMenuController;
 import com.example.spacechase.models.characters.Character;
 import com.example.spacechase.models.characters.Player;
 import com.example.spacechase.models.items.Item;
-import com.example.spacechase.models.level.GameClock;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.utils.Data;
 import com.example.spacechase.utils.Direction;
@@ -42,7 +42,6 @@ import java.util.Arrays;
 public class Level {
     /**
      * X offset of canvas.
-     *
      * @see javafx.scene.canvas
      */
     public static final int CANVAS_OFFSET_X = 100;
@@ -52,38 +51,32 @@ public class Level {
     public static final int TILE_SPACING = 5;
     /**
      * Fxml file path of level menu.
-     *
      * @see javafx.fxml
      */
     private static final String LEVEL_MENU_FXML_PATH = "fxml/levelMenu.fxml";
     /**
      * Fxml file path of pause menu.
-     *
      * @see javafx.fxml
      */
     private static final String PAUSE_MENU_FXML_PATH = "fxml/pauseMenu.fxml";
     /**
      * Fxml file path of level ended menu.
-     *
      * @see javafx.fxml
      */
     private static final String LEVEL_ENDED_MENU_FXML_PATH =
             "fxml/levelEndedMenu.fxml";
     /**
      * Spacing of HBox.
-     *
      * @see javafx.scene.layout.HBox
      */
     private static final int HBOX_SPACING = 10;
     /**
      * Normal font size.
-     *
      * @see javafx.scene.text.Font
      */
     private static final int NORM_FONT_SIZE = 16;
     /**
      * Font family.
-     *
      * @see javafx.scene.text.Font
      */
     private static final String FONT_FAMILY = "neuropol x rg";
@@ -133,13 +126,11 @@ public class Level {
     private Label scoreLabel;
     /**
      * Scene of the level.
-     *
      * @see javafx.scene
      */
     private Scene scene;
     /**
      * Pane of the level.
-     *
      * @see javafx.scene.layout.BorderPane
      */
     private BorderPane pane;
@@ -264,7 +255,6 @@ public class Level {
 
     /**
      * Removes the item from items.
-     *
      * @param item item.
      */
     public void removeItem(Item item) {
@@ -273,7 +263,6 @@ public class Level {
 
     /**
      * Removes the character from characters.
-     *
      * @param character character.
      */
     public void removeCharacter(Character character) {
@@ -335,7 +324,6 @@ public class Level {
      * Creates a pause button that can pause the level
      * by stopping the game clock and showing the pause
      * level menu.
-     *
      * @return pause button.
      */
     private Button createPauseButton() {
@@ -356,7 +344,6 @@ public class Level {
 
     /**
      * Draws all the tiles and entities.
-     *
      * @param group pane of the canvas.
      */
     private void draw(Group group) {
@@ -429,7 +416,6 @@ public class Level {
 
     /**
      * Gets colour from a given character.
-     *
      * @param c character of the colour.
      * @return the colour.
      */
@@ -445,7 +431,6 @@ public class Level {
 
     /**
      * Gets the linking tile in direction.
-     *
      * @param tile      initial tile.
      * @param direction direction.
      * @return tile in the given direction of the given tile.
@@ -458,7 +443,6 @@ public class Level {
      * Recursively search through each tile that links with
      * the current tile and return the tile that has the
      * same colour(s) with initial tile.
-     *
      * @param current   current tile.
      * @param goal      initial tile.
      * @param direction direction
@@ -507,7 +491,6 @@ public class Level {
 
     /**
      * Gets the neighbour tile of a tile.
-     *
      * @param tile      initial tile.
      * @param direction direction to search for.
      * @return the neighbour tile of the given tile.
@@ -526,7 +509,6 @@ public class Level {
     /**
      * Ends the level by stopping the game clock
      * and loads the level ended menu.
-     *
      * @param isCleared level is cleared or not.
      */
     public void end(boolean isCleared) {
@@ -564,6 +546,8 @@ public class Level {
         /* Tries to load the same level.
          Catches if there is an I/O exception while loading the file. */
         try {
+            String playerName = file.getParentFile().getName();
+            Data.copyLevel(id, playerName);
             Level newLevel = Data.readLevel(file);
             newLevel.start();
         } catch (IOException ex) {
@@ -597,7 +581,6 @@ public class Level {
 
     /**
      * Call and concat all tiles toString from the level map.
-     *
      * @return string of all tiles from the map.
      */
     private String getMapString() {
@@ -613,7 +596,6 @@ public class Level {
     /**
      * Returns the height of the map, width of the map, time of the level,
      * score of the level, string data of all tiles, characters and items.
-     *
      * @return string of all contents in level.
      */
     @Override

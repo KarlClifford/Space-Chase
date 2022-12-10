@@ -50,10 +50,10 @@ public class Valuable extends Item {
     private static final HashMap<java.lang.Character, String>
             ITEM_IMAGES = new HashMap<>();
     static {
-        ITEM_IMAGES.put('+', "screw.png");
-        ITEM_IMAGES.put('Y', "screwdriver.png");
-        ITEM_IMAGES.put('T', "toolbox.png");
-        ITEM_IMAGES.put('G', "gas.png");
+        ITEM_IMAGES.put('+', "Screw.gif");
+        ITEM_IMAGES.put('Y', "Screwdriver.gif");
+        ITEM_IMAGES.put('T', "Toolbox.gif");
+        ITEM_IMAGES.put('G', "rocketFuel.gif");
     }
     /**
      * This represents the score value of each item.

@@ -23,13 +23,14 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
- * @version 1.0.4
+ * @author Alex Hallsworth
+ * @version 1.0.1
  */
 public interface Data {
     /**
      * Format of tile data.
      */
-    String DATA_FORMAT = "[RYGB]{1,4}|[RYGB]{1,4}[*|@DP^FS][RYGB_]";
+    String DATA_FORMAT = "[RYGB]{1,4}|[RYGB]{1,4}[*|@DP^FS{}()GT+Y][RYGB_]";
     /**
      * Name of directory that contains all data of the game.
      */
@@ -102,7 +103,10 @@ public interface Data {
     static File createFileFromPath(String path, String fileName) {
         File directory = getFileFromPath(path);
         File file = new File(directory.getPath() + fileName);
-        file.mkdirs();
+        boolean success = file.mkdirs();
+        if (!success) {
+            System.out.println("WARN: file has already been created.");
+        }
         return file;
     }
 
@@ -205,15 +209,20 @@ public interface Data {
      */
     private static Entity createEntity(char type) {
         return switch (type) {
-            case '*' -> new Bomb();
-            case '|' -> new Lever();
-            case '@' -> new Clock();
-            case 'D' -> new Door();
             case 'P' -> new Player();
             case '^' -> new FlyingAssassin();
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
-            default -> new Valuable(type);
+            case '*' -> new Bomb();
+            case '@' -> new Clock();
+            case 'D' -> new Door();
+            case 'Y' -> new Valuable('Y');
+            case '+' -> new Valuable('+');
+            case 'T' -> new Valuable('T');
+            case 'G' -> new Valuable('G');
+            case '(', ')' -> new Gate(type);
+            case '{', '}' -> new Lever(type);
+            default -> null;
         };
     }
 
@@ -262,14 +271,15 @@ public interface Data {
     static boolean createProfile(String name) throws IOException {
         File folder = getPlayerDirectory(name);
 
-        /*
-         * Returns true if success in creating a new profile directory.
-         * Otherwise, returns false.
-         */
+        // Check for the directory and create it if it doesn't exist.
         if (folder.exists()) {
             return false;
         } else {
-            folder.mkdirs();
+            boolean success = folder.mkdirs();
+            // Warn if directory already exists.
+            if (!success) {
+                System.out.println("WARN: Directory already exists.");
+            }
             copyLevel(1, name);
             return true;
         }
@@ -280,18 +290,31 @@ public interface Data {
      * @param file file or folder to be deleted.
      */
     private static void deleteFiles(File file) {
-        /* If this file is a directory, delete all of its sub-files
-         and delete this directory.
-         Otherwise, delete the file. */
+        /*
+         * If this file is a directory, delete all of its sub-files
+         * and delete this directory.
+         * Otherwise, delete the file.
+         */
         if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
+            for (File f : Objects.requireNonNull(file.listFiles())) {
                 deleteFiles(f);
             }
 
-            file.delete();
-
+            deleteFile(file);
         } else {
-            file.delete();
+            deleteFile(file);
+        }
+    }
+
+    /**
+     * Deletes a file.
+     * @param file target file for deletion.
+     */
+    private static void deleteFile(File file) {
+        boolean success = file.delete();
+        // Warn if file has been deleted.
+        if (!success) {
+            System.out.println("WARN: File has already been deleted.");
         }
     }
 

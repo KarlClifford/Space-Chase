@@ -1,12 +1,12 @@
 package com.example.spacechase.models.items;
 
-import com.example.spacechase.models.characters.Collector;
-
+import com.example.spacechase.models.level.Tile;
+import com.example.spacechase.utils.Data;
+import com.example.spacechase.utils.Direction;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.time.Clock;
-import java.util.Objects;
 
 /**
  * This class represents a bomb. It can be triggered
@@ -146,11 +146,7 @@ public class Bomb extends Item {
      * @return image.
      */
     private Image createImage(String path) {
-        return new Image(
-                Objects.requireNonNull(
-                                this.getClass()
-                                        .getResource(path))
-                        .toExternalForm());
+        return new Image(Data.getUrl(path).toExternalForm());
     }
 
 
