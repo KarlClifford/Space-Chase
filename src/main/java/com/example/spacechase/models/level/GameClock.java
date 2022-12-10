@@ -1,4 +1,4 @@
-package com.example.spacechase.models.level;
+package com.example.spacechase;
 
 import com.example.spacechase.models.Level;
 import com.example.spacechase.models.characters.Character;
@@ -10,6 +10,8 @@ import java.util.Arrays;
 /**
  * This class represents a game clock. A game clock contains
  * components of a game loop and time interval for each character update.
+ *
+ * @author Rami Abdulrazzaq
  * @author Tristan Tsang
  * @version 1.0.1
  */
@@ -30,6 +32,11 @@ public class GameClock {
      * Time interval between each tick of the npc.
      */
     private static final double NPC_TICK = 1000.0;
+
+    /**
+     * Time until bomb explodes.
+     */
+    private static final double BOMB_EXPLODE = 3000.0;
     /**
      * Determines whether game is running.
      */
@@ -63,12 +70,14 @@ public class GameClock {
             public void handle(long l) {
                 long now = clock.millis();
                 double time = level.getTime();
-
-                // Clone the array to prevent concurrency.
                 final Character[] characters = level.getCharacters()
                         .toArray(Character[]::new)
                         .clone();
-
+                final Bomb[] bombs = level.getItems()
+                        .stream()
+                        .filter(item -> item instanceof Bomb)
+                        .toArray(Bomb[]::new)
+                        .clone();
                 // If there is no more time, then stop the timer.
                 if (time <= 0) {
                     this.stop();
@@ -110,6 +119,27 @@ public class GameClock {
                         }
 
                         npcLast = now;
+                    }
+                    for (Bomb bomb : bombs) {
+                        /*if bomb is not triggered
+                        then check if it can be triggered and
+                        trigger it.
+                         */
+                        if (!bomb.getIsTriggered()) {
+                            if (bomb.canTrigger()) {
+                                bomb.trigger(now);
+                            }
+                            //if the bomb isn't detonated then detonate it.
+                        } else if (!bomb.getIsDetonated()) {
+                            /*if 3 seconds have passed
+                            since it has been triggered
+                            then detonate it.
+                             */
+                            if (now - bomb.getInitTime() >= BOMB_EXPLODE) {
+                                bomb.setIsDetonated();
+                                bomb.destroyItems();
+                            }
+                        }
                     }
                 }
             }

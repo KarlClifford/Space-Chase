@@ -11,6 +11,7 @@ import java.util.Arrays;
  * from collector.
  * @author Tristan Tsang
  * @author Ben Thornber
+ * @author Alex Hallsworth
  * @version 1.0.1
  */
 public class FloorFollowing extends Collector {
@@ -60,10 +61,16 @@ public class FloorFollowing extends Collector {
         for (Direction direction : directions) {
             Tile link = tile.getLinkedTile(direction);
 
-            // If a link exists and does not have a character on it.
-            if (link != null && link.getCharacter() == null) {
-                /* If the tile matches any tiles in last tile,
-                 rotate the order of directions. */
+            /*
+             * If a link exists and does not have a character on it
+             * nor a gate on it.
+             */
+            if (link != null && link.getCharacter() == null
+                && !(link.getItem() instanceof Gate)) {
+                /*
+                 * If the tile matches any tiles in last tile,
+                 * rotate the order of directions.
+                 */
                 if (Arrays.stream(lastTile).anyMatch(t -> t == link)) {
                     directions = rotateArrayOrder(directions)
                             .toArray(Direction[]::new);
@@ -71,8 +78,10 @@ public class FloorFollowing extends Collector {
 
                 char[] colours = link.getColours();
 
-                /* Return the tile if the following colour
-                 is an element of all the colours in the tile. */
+                /*
+                 * Return the tile if the following colour
+                 * is an element of all the colours in the tile.
+                 */
                 if (isElement(followColour, colours)) {
                     return link;
                 }
@@ -90,8 +99,10 @@ public class FloorFollowing extends Collector {
      * @return whether element is an element of array.
      */
     private boolean isElement(char elem, char[] arr) {
-        /* For every character in the array, return true if it equals
-         to the element. Otherwise, return false. */
+        /*
+         * For every character in the array, return true if it equals
+         * to the element. Otherwise, return false.
+         */
         for (char t : arr) {
             // Return true if character equals to element.
             if (t == elem) {

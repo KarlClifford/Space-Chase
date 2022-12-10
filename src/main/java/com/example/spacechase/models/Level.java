@@ -1,4 +1,4 @@
-package com.example.spacechase.models;
+package com.example.spacechase;
 
 import com.example.spacechase.App;
 import com.example.spacechase.controllers.Controller;
@@ -35,6 +35,7 @@ import java.util.Arrays;
  * to next level by next.
  *
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
  */
@@ -224,6 +225,14 @@ public class Level {
      */
     public GameClock getClock() {
         return clock;
+    }
+
+
+    /**
+     * @return tileMap
+     */
+    public Tile[][] getTileMap() {
+        return tileMap;
     }
 
     /**

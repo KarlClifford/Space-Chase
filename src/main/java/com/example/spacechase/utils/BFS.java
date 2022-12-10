@@ -8,7 +8,8 @@ import java.util.PriorityQueue;
  * It contains components of paths and nodes. A graph can be created by
  * providing a root tile, a path can then be calculated with an end tile.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Alex Hallsworth
+ * @version 1.0.1
  */
 public class BFS {
     /**
@@ -36,28 +37,36 @@ public class BFS {
      * @return path to tile.
      */
     public Path search(Tile end) {
-        /* While the there are paths, dequeue the path
-         and check if the path has reached the end. */
+        /*
+         * While the there are paths, dequeue the path
+         * and check if the path has reached the end.
+         */
         while (!paths.isEmpty()) {
             Path path = paths.poll();
             Tile tile = path.getRear();
 
-            /* Return the path if it reaches the end.
-             Otherwise, go through each link of the tile
-             and create a new path. */
+            /*
+             * Return the path if it reaches the end.
+             * Otherwise, go through each link of the tile
+             * and create a new path.
+             */
             if (tile == end) {
                 return path;
             } else {
-                /* For each possible direction,
-                 get the link of the tile
-                 and append new path to paths if link is valid. */
+                /*
+                 * For each possible direction,
+                 * get the link of the tile
+                 * and append new path to paths if link is valid.
+                 */
                 for (Direction direction : Direction.values()) {
                     Tile link = tile.getLinkedTile(direction);
-
-                    /* If a link exists
-                     where it does not exist in the path
-                     and have no character on it, add a new path. */
+                    /*
+                     * If a link exists
+                     * where it does not exist in the path
+                     * and has no character or gate on it, add a new path.
+                     */
                     if (link != null
+                            && !(link.getItem() instanceof Gate)
                             && link.getCharacter() == null
                             && !path.contains(link)) {
                         Path newPath = path.clone();

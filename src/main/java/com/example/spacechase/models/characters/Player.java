@@ -9,6 +9,7 @@ import javafx.scene.Scene;
  * A player contains components of direction and all shared
  * components from character.
  * @author Tristan Tsang
+ * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
  */
@@ -63,8 +64,9 @@ public class Player extends Collector {
             Tile link = tile.getLinkedTile(direction);
             /* Change tile of the player to link of current tile
             in player direction if link exists and has no
-            character on it. */
-            if (link != null && link.getCharacter() == null) {
+            character on it and has no gate on it */
+            if (link != null && link.getCharacter() == null
+                && !(link.getItem() instanceof Gate)) {
                 changeTile(link);
             }
         }
