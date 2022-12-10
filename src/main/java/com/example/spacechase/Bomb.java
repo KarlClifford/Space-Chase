@@ -100,6 +100,7 @@ public class Bomb extends Item {
                      */
                     if (now - last >= EXPLOSION_TIME) {
                         item.remove();
+                        playDestroySound();
                         this.stop();
                     }
                 }
@@ -129,6 +130,7 @@ public class Bomb extends Item {
                     if (now - last >= EXPLOSION_TIME) {
                         bomb.setIsDetonated();
                         bomb.destroyItems();
+                        playDestroySound();
                         this.stop();
                     }
                 }
