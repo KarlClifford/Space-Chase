@@ -77,6 +77,13 @@ public abstract class Character {
     }
 
     /**
+     * @return tile the character is stepping on.
+     */
+    public Tile getTile() {
+        return tile;
+    }
+
+    /**
      * Changes the current tile to the new tile.
      * @param link the tile to move on to.
      */
