@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,7 +14,9 @@ import java.util.Objects;
 /**
  * Data interface handles game file loading.
  * @author Tristan Tsang
- * @version 1.0.0
+ * @author Daniel Halsall
+ * @author Alex Hallsworth
+ * @version 1.0.2
  */
 public interface Data {
     /**
@@ -74,9 +77,11 @@ public interface Data {
         while (!isLastTile) {
             String colours = scan.next();
 
-            /* If the colour string has the correct length,
-             create a tile and assign it to corresponding position
-             to the 2D tile map array. */
+            /*
+             * If the colour string has the correct length,
+             * create a tile and assign it to corresponding position
+             * to the 2D tile map array.
+             */
             if (colours.length() == DATA_LENGTH) {
                 tileMap[y][x] = new Tile(x, y, colours);
 
@@ -92,32 +97,43 @@ public interface Data {
             }
         }
 
-        /* While there is entity data, creates a new entity
-         where an entity can be a character or an item. */
+        /*
+         * While there is entity data, creates a new entity
+         * where an entity can be a character or an item.
+         */
         while (scan.hasNext()) {
             String itemData = scan.next();
+            String[] itemDataList = itemData.split(" ");
 
-            /* If the data has the correct length,
-             create a new entity and assign it to the tile. */
-            if (itemData.length() == DATA_LENGTH) {
-                char type = itemData.charAt(0);
-                char subType = itemData.charAt(1);
-                int a = Integer.parseInt(itemData.substring(2, 3));
-                int b = Integer.parseInt(itemData.substring(3, 4));
-
-                Tile tile = tileMap[b][a];
-
-                /* If the type of entity is an item,
-                 create an item and assign it to the tile.
-                 Otherwise, create a character and assign it
-                 to the tile. */
-                if (type == 'L') {
-                    Item item = createItemFromType(subType);
-                    tile.setItem(item);
-                } else {
+            /*
+             * Looping through each piece of item data
+             * and creating either an item or character
+             */
+            for (String piece: itemDataList) {
+                /*
+                 * Splitting up the string of the entity
+                 * to get their class and location.
+                 */
+                ArrayList<String> properties =
+                        new ArrayList<>(Arrays.asList(piece.split(",")));
+                String type = properties.get(0);
+                properties.remove(0);
+                char subType = properties.get(0).charAt(0);
+                properties.remove(0);
+                Tile tile = tileMap[Integer.parseInt(properties.get(1))]
+                        [Integer.parseInt(properties.get(0))];
+                /*
+                 * Checking the type of the data
+                 * if it's a character type it will make a character
+                 * otherwise it'll create an item.
+                 */
+                if (type.equals("C")) {
                     Character character = createCharacterFromType(subType);
                     tile.setCharacter(character);
                     character.setTile(tile);
+                } else {
+                    Item item = createItemFromType(subType);
+                    tile.setItem(item);
                 }
             }
         }
@@ -129,32 +145,30 @@ public interface Data {
 
     /**
      * Gets the instance of the corresponding item from given id.
-     * @param type id of the item.
+     * @param type id of the item in string form.
      * @return instance of the item.
      */
     private static Item createItemFromType(char type) {
         return switch (type) {
             case '*' -> new Bomb();
-            case '|' -> new Lever();
             case '@' -> new Clock();
             case 'D' -> new Door();
-            case 'Y' -> new Valuable('Y');
-            case '+' -> new Valuable('+');
-            case 'T' -> new Valuable('T');
-            case 'G' -> new Valuable('G');
+            case 'Y', '+', 'T', 'G' -> new Valuable(type);
+            case '(', ')' -> new Gate(type);
+            case '{', '}' -> new Lever(type);
             default -> null;
         };
     }
 
     /**
      * Gets the instance of the corresponding character from given id.
-     * @param type id of the character.
+     * @param type id of the character in string form.
      * @return instance of the character.
      */
     private static Character createCharacterFromType(char type) {
         return switch (type) {
             case 'P' -> new Player();
-            case '^' -> new FlyingAssassin();
+            case '^', '>', '<', '⌄' -> new FlyingAssassin(type);
             case 'F' -> new FloorFollowing();
             case 'S' -> new SmartThief();
             default -> null;
@@ -174,8 +188,10 @@ public interface Data {
                         playerFolder.listFiles()
                 ))
                 .map(file -> {
-                    /* Try to read levels out of a file,
-                     Catches exception when file is not found. */
+                    /*
+                     * Try to read levels out of a file,
+                     * Catches exception when file is not found.
+                     */
                     try {
                         return Data.readLevel(file);
                     } catch (FileNotFoundException e) {
@@ -210,10 +226,15 @@ public interface Data {
     static boolean createProfile(String name) throws IOException {
         File folder = new File(PATH_TO_PROFILES + name);
 
+        // Check for the directory and create it if it doesn't exist.
         if (folder.exists()) {
             return false;
         } else {
-            folder.mkdirs();
+            boolean success = folder.mkdirs();
+            // Warn if directory already exists.
+            if (!success) {
+                System.out.println("WARN: Directory already exists.");
+            }
             copyLevel(1, name);
             return true;
         }
@@ -224,16 +245,31 @@ public interface Data {
      * @param file file or folder to be deleted.
      */
     private static void deleteFiles(File file) {
-        /* If this file is a directory, delete all of its sub-files
-         and delete this directory.
-         Otherwise, delete the file. */
+        /*
+         * If this file is a directory, delete all of its sub-files
+         * and delete this directory.
+         * Otherwise, delete the file.
+         */
         if (file.isDirectory()) {
-            for (File f : file.listFiles()) {
+            for (File f : Objects.requireNonNull(file.listFiles())) {
                 deleteFiles(f);
             }
-            file.delete();
+
+            deleteFile(file);
         } else {
-            file.delete();
+            deleteFile(file);
+        }
+    }
+
+    /**
+     * Deletes a file.
+     * @param file target file for deletion.
+     */
+    private static void deleteFile(File file) {
+        boolean success = file.delete();
+        // Warn if file has been deleted.
+        if (!success) {
+            System.out.println("WARN: File has already been deleted.");
         }
     }
 
@@ -285,8 +321,10 @@ public interface Data {
         File file = level.getFile();
         String content = level.toString();
 
-        /* Try to overwrite the file with contents of the level.
-         Catch if there is an I/O exception on writing file. */
+        /*
+         * Try to overwrite the file with contents of the level.
+         * Catch if there is an I/O exception on writing file.
+         */
         try {
             FileWriter writer = new FileWriter(file);
             writer.write(content);

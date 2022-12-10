@@ -27,6 +27,8 @@ import java.util.Objects;
  *
  * @author Tristan Tsang
  * @author Karl Clifford
+ * @author Alex Hallsworth
+ * @author Ben Thornber
  * @version 1.0.1
  */
 public class Level {
@@ -217,6 +219,14 @@ public class Level {
         return clock;
     }
 
+
+    /**
+     * @return tileMap
+     */
+    public Tile[][] getTileMap() {
+        return tileMap;
+    }
+
     /**
      * Sets the new time and updates it in the label.
      *
@@ -224,7 +234,7 @@ public class Level {
      */
     public void setTime(double time) {
         this.time = time;
-        timeLabel.setText(String.format("Time: %.2f", time));
+        timeLabel.setText(String.format("Oxygen: %.2f", time));
     }
 
     /**
@@ -306,7 +316,7 @@ public class Level {
      * Creates a label for the time of level.
      */
     private void createTimeLabel() {
-        timeLabel = new Label("Time: " + time);
+        timeLabel = new Label("Oxygen: " + time);
         timeLabel.setTextFill(Color.WHITE);
         timeLabel.setFont(Font.font(FONT_FAMILY, NORM_FONT_SIZE));
     }
@@ -388,7 +398,6 @@ public class Level {
          Draws the item and character if they exist on a tile. */
         for (int y = 0; y < tileMap.length; y++) {
             Tile[] row = tileMap[y];
-
             // For every tile in a row.
             for (int x = 0; x < row.length; x++) {
                 Tile tile = row[x];
@@ -427,12 +436,10 @@ public class Level {
                     item.setLevel(this);
                     item.setTile(tile);
 
-                    ImageView image = item.createImageView(tile.getX(),
-                            tile.getY());
+                    ImageView image = item.createImageView();
                     group.getChildren().add(image);
                     items.add(item);
                 }
-
                 Character character = tile.getCharacter();
                 /* If there is a character, assign level and tile to
                  character, create an image and draw it. */
@@ -654,6 +661,7 @@ public class Level {
                                                     ? null
                                                     : item.toString()
                                                     + t.getX()
+                                                    + ","
                                                     + t.getY();
                                         })
                                         .filter(Objects::nonNull)
