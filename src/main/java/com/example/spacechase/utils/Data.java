@@ -31,7 +31,7 @@ public interface Data {
     /**
      * Format of tile data.
      */
-    String DATA_FORMAT = "[RYGB]{1,4}|[RYGB]{1,4}[*|@DP^FS{}()GT+Y][RYGB_]";
+    String DATA_FORMAT = "[A-Z]{1,4}(.)";
     /**
      * Name of directory that contains all data of the game.
      */
@@ -159,18 +159,11 @@ public interface Data {
             if (tileData.matches(DATA_FORMAT)) {
                 String colours = tileData.substring(0, DATA_LENGTH);
                 Tile tile = tileMap[y][x] = new Tile(x, y, colours);
+                char entityType = tileData.charAt(4);
 
-                /*
-                 * If there is entity data, create that entity and
-                 * set it to the tile.
-                 */
-                if (tileData.length() > DATA_LENGTH) {
-                    char entityType = tileData.charAt(4);
-                    char entityColour = tileData.charAt(5);
-
-                    Entity entity = createEntity(entityType);
+                Entity entity = createEntity(entityType);
+                if (entity != null) {
                     entity.setTile(tile);
-                    entity.setColour(entityColour);
                     entity.setLevel(level);
                     entity.createImageView();
 
@@ -459,7 +452,25 @@ public interface Data {
         }
 
         return highScores;
+    }
 
+    /**
+     * Reads json file as a hash map.
+     * @param path path of json file.
+     * @return map created from json file.
+     */
+    static HashMap<Object, Object> readJsonAsHashMap(String path) {
+        JSONObject jsonObject = readJson(path);
+        HashMap<Object, Object> map = new HashMap<>();
+
+        // Get the keys and values and put them into the map.
+        for (Object key : jsonObject.keySet()) {
+            Object value = jsonObject.get(key);
+
+            map.put(key, value);
+        }
+
+        return map;
     }
 
     /**
