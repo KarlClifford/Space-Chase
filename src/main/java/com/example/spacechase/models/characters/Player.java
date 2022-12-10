@@ -10,6 +10,7 @@ import javafx.scene.Scene;
  * A player contains components of direction and all shared
  * components from character.
  * @author Tristan Tsang
+ * @author Karl Clifford
  * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
@@ -54,6 +55,20 @@ public class Player extends Collector {
     }
 
     /**
+     * Plays the sound effect of player movement.
+     */
+    private void playMoveSound() {
+        // Initialise a new sound engine, so we can play a sound effect.
+        SoundEngine soundEngine = new SoundEngine();
+        // Play the move sound effect.
+        soundEngine.playSound(
+                SoundEngine.Sound.MOVE,
+                SoundEngine.SOUND_EFFECT_VOLUME,
+                false);
+    }
+
+
+    /**
      * Changes the tile of the character if player
      * is trying to move towards a direction.
      */
@@ -69,6 +84,7 @@ public class Player extends Collector {
             if (link != null && link.getCharacter() == null
                 && !(link.getItem() instanceof Gate)) {
                 changeTile(link);
+                playMoveSound();
             }
         }
 

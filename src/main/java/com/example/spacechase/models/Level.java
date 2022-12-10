@@ -35,6 +35,7 @@ import java.util.Arrays;
  * to next level by next.
  *
  * @author Tristan Tsang
+ * @author Karl Clifford
  * @author Alex Hallsworth
  * @author Ben Thornber
  * @version 1.0.1
@@ -300,6 +301,13 @@ public class Level {
 
         player.initialize(scene);
         clock.initialize();
+
+        // Stop the playing music and start the level music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.LEVEL_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**
@@ -343,6 +351,37 @@ public class Level {
     }
 
     /**
+     * Ends the level by stopping the game clock
+     * and loads the level ended menu.
+     *
+     * @param isCleared level is cleared or not.
+     */
+    public void end(boolean isCleared) {
+        clock.setRun(false);
+
+        LevelEndedMenuController controller = (LevelEndedMenuController)
+                new Controller()
+                        .loadFxml(LEVEL_ENDED_MENU_FXML_PATH);
+        controller.start(this, isCleared);
+
+        // Stop the playing music.
+        App.MUSIC_PLAYER.stopMusic();
+        // Initialise the sound engine to play a sound effect.
+        SoundEngine soundEngine = new SoundEngine();
+        if (isCleared) {
+            // Play win sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.WIN,
+                    SoundEngine.MUSIC_VOLUME, false);
+        } else {
+            // Play loose sound effect.
+            soundEngine.playSound(
+                    SoundEngine.Sound.LOOSE,
+                    SoundEngine.MUSIC_VOLUME, false);
+        }
+    }
+
+    /**
      * Draws all the tiles and entities.
      * @param group pane of the canvas.
      */
@@ -355,7 +394,6 @@ public class Level {
          Draws the item and character if they exist on a tile. */
         for (int y = 0; y < tileMap.length; y++) {
             Tile[] row = tileMap[y];
-
             // For every tile in a row.
             for (int x = 0; x < row.length; x++) {
                 Tile tile = row[x];
@@ -395,7 +433,6 @@ public class Level {
                     group.getChildren().add(image);
                     items.add(item);
                 }
-
                 Character character = tile.getCharacter();
                 /* If there is a character, assign level and tile to
                  character, create an image and draw it. */
@@ -553,6 +590,12 @@ public class Level {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        // Stop the playing music and start the level music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.LEVEL_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**
@@ -577,6 +620,13 @@ public class Level {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+
+        // Stop the playing music and start the level music.
+        App.MUSIC_PLAYER.stopMusic();
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.LEVEL_MUSIC,
+                SoundEngine.MUSIC_VOLUME,
+                true);
     }
 
     /**

@@ -21,6 +21,10 @@ import java.util.Objects;
  */
 public class App extends Application {
     /**
+     * Create the music player that will be used to play global audio.
+     */
+    public static final SoundEngine MUSIC_PLAYER = new SoundEngine();
+    /**
      * Width of the stage.
      * @see javafx.stage
      */
@@ -71,6 +75,11 @@ public class App extends Application {
         stage.setHeight(STAGE_HEIGHT);
         stage.setResizable(RESIZEABLE);
         stage.show();
+
+        // Start the game music.
+        MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.MENU_MUSIC,
+                SoundEngine.MUSIC_VOLUME, true);
     }
 
     /**
