@@ -139,6 +139,17 @@ public class Bomb extends Item {
     }
 
     /**
+     * Plays the sound effect of explosion.
+     */
+    private void playDestroySound() {
+        SoundEngine soundEngine = new SoundEngine();
+        soundEngine.playSound(
+                SoundEngine.Sound.DESTROY,
+                SoundEngine.SOUND_EFFECT_VOLUME,
+                false);
+    }
+
+    /**
      * Creates an image from the path.
      * @param path path of image.
      * @return image.
