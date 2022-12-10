@@ -55,12 +55,15 @@ public class Player extends Collector {
      * Plays the sound effect of player movement.
      */
     private void playMoveSound() {
+        // Initialise a new sound engine, so we can play a sound effect.
         SoundEngine soundEngine = new SoundEngine();
+        // Play the move sound effect.
         soundEngine.playSound(
                 SoundEngine.Sound.MOVE,
                 SoundEngine.SOUND_EFFECT_VOLUME,
                 false);
     }
+
 
     /**
      * Changes the tile of the character if player
@@ -84,26 +87,4 @@ public class Player extends Collector {
 
         direction = null;
     }
-
-    /**
-     * Overrides the pickup method to add a pickup sound when
-     * the character interacts with an item on the level.
-     */
-    @Override
-    protected void update() {
-        super.update();
-
-        Item item = tile.getItem();
-        // If there is an item, interact with it.
-        if (item != null) {
-            // Initialise a new sound engine, so we can play a sound effect.
-            SoundEngine soundEngine = new SoundEngine();
-            // Play the reward sound effect.
-            soundEngine.playSound(
-                    SoundEngine.Sound.REWARD,
-                    SoundEngine.SOUND_EFFECT_VOLUME,
-                    false);
-            item.interact(this);
-        }
-        }
 }
