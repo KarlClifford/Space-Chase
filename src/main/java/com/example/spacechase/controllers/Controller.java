@@ -2,7 +2,7 @@ package com.example.spacechase.controllers;
 
 import com.example.spacechase.utils.Data;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -39,11 +39,11 @@ public class Controller {
     }
 
     /**
-     * Sets the scene of the game.
-     * @param scene scene of the game.
+     * Sets the root of scene in stage.
+     * @param parent root of scene.
      */
-    public static void setScene(Scene scene) {
-        stage.setScene(scene);
+    public static void setRoot(Parent parent) {
+        stage.getScene().setRoot(parent);
     }
 
     /**

@@ -54,9 +54,9 @@ public class Player extends Collector {
     /**
      * Initializes input for the level. Changes direction depending
      * on the input.
-     * @param scene scene of the level.
      */
-    public void initialize(Scene scene) {
+    public void initialize() {
+        Scene scene = level.getPane().getScene();
         scene.setOnKeyPressed(keyEvent -> {
             Control control =
                     KEYBINDS.getOrDefault(keyEvent.getCode(), Control.NULL);

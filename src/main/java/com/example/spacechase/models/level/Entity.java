@@ -1,5 +1,6 @@
 package com.example.spacechase.models.level;
 
+import com.example.spacechase.App;
 import com.example.spacechase.models.Level;
 import com.example.spacechase.utils.Data;
 import javafx.scene.image.ImageView;
@@ -46,7 +47,7 @@ public abstract class Entity {
         imageView = new ImageView(
                 Data.getUrl(PATH_TO_IMAGES + imagePath)
                         .toExternalForm());
-        imageView.setFitHeight(Tile.TILE_SIZE);
+        imageView.setFitHeight(Tile.TILE_SIZE * App.SCALE_Y);
         imageView.setPreserveRatio(true);
         draw();
     }
@@ -56,8 +57,10 @@ public abstract class Entity {
      */
     public void draw() {
         imageView.relocate(
-                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
-                   (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
+                (Tile.TILE_SIZE + Level.TILE_SPACING)
+                        * tile.getX() * App.SCALE_X,
+                   (Tile.TILE_SIZE + Level.TILE_SPACING)
+                           * tile.getY() * App.SCALE_Y);
     }
 
     /**

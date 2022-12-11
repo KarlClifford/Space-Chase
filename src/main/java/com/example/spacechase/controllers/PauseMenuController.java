@@ -6,7 +6,6 @@ import com.example.spacechase.models.level.GameClock;
 import com.example.spacechase.services.SoundEngine;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 /**
@@ -50,8 +49,7 @@ public class PauseMenuController extends Controller {
             GameClock clock = level.getClock();
             clock.setRun(true);
 
-            Scene levelScene = level.getScene();
-            setScene(levelScene);
+            setRoot(level.getPane());
         });
 
         restartButton.setOnMouseClicked(e -> level.restart());

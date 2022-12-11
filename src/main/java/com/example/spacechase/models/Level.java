@@ -12,13 +12,13 @@ import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
 import com.example.spacechase.utils.Direction;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -121,10 +121,10 @@ public class Level {
      */
     private Label scoreLabel;
     /**
-     * Scene of the level.
-     * @see javafx.scene
+     * Border pane of the level.
+     * @see javafx.scene.layout.Pane
      */
-    private Scene scene;
+    private BorderPane pane;
 
     /**
      * Creates a level object.
@@ -165,12 +165,11 @@ public class Level {
     }
 
     /**
-     * Gets the scene of the level.
-     *
-     * @return the scene of the level.
+     * Gets the pane of the level.
+     * @return pane of the level.
      */
-    public Scene getScene() {
-        return scene;
+    public Pane getPane() {
+        return pane;
     }
 
     /**
@@ -278,17 +277,16 @@ public class Level {
         AnchorPane anchorPane = new AnchorPane();
         draw(anchorPane);
 
-        BorderPane pane = new BorderPane();
+        pane = new BorderPane();
         pane.setTop(hBox);
         pane.setCenter(anchorPane);
         pane.setStyle("-fx-background-color: BLACK");
         pane.setPrefWidth(App.STAGE_WIDTH);
         pane.setPrefHeight(App.STAGE_HEIGHT);
 
-        scene = new Scene(pane);
-        Controller.setScene(scene);
+        Controller.setRoot(pane);
 
-        player.initialize(scene);
+        player.initialize();
         clock.initialize();
 
         // Stop the playing music and start the level music.
@@ -373,8 +371,10 @@ public class Level {
                     final double rectSize = Tile.TILE_SIZE / 2;
                     Rectangle rectangle = new Rectangle(
                             (Tile.TILE_SIZE + TILE_SPACING) * x
+                                    * App.SCALE_X
                             + rectSize * (i % 2),
                             (Tile.TILE_SIZE + TILE_SPACING) * y
+                                    * App.SCALE_Y
                             + rectSize * (i < colours.length / 2 ? 0 : 1),
                             rectSize,
                             rectSize);

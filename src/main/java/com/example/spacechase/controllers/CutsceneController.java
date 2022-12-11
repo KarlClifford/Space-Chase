@@ -6,7 +6,6 @@ import com.example.spacechase.models.level.GameClock;
 import com.example.spacechase.services.SoundEngine;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import java.time.Clock;
@@ -64,8 +63,7 @@ public class CutsceneController extends Controller {
         if (message == null) {
             resumeMusic();
             gameClock.setRun(true);
-            Scene scene = level.getScene();
-            setScene(scene);
+            setRoot(level.getPane());
             return;
         }
 
@@ -121,8 +119,7 @@ public class CutsceneController extends Controller {
             } else {
                 resumeMusic();
                 gameClock.setRun(true);
-                Scene scene = level.getScene();
-                setScene(scene);
+                setRoot(level.getPane());
             }
         });
     }
@@ -166,7 +163,7 @@ public class CutsceneController extends Controller {
      * Resets the music back to default.
      */
     public void resumeMusic() {
-        App.MUSIC_PLAYER.setPlaybackSpeed(SoundEngine.getMusicVolume());
+        SoundEngine.setMusicVolume(SoundEngine.getMusicVolume());
         App.MUSIC_PLAYER.setPlaybackSpeed(1);
     }
 

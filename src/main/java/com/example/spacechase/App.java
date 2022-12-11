@@ -29,6 +29,14 @@ public class App extends Application {
      */
     public static final SoundEngine MUSIC_PLAYER = new SoundEngine();
     /**
+     *
+     */
+    public static final double DEFAULT_WIDTH = 1920;
+    /**
+     *
+     */
+    public static final double DEFAULT_HEIGHT = 1080;
+    /**
      * Width of the stage.
      * @see javafx.stage
      */
@@ -42,6 +50,14 @@ public class App extends Application {
     public static final double STAGE_HEIGHT = Screen.getPrimary()
             .getBounds()
             .getHeight();
+    /**
+     *
+     */
+    public static final double SCALE_X = STAGE_WIDTH / DEFAULT_WIDTH;
+    /**
+     *
+     */
+    public static final double SCALE_Y = STAGE_HEIGHT / DEFAULT_HEIGHT;
     /**
      * Title of the stage.
      * @see javafx.stage
