@@ -398,7 +398,6 @@ public class Level {
                 if (item != null) {
                     ImageView image = item.getImageView();
                     group.getChildren().add(image);
-                    items.add(item);
                 }
                 Character character = tile.getCharacter();
                 /* If there is a character, assign level and tile to
@@ -412,7 +411,6 @@ public class Level {
 
                     ImageView image = character.getImageView();
                     group.getChildren().add(image);
-                    characters.add(character);
                 }
             }
         }

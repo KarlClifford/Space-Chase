@@ -15,10 +15,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Data interface handles game file loading.
@@ -174,8 +171,10 @@ public interface Data {
                      */
                     if (entity instanceof Character character) {
                         tile.setCharacter(character);
+                        level.getCharacters().add(character);
                     } else if (entity instanceof Item item) {
                         tile.setItem(item);
+                        level.getItems().add(item);
                     }
                 }
 
@@ -190,6 +189,22 @@ public interface Data {
                 isLastTile = y > height - 1;
             }
         }
+
+        level.getItems()
+                .forEach(item -> {
+                    /*
+                     * Assign message to the note if there is a message
+                     * and item is a note.
+                     */
+                    if (scan.hasNextLine() && item instanceof Note note) {
+                        String message = scan.nextLine();
+                        // Goes to next line if line is blank.
+                        if (message.isBlank() && scan.hasNextLine()) {
+                            message = scan.nextLine();
+                        }
+                        note.setMessage(message);
+                    }
+                });
 
         scan.close();
 
@@ -213,6 +228,7 @@ public interface Data {
             case 'Y', '+', 'T', 'G' -> new Valuable(type);
             case '(', ')' -> new Gate(type);
             case '{', '}' -> new Lever(type);
+            case 'N' -> new Note();
             default -> null;
         };
     }

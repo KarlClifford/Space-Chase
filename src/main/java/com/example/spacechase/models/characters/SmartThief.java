@@ -2,6 +2,7 @@ package com.example.spacechase.models.characters;
 
 import com.example.spacechase.models.items.Gate;
 import com.example.spacechase.models.items.Item;
+import com.example.spacechase.models.items.Note;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.utils.BFS;
 import com.example.spacechase.utils.Path;
@@ -46,9 +47,11 @@ public class SmartThief extends Collector {
             /*
              * Checks if the path is null
              * meaning the path is unblocked
-             * ignores gates.
+             * ignores gates. Ignore all notes as they
+             * should only be interacted by player.
              */
-            if (path != null && !(item instanceof Gate)) {
+            if (path != null
+                    && !(item instanceof Gate || item instanceof Note)) {
                 int tileDistance = path.size();
                 /*
                  * If this path is a shorter path than

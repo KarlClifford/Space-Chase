@@ -24,8 +24,8 @@ public class Player extends Collector {
     static {
         KEYBINDS.put(KeyCode.W, Control.UP);
         KEYBINDS.put(KeyCode.A, Control.LEFT);
-        KEYBINDS.put(KeyCode.S, Control.RIGHT);
-        KEYBINDS.put(KeyCode.D, Control.DOWN);
+        KEYBINDS.put(KeyCode.D, Control.RIGHT);
+        KEYBINDS.put(KeyCode.S, Control.DOWN);
     }
     /**
      * Direction of the player.
