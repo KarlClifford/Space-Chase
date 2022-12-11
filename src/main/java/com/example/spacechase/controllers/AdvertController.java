@@ -1,5 +1,6 @@
-package com.example.spacechase;
+package com.example.spacechase.controllers;
 
+import com.example.spacechase.models.Level;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
