@@ -20,6 +20,9 @@ import java.util.HashMap;
  * @version 1.0.1
  */
 public class Player extends Collector {
+    /**
+     * Keybinds for all controls.
+     */
     private static final HashMap<KeyCode, Control> KEYBINDS = new HashMap<>();
     static {
         KEYBINDS.put(KeyCode.W, Control.UP);

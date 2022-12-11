@@ -18,6 +18,10 @@ public class TitleScreenController extends Controller {
      */
     private static final double FADE_OUT_DURATION = 1000.0;
     /**
+     * Duration for title staying on the scene.
+     */
+    private static final long TITLE_DURATION = 2000L;
+    /**
      * In value of fade of the label.
      */
     private static final double FADE_IN = 10;
@@ -31,6 +35,9 @@ public class TitleScreenController extends Controller {
      */
     @FXML
     private VBox titleLabel;
+    /**
+     * Label that displays message of the day.
+     */
     @FXML
     private Label message;
 
@@ -73,7 +80,7 @@ public class TitleScreenController extends Controller {
                  * Pause the fade animation to give enough opportunity to
                  * read the game message.
                  */
-                Thread.sleep(2000);
+                Thread.sleep(TITLE_DURATION);
             } catch (InterruptedException ex) {
                 // The sleep operation was cancelled.
                 throw new RuntimeException(ex);

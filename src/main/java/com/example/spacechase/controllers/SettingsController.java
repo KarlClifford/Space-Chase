@@ -165,6 +165,7 @@ public class SettingsController extends Controller {
      * @param volume volume of the music.
      */
     private void setMusicVolume(int volume) {
+        // Displays music volume if label exists.
         if (volumeLabel != null) {
             volumeLabel.setText(String.valueOf(volume));
         }
@@ -176,6 +177,7 @@ public class SettingsController extends Controller {
      * @param volume volume of the sound effects.
      */
     private void setFxVolume(int volume) {
+        // Displays sound effects volume if label exists.
         if (fxLabel != null) {
             fxLabel.setText(String.valueOf(volume));
         }

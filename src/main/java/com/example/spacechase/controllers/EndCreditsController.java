@@ -58,6 +58,10 @@ public class EndCreditsController extends Controller {
      * Loads the main menu fxml file.
      */
     private void exit() {
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.MENU_MUSIC,
+                SoundEngine.getMusicVolume(),
+                true);
         loadFxml("fxml/mainMenu.fxml");
     }
 

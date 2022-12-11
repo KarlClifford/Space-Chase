@@ -584,9 +584,12 @@ public class Level {
      * Starts the next level.
      */
     public void next() {
+
         /* Tries to load the next level from player profile.
          Catches if there is an I/O exception while loading the file. */
         try {
+            String playerName = file.getParentFile().getName();
+            Data.copyLevel(id, playerName);
             File nextFile = new File(String.format("%s/%d.txt",
                     file.getParentFile().getPath(),
                     id + 1));
@@ -595,6 +598,7 @@ public class Level {
             if (!nextFile.exists()) {
                 Controller controller = new Controller();
                 controller.loadFxml(END_CREDITS_FXML_PATH);
+                return;
             } else {
                 Level newLevel = Data.readLevel(nextFile);
                 newLevel.start();

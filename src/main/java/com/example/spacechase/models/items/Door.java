@@ -26,9 +26,12 @@ public class Door extends Item {
      */
     @Override
     public void interact(Collector collector) {
+        // Check if there are items that is valuable or lever.
         boolean haveItemsInMap = level.getItems()
                 .stream()
-                .anyMatch(item -> !(item instanceof Door));
+                .anyMatch(item ->
+                        (item instanceof Valuable
+                        || item instanceof Lever));
 
         // End the level if there is no other items in the map.
         if (!haveItemsInMap) {

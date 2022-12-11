@@ -169,6 +169,22 @@ public class SoundEngine {
     }
 
     /**
+     * Gets volume of the music.
+     * @return volume of the music.
+     */
+    public static int getMusicVolume() {
+        return musicVolume;
+    }
+
+    /**
+     * Gets the volume of sound effect.
+     * @return volume of sound effect.
+     */
+    public static int getSoundEffectVolume() {
+        return soundEffectVolume;
+    }
+
+    /**
      * Gets the file path for the specified sound effect.
      * @param effect The sound effect to get.
      * @return the enumerated key to retrieve the media file path.
