@@ -60,15 +60,17 @@ public class CutsceneController extends Controller {
         AnimationTimer timer = new AnimationTimer() {
             final Clock clock = Clock.systemDefaultZone();
             long last = clock.millis();
+            String copy = message;
 
             @Override
             public void handle(long l) {
                 long now = clock.millis();
+
                 /*
                  * Stops timer when there is no more characters
                  * in the message.
                  */
-                if (message.length() == 0) {
+                if (copy.length() == 0) {
                     this.stop();
                     /*
                      * Prints out the first character in the
@@ -76,15 +78,24 @@ public class CutsceneController extends Controller {
                      * the rest in message.
                      */
                 } else if (now - last >= PRINT_SPEED) {
-                    char c = message.charAt(0);
-                    message = message.substring(1);
-                    messageLabel.setText(messageLabel.getText() + c);
-                    last = now;
+                    if (copy.charAt(0) == '^') {
+                        copy = copy.substring(1);
+                        messageLabel.setText(messageLabel.getText() + '\n');
+                    } else {
+                        char c = copy.charAt(0);
+
+                        copy = copy.substring(1);
+                        messageLabel.setText(messageLabel.getText() + c);
+                        playTypingSound();
+                        last = now;
+                    }
                 }
             }
         };
 
         timer.start();
+
+        message = message.replaceAll("\\^", "\n");
 
         continueButton.setOnMouseClicked(e -> {
             /*
@@ -93,8 +104,8 @@ public class CutsceneController extends Controller {
              * ends cutscene and resumes the level.
              */
             if (!messageLabel.getText().equals(message)) {
-                timer.stop();
                 messageLabel.setText(message);
+                timer.stop();
             } else {
                 resumeMusic();
                 gameClock.setRun(true);
@@ -102,6 +113,16 @@ public class CutsceneController extends Controller {
                 setScene(scene);
             }
         });
+    }
+
+    /**
+     * Plays typing sound effect.
+     */
+    private void playTypingSound() {
+        SoundEngine soundEngine = new SoundEngine();
+        soundEngine.playSound(SoundEngine.Sound.CLICK,
+                SoundEngine.SOUND_EFFECT_VOLUME,
+                false);
     }
 
     /**
@@ -137,9 +158,11 @@ public class CutsceneController extends Controller {
         App.MUSIC_PLAYER.setPlaybackSpeed(1);
     }
 
+    /**
+     * Plays the slow music.
+     */
+    @FXML
     public void initialize() {
-        System.out.println("init");
         slowMusic();
-
     }
 }
