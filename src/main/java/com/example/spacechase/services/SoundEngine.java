@@ -62,6 +62,8 @@ public class SoundEngine {
         soundFiles.put(Sound.MOVE, "sounds/gameboy-pluck-41265.mp3");
         soundFiles.put(Sound.DESTROY,
                 "sounds/hit-brutal-puncher-cinematic-trailer-sound-effects-124760.mp3");
+        soundFiles.put
+                (Sound.CLICK, "computer-processing-sound-effects-short-click-select-01-122134.mp3");
     }
 
     // Enumerated type for the different sound effects.
@@ -97,7 +99,11 @@ public class SoundEngine {
         /**
          * Will form part of the key to retrieve destroy sound effect file.
          */
-        DESTROY
+        DESTROY,
+        /**
+         * Will form part of the key to retrieve the click sound effect file.
+         */
+        CLICK
     }
 
     /**
