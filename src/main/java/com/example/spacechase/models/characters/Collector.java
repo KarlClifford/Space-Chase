@@ -1,6 +1,7 @@
 package com.example.spacechase.models.characters;
 
 import com.example.spacechase.models.items.Bomb;
+import com.example.spacechase.models.items.Door;
 import com.example.spacechase.models.items.Item;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.services.SoundEngine;
@@ -53,7 +54,7 @@ public abstract class Collector extends Character {
         // If there is an item, interact with it.
         if (item != null) {
             // Plays reward sound if it is a player collecting it.
-            if (this instanceof Player) {
+            if (this instanceof Player && !(item instanceof Door)) {
                 playRewardSound();
             }
             item.interact(this);
