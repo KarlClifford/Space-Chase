@@ -150,7 +150,7 @@ public class Bomb extends Item {
         SoundEngine soundEngine = new SoundEngine();
         soundEngine.playSound(
                 SoundEngine.Sound.DESTROY,
-                SoundEngine.SOUND_EFFECT_VOLUME,
+                SoundEngine.getSoundEffectVolume(),
                 false);
     }
 

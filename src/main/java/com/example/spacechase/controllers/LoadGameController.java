@@ -105,7 +105,9 @@ public class LoadGameController extends Controller {
      * @return delete button.
      */
     private Button createDeleteButton(String name) {
-        ImageView binImage = new ImageView(Data.getUrl("images/bin.png").toExternalForm());
+        ImageView binImage =
+                new ImageView(
+                        Data.getUrl("images/bin.png").toExternalForm());
         binImage.setFitHeight(BIN_IMAGE_HEIGHT);
         binImage.setPreserveRatio(true);
 

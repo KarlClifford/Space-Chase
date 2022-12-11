@@ -43,7 +43,11 @@ public class CutsceneController extends Controller {
      * @see javafx.scene.control.Button
      */
     @FXML
-    private Button continueButton;
+    private Button skipButton;
+
+    /**
+     * Stores the level of the game.
+     */
     private Level level;
     /**
      * Message of this cutscene.
@@ -59,8 +63,8 @@ public class CutsceneController extends Controller {
 
         AnimationTimer timer = new AnimationTimer() {
             final Clock clock = Clock.systemDefaultZone();
-            long last = clock.millis();
-            String copy = message;
+            private long last = clock.millis();
+            private String copy = message;
 
             @Override
             public void handle(long l) {
@@ -97,7 +101,7 @@ public class CutsceneController extends Controller {
 
         message = message.replaceAll("\\^", "\n");
 
-        continueButton.setOnMouseClicked(e -> {
+        skipButton.setOnMouseClicked(e -> {
             /*
              * Stops the animation and shows full message
              * if message is still printing out. Otherwise,
@@ -121,7 +125,7 @@ public class CutsceneController extends Controller {
     private void playTypingSound() {
         SoundEngine soundEngine = new SoundEngine();
         soundEngine.playSound(SoundEngine.Sound.CLICK,
-                SoundEngine.SOUND_EFFECT_VOLUME,
+                SoundEngine.getSoundEffectVolume(),
                 false);
     }
 
@@ -154,7 +158,7 @@ public class CutsceneController extends Controller {
      * Resets the music back to default.
      */
     public void resumeMusic() {
-        App.MUSIC_PLAYER.setPlaybackSpeed(SoundEngine.MUSIC_VOLUME);
+        App.MUSIC_PLAYER.setPlaybackSpeed(SoundEngine.getMusicVolume());
         App.MUSIC_PLAYER.setPlaybackSpeed(1);
     }
 

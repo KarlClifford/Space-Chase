@@ -1,5 +1,7 @@
 package com.example.spacechase.controllers;
 
+import com.example.spacechase.App;
+import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
 import javafx.fxml.FXML;
 import javafx.scene.media.Media;
@@ -21,11 +23,14 @@ public class EndCreditsController extends Controller {
      */
     public static final String MEDIA_PATH = "media/end-credits.mp4";
     /**
-     * Media player to view the end credits.
+     * Media view to display the media player.
      */
     @FXML
     private MediaView mediaView;
 
+    /**
+     * Media player to view the end credits.
+     */
     private MediaPlayer mediaPlayer;
 
     /**

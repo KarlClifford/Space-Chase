@@ -20,6 +20,9 @@ import java.util.HashMap;
  * @version 1.0.1
  */
 public class SettingsController extends Controller {
+    /**
+     * Path to the settings file.
+     */
     private static final String SETTINGS_PATH = "data/settings/settings.json";
     /**
      * Fxml file path of main menu.
@@ -51,15 +54,27 @@ public class SettingsController extends Controller {
     @FXML
     private Label fxLabel;
 
+    /**
+     * Text field for W keybinding.
+     */
     @FXML
     private TextField upTextField;
 
+    /**
+     * Text field for S keybinding.
+     */
     @FXML
     private TextField downTextField;
 
+    /**
+     * Text field for A keybinding.
+     */
     @FXML
     private TextField leftTextField;
 
+    /**
+     * Text field for D keybinding.
+     */
     @FXML
     private TextField rightTextField;
 
@@ -69,8 +84,8 @@ public class SettingsController extends Controller {
     @FXML
     private void initialize() {
         loadSettings();
-        musicSlider.setValue(SoundEngine.MUSIC_VOLUME);
-        fxSlider.setValue(SoundEngine.SOUND_EFFECT_VOLUME);
+        musicSlider.setValue(SoundEngine.getMusicVolume());
+        fxSlider.setValue(SoundEngine.getSoundEffectVolume());
         /*
          * Changes the volume of music whenever music slider
          *  is interacted.
@@ -94,7 +109,8 @@ public class SettingsController extends Controller {
      * Loads local settings configurations.
      */
     public void loadSettings() {
-        HashMap<Object, Object> settings = Data.readJsonAsHashMap(SETTINGS_PATH);
+        HashMap<Object, Object> settings =
+                Data.readJsonAsHashMap(SETTINGS_PATH);
 
         // Change each setting with its value.
         for (Object key : settings.keySet()) {
@@ -112,7 +128,8 @@ public class SettingsController extends Controller {
      */
     private void writeSetting(Object attribute, Object value) {
         // Assign attribute, value pair to hashmap of settings.
-        HashMap<Object, Object> settings = Data.readJsonAsHashMap(SETTINGS_PATH);
+        HashMap<Object, Object> settings =
+                Data.readJsonAsHashMap(SETTINGS_PATH);
         settings.put(attribute, value);
 
         // Write settings as json format into settings json.
@@ -135,7 +152,9 @@ public class SettingsController extends Controller {
                 int volume = (int) Double.parseDouble(value);
                 setFxVolume(volume);
             }
-            default -> {}
+            default ->
+                    throw new IllegalArgumentException(
+                            "ERROR: Illegal attribute provided.");
         }
 
         writeSetting(attribute, value);
@@ -161,13 +180,6 @@ public class SettingsController extends Controller {
             fxLabel.setText(String.valueOf(volume));
         }
         SoundEngine.setFxMusicVolume(volume);
-    }
-
-    @FXML
-    public void changeKeyBind() {
-        //KeyCode oldBinding = getInitialKeyBind();
-        //if (oldBinding != )
-        //KeyCode newBinding = getNewKeyBinding();
     }
 
 
@@ -202,9 +214,9 @@ public class SettingsController extends Controller {
     @FXML
     private void onBackButtonClicked() {
         App.MUSIC_PLAYER.stopMusic();
-        App.MUSIC_PLAYER.playSound
-                (SoundEngine.Sound.MENU_MUSIC,
-                        SoundEngine.MUSIC_VOLUME,
+        App.MUSIC_PLAYER.playSound(
+                        SoundEngine.Sound.MENU_MUSIC,
+                        SoundEngine.getMusicVolume(),
                         true);
         loadFxml(MAIN_MENU_FXML_PATH);
     }

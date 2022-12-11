@@ -68,7 +68,7 @@ public class PauseMenuController extends Controller {
         App.MUSIC_PLAYER.stopMusic();
         App.MUSIC_PLAYER.playSound(
                 SoundEngine.Sound.MENU_MUSIC,
-                SoundEngine.MUSIC_VOLUME,
+                SoundEngine.getMusicVolume(),
                 true);
     }
 

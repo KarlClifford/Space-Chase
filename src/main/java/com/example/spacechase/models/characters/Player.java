@@ -55,7 +55,8 @@ public class Player extends Collector {
      */
     public void initialize(Scene scene) {
         scene.setOnKeyPressed(keyEvent -> {
-            Control control = KEYBINDS.getOrDefault(keyEvent.getCode(), Control.NULL);
+            Control control =
+                    KEYBINDS.getOrDefault(keyEvent.getCode(), Control.NULL);
                 direction = switch (control) {
                     case UP -> Direction.UP;
                     case LEFT -> Direction.LEFT;
@@ -67,6 +68,11 @@ public class Player extends Collector {
         );
     }
 
+    /**
+     * Changes the keybind of control.
+     * @param control control of the player.
+     * @param keyCode key code of the control.
+     */
     public static void setKeybind(Control control, KeyCode keyCode) {
         KEYBINDS.put(keyCode, control);
     }
@@ -80,7 +86,7 @@ public class Player extends Collector {
         // Play the move sound effect.
         soundEngine.playSound(
                 SoundEngine.Sound.MOVE,
-                SoundEngine.SOUND_EFFECT_VOLUME,
+                SoundEngine.getSoundEffectVolume(),
                 false);
     }
 

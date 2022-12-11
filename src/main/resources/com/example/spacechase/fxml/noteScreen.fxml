@@ -29,7 +29,7 @@
 
     </top>
     <bottom>
-        <Button fx:id="continueButton" mnemonicParsing="false" text="back" BorderPane.alignment="BOTTOM_LEFT">
+        <Button fx:id="skipButton" mnemonicParsing="false" text="back" BorderPane.alignment="BOTTOM_LEFT">
             <font>
                 <Font name="NeuropolXRg-Regular" size="12.0"/>
             </font>

@@ -15,22 +15,21 @@ import java.util.Map;
  */
 public class SoundEngine {
     /**
-     * Volume the game music should play at.
-     */
-    public static int MUSIC_VOLUME = 30;
-    /**
-     * Volume that sound effects should play at.
-     */
-    public static int SOUND_EFFECT_VOLUME = 100;
-    /**
      * The maximum volume sound is allowed to play at.
      */
     public static final double MAX_VOLUME = 100.0;
-
     /**
      * The value that determines the rate at which the volume fades out.
      */
     public static final double VOLUME_DECREMENT_VALUE = 0.1;
+    /**
+     * Volume the game music should play at.
+     */
+    private static int musicVolume;
+    /**
+     * Volume that sound effects should play at.
+     */
+    private static int soundEffectVolume;
 
     /**
      * Map to store the file paths for the different sound effects.
@@ -62,8 +61,8 @@ public class SoundEngine {
         soundFiles.put(Sound.MOVE, "sounds/gameboy-pluck-41265.mp3");
         soundFiles.put(Sound.DESTROY,
                 "sounds/hit-brutal-puncher-cinematic-trailer-sound-effects-124760.mp3");
-        soundFiles.put
-                (Sound.CLICK,
+        soundFiles.put(
+                        Sound.CLICK,
                         "sounds/computer-processing-sound-effects-short-click-select-01-122134.mp3");
     }
 
@@ -194,7 +193,7 @@ public class SoundEngine {
      * @param volume volume of the music.
      */
     public static void setMusicVolume(int volume) {
-        MUSIC_VOLUME = volume;
+        musicVolume = volume;
 
     }
 
@@ -203,7 +202,7 @@ public class SoundEngine {
      * @param volume volume of the sound effects.
      */
     public static void setFxMusicVolume(int volume) {
-        SOUND_EFFECT_VOLUME = volume;
+        soundEffectVolume = volume;
     }
 
 }

@@ -302,7 +302,7 @@ public class Level {
         App.MUSIC_PLAYER.stopMusic();
         App.MUSIC_PLAYER.playSound(
                 SoundEngine.Sound.LEVEL_MUSIC,
-                SoundEngine.MUSIC_VOLUME,
+                SoundEngine.getMusicVolume(),
                 true);
     }
 
@@ -549,12 +549,12 @@ public class Level {
             // Play win sound effect.
             soundEngine.playSound(
                     SoundEngine.Sound.WIN,
-                    SoundEngine.MUSIC_VOLUME, false);
+                    SoundEngine.getMusicVolume(), false);
         } else {
             // Play loose sound effect.
             soundEngine.playSound(
                     SoundEngine.Sound.LOOSE,
-                    SoundEngine.MUSIC_VOLUME, false);
+                    SoundEngine.getMusicVolume(), false);
         }
     }
 
@@ -576,7 +576,7 @@ public class Level {
         App.MUSIC_PLAYER.stopMusic();
         App.MUSIC_PLAYER.playSound(
                 SoundEngine.Sound.LEVEL_MUSIC,
-                SoundEngine.MUSIC_VOLUME,
+                SoundEngine.getMusicVolume(),
                 true);
     }
 
@@ -607,7 +607,7 @@ public class Level {
         App.MUSIC_PLAYER.stopMusic();
         App.MUSIC_PLAYER.playSound(
                 SoundEngine.Sound.LEVEL_MUSIC,
-                SoundEngine.MUSIC_VOLUME,
+                SoundEngine.getMusicVolume(),
                 true);
     }
 

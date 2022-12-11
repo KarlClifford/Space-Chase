@@ -47,7 +47,8 @@ public class Clock extends Item {
             // Play the clock sound effect.
             soundEngine.playSound(
                     SoundEngine.Sound.CLOCK,
-                    SoundEngine.SOUND_EFFECT_VOLUME, false);
+                    SoundEngine.getSoundEffectVolume(),
+                    false);
             soundEngine.setPlaybackSpeed(2);
         } else {
             level.setTime(time - VALUE);

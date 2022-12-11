@@ -84,7 +84,8 @@ public class App extends Application {
                 // Start the game music.
                 App.MUSIC_PLAYER.playSound(
                         SoundEngine.Sound.MENU_MUSIC,
-                        SoundEngine.MUSIC_VOLUME, true);
+                        SoundEngine.getMusicVolume(),
+                        true);
             }
         });
     }

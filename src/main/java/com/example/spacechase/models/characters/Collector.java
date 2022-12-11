@@ -39,7 +39,7 @@ public abstract class Collector extends Character {
         // Play the reward sound effect.
         soundEngine.playSound(
                 SoundEngine.Sound.REWARD,
-                SoundEngine.SOUND_EFFECT_VOLUME,
+                SoundEngine.getSoundEffectVolume(),
                 false);
     }
 
