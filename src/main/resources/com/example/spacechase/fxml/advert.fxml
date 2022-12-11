@@ -6,8 +6,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.AdvertController">
     <children>
-        <Button fx:id="button" layoutX="900.0" layoutY="700.0" mnemonicParsing="false" text="restart" />
-        <MediaView fx:id="mediaView" fitHeight="600.0" fitWidth="1000.0" layoutX="400.0" />
+        <Button fx:id="button" layoutX="945.0" layoutY="800.0" mnemonicParsing="false" text="restart" />
+        <MediaView fx:id="mediaView" fitHeight="600.0" fitWidth="1000.0" layoutX="470.0" layoutY="190.0" />
+      <Label text="Actual advert would go here" layoutX="900.0" layoutY="500.0" mnemonicParsing="false" />
     </children>
 </AnchorPane>
-

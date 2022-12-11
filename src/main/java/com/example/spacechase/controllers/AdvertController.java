@@ -63,6 +63,7 @@ public class AdvertController extends Controller {
         mediaPlayer = new  MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.play();
+        mediaView.setVisible(true);
         button.setVisible(false);
         PauseTransition pt = new PauseTransition(Duration.seconds(timer));
         pt.setOnFinished(e -> {
