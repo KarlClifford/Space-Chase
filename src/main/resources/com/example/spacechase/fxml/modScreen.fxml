@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0"
+            prefWidth="1920.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.MODController">
+
+    <center>
+        <VBox alignment="CENTER" style="-fx-background-color: BLACK; -fx-padding: 10 10 10 10" BorderPane.alignment="CENTER" spacing="20">
+            <Label contentDisplay="CENTER" fx:id="messageLabel" textFill="YELLOW">
+                <font>
+                    <Font name="NeuropolXRg-Regular" size="16.0"/>
+                </font>
+            </Label>
+        </VBox>
+    </center>
+</BorderPane>
