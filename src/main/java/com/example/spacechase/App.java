@@ -1,23 +1,25 @@
 package com.example.spacechase;
 
+import com.example.spacechase.controllers.Controller;
+import com.example.spacechase.controllers.SettingsController;
+import com.example.spacechase.services.SoundEngine;
+import com.example.spacechase.utils.Data;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
-import javax.swing.JOptionPane;
 
 /**
  * This class represents the main app of the game. It loads
  * the required fonts and launch the game with main menu.
  * @author Tristan Tsang
  * @author Karl Clifford
- * @version 1.0.1
+ * @version 1.0.2
  */
 public class App extends Application {
     /**
@@ -28,12 +30,12 @@ public class App extends Application {
      * Width of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_WIDTH = 600;
+    public static final double STAGE_WIDTH = 1920.0;
     /**
      * Height of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_HEIGHT = 500;
+    public static final double STAGE_HEIGHT = 1080.0;
     /**
      * Title of the stage.
      * @see javafx.stage
@@ -50,10 +52,9 @@ public class App extends Application {
      */
     public static final int FONT_SIZE = 10;
     /**
-     * Path of fonts.
+     * Name of directory that contains all fonts.
      */
-    private static final String PATH_TO_FONTS =
-            "src/main/resources/com/example/spacechase/fonts";
+    private static final String FONTS_DIRECT = "fonts";
 
     /**
      * @param stage primary stage of the game.
@@ -62,25 +63,31 @@ public class App extends Application {
      */
     @Override
     public void start(final Stage stage) throws IOException {
+        SettingsController settingsController = new SettingsController();
+        settingsController.loadSettings();
+
         Controller.setStage(stage);
 
-        AnchorPane pane = FXMLLoader.load(
+        Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        getClass().getResource("fxml/mainMenu.fxml")));
-
+                        getClass().getResource("fxml/titleScreen.fxml")));
         Scene scene = new Scene(pane);
         stage.setScene(scene);
 
         stage.setTitle(TITLE);
-        stage.setWidth(STAGE_WIDTH);
-        stage.setHeight(STAGE_HEIGHT);
         stage.setResizable(RESIZEABLE);
         stage.show();
 
-        // Start the game music.
-        MUSIC_PLAYER.playSound(
-                SoundEngine.Sound.MENU_MUSIC,
-                SoundEngine.MUSIC_VOLUME, true);
+        stage.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            // Plays music if it changes scene from title screen.
+            if (oldScene == scene) {
+                // Start the game music.
+                App.MUSIC_PLAYER.playSound(
+                        SoundEngine.Sound.MENU_MUSIC,
+                        SoundEngine.getMusicVolume(),
+                        true);
+            }
+        });
     }
 
     /**
@@ -89,20 +96,6 @@ public class App extends Application {
      */
     public static void main(final String[] args) {
         loadFonts();
-        String messageOfTheDay;
-        // Try to retrieve the message of the day.
-        try {
-            messageOfTheDay = GameMessage.fetch();
-        } catch (IOException e) {
-            // The user isn't connected to the internet.
-            messageOfTheDay = ("Error: Couldn't get the message of the day. "
-                    + "Are you connected to the internet?");
-            // The user disconnected from the internet while fetching the MOTD.
-        } catch (InterruptedException e) {
-            messageOfTheDay = ("Error: Couldn't get the message of the day.");
-        }
-        // Show message of the day.
-        JOptionPane.showMessageDialog(null, messageOfTheDay);
         // Launch game.
         launch(args);
     }
@@ -111,9 +104,10 @@ public class App extends Application {
      * Loads every font from the font resource folder.
      */
     private static void loadFonts() {
+        File fontsDirect = Data.getFileFromPath(FONTS_DIRECT);
+
         // For every font file in fonts directory, load the font.
-        for (File file : Objects.requireNonNull(
-                new File(PATH_TO_FONTS).listFiles())) {
+        for (File file : Objects.requireNonNull(fontsDirect.listFiles())) {
             Font.loadFont("file:" + file.getPath(), FONT_SIZE);
         }
     }

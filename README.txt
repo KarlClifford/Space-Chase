@@ -11,6 +11,8 @@ If you would like to run the most stable build then clone the release branch, cd
 
 > **Note:** This Javafx project was built with **Java 17** and **maven version 3.8.6**. If you experience issues running this project you should check your java and maven versions.
 
+> **Note:** This software has been optimised for **Windows**. Unexpected behaviours such as problems with sound may occur when running on alternative platforms.
+
 
 # Developer Information
 
