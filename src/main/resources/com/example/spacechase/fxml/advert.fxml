@@ -10,3 +10,4 @@
         <MediaView fx:id="mediaView" fitHeight="600.0" fitWidth="1000.0" layoutX="400.0" />
     </children>
 </AnchorPane>
+
