@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+/**
+ * Title screen controller, handles loading and displaying the title screen.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class TitleScreenController extends Controller {
     /**
      * Duration for fade in transition of the label.
