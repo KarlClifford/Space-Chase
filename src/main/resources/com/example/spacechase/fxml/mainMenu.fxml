@@ -39,13 +39,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.MainMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.MainMenuController">
    <center>
       <AnchorPane fx:id="pane" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="menuBox" alignment="CENTER" spacing="5.0">
+            <VBox fx:id="menuBox" alignment="CENTER" layoutX="403.0" layoutY="306.0" spacing="5.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Space Chase" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Space Chase" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Iomanoid-Regular" size="63.0" />
                      </font>
@@ -71,6 +71,11 @@
                      </font>
                   </Button>
                   <Button alignment="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#onSettingsButtonClicked" prefHeight="35.0" prefWidth="163.0" style="-fx-background-color: BLACK;" text="Settings" textFill="WHITE" textOverrun="CLIP">
+                     <font>
+                        <Font name="NeuropolXRg-Regular" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#onQuitButtonClicked" prefHeight="35.0" prefWidth="163.0" style="-fx-background-color: BLACK;" text="Quit" textFill="WHITE" textOverrun="CLIP">
                      <font>
                         <Font name="NeuropolXRg-Regular" size="16.0" />
                      </font>

@@ -7,6 +7,7 @@ import com.example.spacechase.utils.Data;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -30,12 +31,16 @@ public class App extends Application {
      * Width of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_WIDTH = 1920.0;
+    public static final double STAGE_WIDTH = Screen.getPrimary()
+            .getBounds()
+            .getWidth();
     /**
      * Height of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_HEIGHT = 1080.0;
+    public static final double STAGE_HEIGHT = Screen.getPrimary()
+            .getBounds()
+            .getHeight();
     /**
      * Title of the stage.
      * @see javafx.stage
@@ -45,7 +50,7 @@ public class App extends Application {
      * Resizeable of the stage.
      * @see javafx.stage
      */
-    public static final boolean RESIZEABLE = true;
+    public static final boolean RESIZEABLE = false;
     /**
      * Font size.
      * @see javafx.scene.text.Font
@@ -71,6 +76,8 @@ public class App extends Application {
         Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
                         getClass().getResource("fxml/titleScreen.fxml")));
+        pane.setPrefSize(App.STAGE_WIDTH, App.STAGE_HEIGHT);
+
         Scene scene = new Scene(pane);
         stage.setScene(scene);
 
@@ -78,16 +85,7 @@ public class App extends Application {
         stage.setResizable(RESIZEABLE);
         stage.show();
 
-        stage.sceneProperty().addListener((observable, oldScene, newScene) -> {
-            // Plays music if it changes scene from title screen.
-            if (oldScene == scene) {
-                // Start the game music.
-                App.MUSIC_PLAYER.playSound(
-                        SoundEngine.Sound.MENU_MUSIC,
-                        SoundEngine.getMusicVolume(),
-                        true);
-            }
-        });
+
     }
 
     /**

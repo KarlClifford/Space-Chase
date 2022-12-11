@@ -12,16 +12,15 @@ import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
 import com.example.spacechase.utils.Direction;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import java.io.File;
 import java.io.IOException;
@@ -42,11 +41,6 @@ import java.util.Arrays;
  * @version 1.0.1
  */
 public class Level {
-    /**
-     * X offset of canvas.
-     * @see javafx.scene.canvas
-     */
-    public static final int CANVAS_OFFSET_X = 100;
     /**
      * Spacing of tiles.
      */
@@ -281,18 +275,17 @@ public class Level {
         hBox.setStyle("-fx-background-color: BLACK");
         hBox.getChildren().addAll(pauseButton, timeLabel, scoreLabel);
 
-        Canvas canvas = new Canvas(App.STAGE_WIDTH, App.STAGE_HEIGHT);
-
-        Group group = new Group(canvas);
-
-        draw(group);
+        AnchorPane anchorPane = new AnchorPane();
+        draw(anchorPane);
 
         BorderPane pane = new BorderPane();
         pane.setTop(hBox);
-        pane.setCenter(group);
+        pane.setCenter(anchorPane);
         pane.setStyle("-fx-background-color: BLACK");
+        pane.setPrefWidth(App.STAGE_WIDTH);
+        pane.setPrefHeight(App.STAGE_HEIGHT);
 
-        scene = new Scene(pane, App.STAGE_WIDTH, App.STAGE_HEIGHT);
+        scene = new Scene(pane);
         Controller.setScene(scene);
 
         player.initialize(scene);
@@ -350,12 +343,9 @@ public class Level {
 
     /**
      * Draws all the tiles and entities.
-     * @param group pane of the canvas.
+     * @param pane pane of the level.
      */
-    private void draw(Group group) {
-        Canvas canvas = (Canvas) group.getChildren().get(0);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
+    private void draw(AnchorPane pane) {
         /* Loops through each tile of the map and draws it out,
          sets each tile their neighbour and link tile if possible.
          Draws the item and character if they exist on a tile. */
@@ -379,17 +369,18 @@ public class Level {
                 // For every colour in the tile, draws it onto the canvas.
                 for (int i = 0; i < colours.length; i++) {
                     char c = colours[i];
-                    Color color = getColorFromChar(c);
-
-                    gc.setFill(color);
-                    gc.fillRect((Tile.TILE_SIZE + TILE_SPACING) * x
-                                    + Tile.TILE_SIZE / 2 * (i % 2),
-                            CANVAS_OFFSET_X
-                                    + (Tile.TILE_SIZE + TILE_SPACING) * y
-                                    + Tile.TILE_SIZE / 2
-                                    * (i < colours.length / 2 ? 0 : 1),
-                            Tile.TILE_SIZE / 2,
-                            Tile.TILE_SIZE / 2);
+                    final Color color = getColorFromChar(c);
+                    final double rectSize = Tile.TILE_SIZE / 2;
+                    Rectangle rectangle = new Rectangle(
+                            (Tile.TILE_SIZE + TILE_SPACING) * x
+                            + rectSize * (i % 2),
+                            (Tile.TILE_SIZE + TILE_SPACING) * y
+                            + rectSize * (i < colours.length / 2 ? 0 : 1),
+                            rectSize,
+                            rectSize);
+                    rectangle.setFill(color);
+                    rectangle.setViewOrder(2);
+                    pane.getChildren().add(rectangle);
                 }
 
                 Item item = tile.getItem();
@@ -397,8 +388,10 @@ public class Level {
                 create an image and draw it. */
                 if (item != null) {
                     ImageView image = item.getImageView();
-                    group.getChildren().add(image);
+                    image.setViewOrder(1);
+                    pane.getChildren().add(image);
                 }
+
                 Character character = tile.getCharacter();
                 /* If there is a character, assign level and tile to
                  character, create an image and draw it. */
@@ -410,7 +403,8 @@ public class Level {
                     }
 
                     ImageView image = character.getImageView();
-                    group.getChildren().add(image);
+                    image.setViewOrder(0);
+                    pane.getChildren().add(image);
                 }
             }
         }

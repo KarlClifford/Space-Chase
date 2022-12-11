@@ -100,7 +100,7 @@ public interface Data {
      */
     static File createFileFromPath(String path, String fileName) {
         File directory = getFileFromPath(path);
-        File file = new File(directory.getPath() + fileName);
+        File file = new File(directory.getPath() + "/" + fileName);
         boolean success = file.mkdirs();
         if (!success) {
             System.out.println("WARN: file has already been created.");

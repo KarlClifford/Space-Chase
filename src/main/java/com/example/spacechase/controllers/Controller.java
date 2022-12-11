@@ -20,7 +20,7 @@ public class Controller {
      * Stage of the game.
      * @see javafx.stage
      */
-    private static Stage stage;
+    protected static Stage stage;
 
     /**
      * Gets the stage of the game.
@@ -64,8 +64,11 @@ public class Controller {
             throw new RuntimeException(ex);
         }
 
-        Scene scene = new Scene(pane);
-        stage.setScene(scene);
+        //pane.setPrefSize(stage.getWidth(), stage.getHeight());
+
+        //Scene scene = new Scene(pane);
+        //stage.setScene(scene);
+        stage.getScene().setRoot(pane);
 
         return fxmlLoader.getController();
     }

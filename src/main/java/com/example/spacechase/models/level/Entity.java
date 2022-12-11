@@ -57,8 +57,7 @@ public abstract class Entity {
     public void draw() {
         imageView.relocate(
                 (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
-                Level.CANVAS_OFFSET_X
-                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
+                   (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
     }
 
     /**

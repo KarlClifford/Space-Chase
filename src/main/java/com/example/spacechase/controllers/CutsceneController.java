@@ -61,6 +61,14 @@ public class CutsceneController extends Controller {
         GameClock gameClock = level.getClock();
         gameClock.setRun(false);
 
+        if (message == null) {
+            resumeMusic();
+            gameClock.setRun(true);
+            Scene scene = level.getScene();
+            setScene(scene);
+            return;
+        }
+
         AnimationTimer timer = new AnimationTimer() {
             final Clock clock = Clock.systemDefaultZone();
             private long last = clock.millis();

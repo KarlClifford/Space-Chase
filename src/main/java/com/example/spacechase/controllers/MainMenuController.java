@@ -2,6 +2,7 @@ package com.example.spacechase.controllers;
 
 import com.example.spacechase.utils.Data;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -259,7 +260,7 @@ public class MainMenuController extends Controller {
     }
 
     /**
-     * Anchors the given node in the scene with value of anchor.
+     * Anchors the given node in the scene to the center.
      * @param node node to be anchored.
      */
     private void setAnchor(Node node) {
@@ -299,6 +300,14 @@ public class MainMenuController extends Controller {
     @FXML
     private void onSettingsButtonClicked() {
         loadFxml(SETTINGS_FXML_PATH);
+    }
+
+    /**
+     * Quits the game when clicked.
+     */
+    @FXML
+    private void onQuitButtonClicked() {
+        Platform.exit();
     }
 
 

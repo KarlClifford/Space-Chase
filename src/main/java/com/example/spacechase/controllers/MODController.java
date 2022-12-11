@@ -1,5 +1,6 @@
 package com.example.spacechase.controllers;
 
+import com.example.spacechase.App;
 import com.example.spacechase.services.GameMessage;
 import com.example.spacechase.services.SoundEngine;
 import javafx.animation.AnimationTimer;
@@ -57,17 +58,17 @@ public class MODController extends Controller {
                  * in the message.
                  */
                 if (copy.length() == 0) {
-                    this.stop();
-
                     // Provide enough time to read the message.
-                    try {
-                        Thread.sleep(PAUSE_DURATION);
-                    } catch (InterruptedException e) {
-                        // The operation was cancelled.
-                        throw new RuntimeException(e);
+                    if (now - last >= PAUSE_DURATION) {
+                        this.stop();
+                        App.MUSIC_PLAYER.playSound(
+                                SoundEngine.Sound.MENU_MUSIC,
+                                SoundEngine.getMusicVolume(),
+                                true);
+                        // Switch to the main menu.
+                        loadFxml("fxml/mainMenu.fxml");
                     }
-                    // Switch to the main menu.
-                    loadFxml("fxml/mainMenu.fxml");
+
                     /*
                      * Prints out the first character in the
                      * message every 100 milliseconds, leaves
@@ -129,7 +130,13 @@ public class MODController extends Controller {
             messageOfTheDay = ("Error: Couldn't get the message of the day.");
         }
 
-        String message = "DATE: [??:??:????]\nSENDER: [UNKNOWN]\n\n--------- START MESSAGE ---------\n\nGreetings, space traveler.\nMy knowledge and understanding is vast.\nI see your journey and applaud your bravery.\nMay your travels be safe and enlightening\nAlways remember:\n\n" + messageOfTheDay + "\n\nIn the vastness of space the only thing left is the Chase.\nBe safe traveller.\n\n--------- END MESSAGE ---------";
+        String message = "DATE: [??:??:????]\nSENDER: [UNKNOWN]\n\n---------"
+                + " START MESSAGE ---------\n\nGreetings, space traveler.\nMy"
+                + " knowledge and understanding is vast.\nI see your journey "
+                + "and applaud your bravery.\nMay your travels be safe and en"
+                + "lightening\nAlways remember:\n\n" + messageOfTheDay + "\n"
+                + "\nIn the vastness of space the only thing left is the Cha"
+                + "se.\nBe safe traveller.\n\n--------- END MESSAGE ---------";
 
         setMessage(message);
         start();
