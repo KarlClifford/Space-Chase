@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.AdvertController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.AdvertController">
     <children>
         <Button fx:id="button" layoutX="250.0" layoutY="300.0" mnemonicParsing="false" text="restart" />
-        <MediaView fx:id="mediaView" fitHeight="250.0" fitWidth="600.0" />
+        <MediaView fx:id="mediaView" fitHeight="600.0" fitWidth="1000.0" layoutX="400.0" />
     </children>
 </AnchorPane>
 
