@@ -31,11 +31,6 @@ public class AdvertController extends Controller {
     @FXML
     private Button button;
     /**
-     * Variable holing a media object.
-     */
-    @FXML
-    private Media media;
-    /**
      * Variable holing a mediaView object.
      * @see javafx.scene.media.Media
      */
@@ -55,31 +50,31 @@ public class AdvertController extends Controller {
      */
     public void start(Level level) {
         File file = Data.getFileFromPath("media/ads/ad1.mp4");
-        media = new Media(file.toURI().toString());
+        Media media = new Media(file.toURI().toString());
 
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(SoundEngine.getMusicVolume());
+        mediaPlayer.setStartTime(Duration.millis(0.0));
         mediaPlayer.play();
 
         mediaView.fitWidthProperty().bind(stage.widthProperty());
         mediaView.fitHeightProperty().bind(stage.heightProperty());
         mediaView.setMediaPlayer(mediaPlayer);
+
         mediaView.setViewOrder(1);
         mediaView.setVisible(true);
 
         button.setVisible(false);
         button.setViewOrder(0);
+        button.setOnMouseClicked(event -> {
+            mediaPlayer.stop();
+            LevelEndedMenuController controller = (LevelEndedMenuController)
+                    loadFxml("fxml/levelEndedMenu.fxml");
+            controller.startFailMenu(level);
+        });
 
         PauseTransition pt = new PauseTransition(Duration.seconds(TIMER));
-        pt.setOnFinished(e -> {
-            button.setVisible(true);
-            button.setOnMouseClicked(event -> {
-                mediaPlayer.stop();
-                LevelEndedMenuController controller = (LevelEndedMenuController)
-                        loadFxml("fxml/levelEndedMenu.fxml");
-                controller.startFailMenu(level);
-            });
-        });
+        pt.setOnFinished(e -> button.setVisible(true));
         pt.play();
     }
 }

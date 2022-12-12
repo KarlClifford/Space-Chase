@@ -97,8 +97,10 @@ public class SettingsController extends Controller {
     private void initialize() {
         isKeybinding = new SimpleBooleanProperty(false);
 
+        // Loads all the settings.
         loadSettings();
 
+        // Sets the label of music and sound effect volume.
         musicSlider.setValue(SoundEngine.getMusicVolume());
         fxSlider.setValue(SoundEngine.getSoundEffectVolume());
         /*
@@ -158,6 +160,10 @@ public class SettingsController extends Controller {
      * @param value value of setting.
      */
     private void changeSetting(String attribute, String value) {
+        /*
+         * Gets the corresponding attribute and applies changes
+         * in game.
+          */
         switch (attribute) {
             case "music" -> {
                 int volume = (int) Double.parseDouble(value);
@@ -174,6 +180,7 @@ public class SettingsController extends Controller {
                             "ERROR: Illegal attribute provided.");
         }
 
+        // Stores it in json file.
         writeSetting(attribute, value);
     }
 
@@ -223,6 +230,7 @@ public class SettingsController extends Controller {
         Button[] keybinds = new Button[] {
                 upKeybind, downKeybind, leftKeybind, rightKeybind};
 
+        // Gets the corresponding button and change its text to key code.
         Arrays.stream(keybinds)
                 .filter(Objects::nonNull)
                 .filter(button -> button.getId()

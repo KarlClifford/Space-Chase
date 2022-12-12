@@ -83,6 +83,7 @@ public class MODController extends Controller {
                      * the rest in message.
                      */
                 } else if (now - last >= PRINT_SPEED) {
+                    // Prints new line if character is '^'.
                     if (copy.charAt(0) == '^') {
                         copy = copy.substring(1);
                         messageLabel.setText(messageLabel.getText() + '\n');

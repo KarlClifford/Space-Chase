@@ -43,7 +43,6 @@ public class TitleScreenController extends Controller {
      */
     @FXML
     private void initialize() {
-
         fadeInTitle();
     }
 

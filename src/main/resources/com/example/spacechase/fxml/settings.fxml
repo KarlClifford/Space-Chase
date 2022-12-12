@@ -15,60 +15,72 @@
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Label text="Music" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
-            <Slider fx:id="musicSlider" value="30.0"/>
+            <Slider fx:id="musicSlider" value="30.0" />
             <Label fx:id="volumeLabel" text="30" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
          </HBox>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Label text="Sound FX" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
-            <Slider fx:id="fxSlider" value="30.0"/>
+            <Slider fx:id="fxSlider" value="30.0" />
             <Label fx:id="fxLabel" text="30" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
          </HBox>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Label text="Up" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="upKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="W"/>
+            <Button fx:id="upKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="W">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
          </HBox>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Label text="Left" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="leftKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="A"/>
+            <Button fx:id="leftKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="A">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
          </HBox>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Label text="Down" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="downKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="S"/>
+            <Button fx:id="downKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="S">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
          </HBox>
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Label text="Right" textFill="WHITE">
                <font>
-                  <Font name="NeuropolXRg-Regular" size="16.0"/>
+                  <Font name="NeuropolXRg-Regular" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="rightKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="D"/>
+            <Button fx:id="rightKeybind" mnemonicParsing="false" onMouseClicked="#onKeybinding" text="D">
+               <font>
+                  <Font size="16.0" />
+               </font></Button>
          </HBox>
       </VBox>
    </center>
@@ -85,8 +97,11 @@
    <bottom>
       <Button mnemonicParsing="false" onAction="#onBackButtonClicked" text="back" BorderPane.alignment="BOTTOM_LEFT">
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
       </Button>
    </bottom>
 </BorderPane>
