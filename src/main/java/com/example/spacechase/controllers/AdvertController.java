@@ -55,10 +55,10 @@ public class AdvertController extends Controller {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(SoundEngine.getMusicVolume());
         mediaPlayer.setStartTime(Duration.millis(0.0));
-        mediaPlayer.play();
+        mediaPlayer.setAutoPlay(true);
 
         mediaView.fitWidthProperty().bind(stage.widthProperty());
-        mediaView.fitHeightProperty().bind(stage.heightProperty());
+        mediaView.fitHeightProperty().bind(stage.heightProperty().multiply(.9));
         mediaView.setMediaPlayer(mediaPlayer);
 
         mediaView.setViewOrder(1);
