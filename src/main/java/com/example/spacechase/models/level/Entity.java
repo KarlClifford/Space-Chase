@@ -71,6 +71,14 @@ public abstract class Entity {
     }
 
     /**
+     * Gets the id of the entity.
+     * @return id of the entity.
+     */
+    public char getId() {
+        return id;
+    }
+
+    /**
      * Gets the tile of the entity is on.
      * @return tile that the entity is on.
      */

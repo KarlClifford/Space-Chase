@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * This class represents a level. A level contains
@@ -627,15 +628,16 @@ public class Level {
      */
     private String getMessageString() {
         return String.join("",
-                Arrays.stream(tileMap)
-                .map(ts -> String.join("\n",
-                        Arrays.stream(ts)
-                                .map(Tile::getItem)
-                                .filter(item -> item instanceof Note)
-                                .map(item -> (Note) item)
-                                .map(Note::getMessage)
-                                .toArray(String[]::new)))
-                .toArray(String[]::new));
+                items.stream()
+                .map(item -> {
+                    if (item instanceof Note note) {
+                        return note.getMessage();
+                    }
+
+                    return null;
+                })
+                        .filter(Objects::nonNull)
+                        .toArray(String[]::new));
     }
 
     /**

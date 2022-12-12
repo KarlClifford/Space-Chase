@@ -67,6 +67,7 @@ public class Valuable extends Item {
      *                 each item.
      */
     public Valuable(char itemType) {
+        this.id = itemType;
         this.score = ITEM_SCORES.get(itemType);
         this.imagePath = ITEM_IMAGES.get(itemType);
     }

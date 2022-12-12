@@ -28,7 +28,7 @@ public interface Data {
     /**
      * Format of tile data.
      */
-    String DATA_FORMAT = "[A-Z]{1,4}(.)";
+    String DATA_FORMAT = "[A-Z]{1,4}(.)+";
     /**
      * Name of directory that contains all data of the game.
      */
@@ -156,25 +156,29 @@ public interface Data {
             if (tileData.matches(DATA_FORMAT)) {
                 String colours = tileData.substring(0, DATA_LENGTH);
                 Tile tile = tileMap[y][x] = new Tile(x, y, colours);
-                char entityType = tileData.charAt(4);
 
-                Entity entity = createEntity(entityType);
-                if (entity != null) {
-                    entity.setTile(tile);
-                    entity.setLevel(level);
-                    entity.createImageView();
+                char[] entityTypes = tileData.substring(DATA_LENGTH)
+                        .toCharArray();
+                // For each entity in entity types in tile data.
+                for (char entityType : entityTypes) {
+                    Entity entity = createEntity(entityType);
+                    if (entity != null) {
+                        entity.setTile(tile);
+                        entity.setLevel(level);
+                        entity.createImageView();
 
-                    /*
-                     * Sets entity to tile's character if it is
-                     * a character. Otherwise, sets entity to
-                     * tile's item if it is an item.
-                     */
-                    if (entity instanceof Character character) {
-                        tile.setCharacter(character);
-                        level.getCharacters().add(character);
-                    } else if (entity instanceof Item item) {
-                        tile.setItem(item);
-                        level.getItems().add(item);
+                        /*
+                         * Sets entity to tile's character if it is
+                         * a character. Otherwise, sets entity to
+                         * tile's item if it is an item.
+                         */
+                        if (entity instanceof Character character) {
+                            tile.setCharacter(character);
+                            level.getCharacters().add(character);
+                        } else if (entity instanceof Item item) {
+                            tile.setItem(item);
+                            level.getItems().add(item);
+                        }
                     }
                 }
 
@@ -190,21 +194,23 @@ public interface Data {
             }
         }
 
-        level.getItems()
-                .forEach(item -> {
-                    /*
-                     * Assign message to the note if there is a message
-                     * and item is a note.
-                     */
-                    if (scan.hasNextLine() && item instanceof Note note) {
-                        String message = scan.nextLine();
-                        // Goes to next line if line is blank.
-                        if (message.isBlank() && scan.hasNextLine()) {
-                            message = scan.nextLine();
-                        }
-                        note.setMessage(message);
-                    }
-                });
+        Note[] notes = level.getItems()
+                .stream()
+                .filter(item -> item instanceof Note)
+                .toArray(Note[]::new);
+
+        // Sets message for each note.
+        for (Note note : notes) {
+            String message = scan.hasNextLine()
+                    ? scan.nextLine() : "";
+
+            // Goes to next line if line is blank.
+            if (message.isBlank() && scan.hasNextLine()) {
+                message = scan.nextLine();
+            }
+
+            note.setMessage(message);
+        }
 
         scan.close();
 
@@ -460,12 +466,16 @@ public interface Data {
 
         HashMap<String, Integer> highScores = new HashMap<>();
 
-        // Add a profile for every player who scored in this level.
-        for (Object n : profiles.keySet()) {
-            String name = (String) n;
-            int score = Integer.parseInt(String.valueOf(profiles.get(name)));
+        // Get highscores if there are profiles.
+        if (profiles != null) {
+            // Add a profile for every player who scored in this level.
+            for (Object n : profiles.keySet()) {
+                String name = (String) n;
+                int score = Integer.parseInt(
+                        String.valueOf(profiles.get(name)));
 
-            highScores.put(name, score);
+                highScores.put(name, score);
+            }
         }
 
         return highScores;
