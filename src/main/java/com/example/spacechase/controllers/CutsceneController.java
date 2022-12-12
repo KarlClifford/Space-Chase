@@ -6,7 +6,6 @@ import com.example.spacechase.models.level.GameClock;
 import com.example.spacechase.services.SoundEngine;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import java.time.Clock;
@@ -19,10 +18,6 @@ import java.time.Clock;
  * @version 1.0.0
  */
 public class CutsceneController extends Controller {
-    /**
-     * The volume of the music to be played on this screen.
-     */
-    private static final int SLOW_MUSIC_VOLUME = 40;
     /**
      * The speed of the music to be played on this screen.
      */
@@ -44,7 +39,6 @@ public class CutsceneController extends Controller {
      */
     @FXML
     private Button skipButton;
-
     /**
      * Stores the level of the game.
      */
@@ -60,6 +54,14 @@ public class CutsceneController extends Controller {
     public void start() {
         GameClock gameClock = level.getClock();
         gameClock.setRun(false);
+
+        // Resumes the game if there's no message.
+        if (message == null) {
+            resumeMusic();
+            gameClock.setRun(true);
+            setRoot(level.getPane());
+            return;
+        }
 
         AnimationTimer timer = new AnimationTimer() {
             final Clock clock = Clock.systemDefaultZone();
@@ -82,6 +84,7 @@ public class CutsceneController extends Controller {
                      * the rest in message.
                      */
                 } else if (now - last >= PRINT_SPEED) {
+                    // Prints a new line if character is '^'.
                     if (copy.charAt(0) == '^') {
                         copy = copy.substring(1);
                         messageLabel.setText(messageLabel.getText() + '\n');
@@ -113,8 +116,7 @@ public class CutsceneController extends Controller {
             } else {
                 resumeMusic();
                 gameClock.setRun(true);
-                Scene scene = level.getScene();
-                setScene(scene);
+                setRoot(level.getPane());
             }
         });
     }
@@ -150,7 +152,7 @@ public class CutsceneController extends Controller {
      * Adds a slowed music effect.
      */
     public void slowMusic() {
-        SoundEngine.setMusicVolume(SLOW_MUSIC_VOLUME);
+        SoundEngine.setMusicVolume(SoundEngine.getMusicVolume() / 2);
         App.MUSIC_PLAYER.setPlaybackSpeed(SLOW_MUSIC_SPEED);
     }
 
@@ -158,7 +160,7 @@ public class CutsceneController extends Controller {
      * Resets the music back to default.
      */
     public void resumeMusic() {
-        App.MUSIC_PLAYER.setPlaybackSpeed(SoundEngine.getMusicVolume());
+        SoundEngine.setMusicVolume(SoundEngine.getMusicVolume() * 2);
         App.MUSIC_PLAYER.setPlaybackSpeed(1);
     }
 

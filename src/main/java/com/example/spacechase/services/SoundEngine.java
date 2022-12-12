@@ -60,10 +60,12 @@ public class SoundEngine {
         soundFiles.put(Sound.LOOSE, "sounds/game-over-38511.mp3");
         soundFiles.put(Sound.MOVE, "sounds/gameboy-pluck-41265.mp3");
         soundFiles.put(Sound.DESTROY,
-                "sounds/hit-brutal-puncher-cinematic-trailer-sound-effects-124760.mp3");
+                "sounds/hit-brutal-puncher-cinematic-trailer-sound-"
+                        + "effects-124760.mp3");
         soundFiles.put(
                         Sound.CLICK,
-                        "sounds/computer-processing-sound-effects-short-click-select-01-122134.mp3");
+                        "sounds/computer-processing-sound-effects-short"
+                                + "-click-select-01-122134.mp3");
     }
 
     // Enumerated type for the different sound effects.
@@ -139,7 +141,9 @@ public class SoundEngine {
      */
     public void stopMusic() {
         // Stop the music immediately.
-        mediaPlayer.stop();
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+        }
     }
 
     /**

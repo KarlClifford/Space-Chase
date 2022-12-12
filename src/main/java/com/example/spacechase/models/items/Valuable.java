@@ -19,19 +19,19 @@ public class Valuable extends Item {
     /**
      * Holds the screw item score value.
      */
-    private static final int SCREW_VALUE = 5;
+    private static final int SCREW_VALUE = 100;
     /**
      * Holds the screwdriver item score value.
      */
-    private static final int SCREWDRIVER_VALUE = 10;
+    private static final int SCREWDRIVER_VALUE = 200;
     /**
      * Holds the toolbox item score value.
      */
-    private static final int TOOLBOX_VALUE = 15;
+    private static final int TOOLBOX_VALUE = 500;
     /**
      * Holds the gas item score value.
      */
-    private static final int GAS_VALUE = 20;
+    private static final int GAS_VALUE = 1000;
     /**
      * Hashmap which contains the item identifying character as well as the
      * score value identified with it.
@@ -67,6 +67,7 @@ public class Valuable extends Item {
      *                 each item.
      */
     public Valuable(char itemType) {
+        this.id = itemType;
         this.score = ITEM_SCORES.get(itemType);
         this.imagePath = ITEM_IMAGES.get(itemType);
     }

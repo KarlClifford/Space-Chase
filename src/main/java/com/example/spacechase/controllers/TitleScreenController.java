@@ -1,13 +1,15 @@
 package com.example.spacechase.controllers;
 
-import com.example.spacechase.services.GameMessage;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import java.io.IOException;
 
+/**
+ * Title screen controller, handles loading and displaying the title screen.
+ * @author Tristan Tsang
+ * @version 1.0.0
+ */
 public class TitleScreenController extends Controller {
     /**
      * Duration for fade in transition of the label.
@@ -35,31 +37,12 @@ public class TitleScreenController extends Controller {
      */
     @FXML
     private VBox titleLabel;
-    /**
-     * Label that displays message of the day.
-     */
-    @FXML
-    private Label message;
 
     /**
      * Fades and zooms in the title label.
      */
     @FXML
     private void initialize() {
-        String messageOfTheDay;
-        // Try to retrieve the message of the day.
-        try {
-            messageOfTheDay = GameMessage.fetch();
-        } catch (IOException e) {
-            // The user isn't connected to the internet.
-            messageOfTheDay = ("Error: Couldn't get the message of the day. "
-                    + "Are you connected to the internet?");
-            // The user disconnected from the internet while fetching the MOTD.
-        } catch (InterruptedException e) {
-            messageOfTheDay = ("Error: Couldn't get the message of the day.");
-        }
-        message.setText(messageOfTheDay);
-
         fadeInTitle();
     }
 
@@ -100,6 +83,6 @@ public class TitleScreenController extends Controller {
         fadeOut.setCycleCount(1);
         fadeOut.setNode(titleLabel);
         fadeOut.play();
-        fadeOut.setOnFinished(e -> loadFxml("fxml/mainMenu.fxml"));
+        fadeOut.setOnFinished(e -> loadFxml("fxml/modScreen.fxml"));
     }
 }

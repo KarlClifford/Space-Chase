@@ -60,13 +60,11 @@ public class GameClock {
      */
     public void initialize() {
         run = true;
-
         AnimationTimer timer = new AnimationTimer() {
             final Clock clock = java.time.Clock.systemDefaultZone();
             private long last = clock.millis();
             private long playerLast = last;
             private long npcLast = last;
-
             @Override
             public void handle(long l) {
                 long now = clock.millis();

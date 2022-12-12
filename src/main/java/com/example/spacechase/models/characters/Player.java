@@ -54,21 +54,22 @@ public class Player extends Collector {
     /**
      * Initializes input for the level. Changes direction depending
      * on the input.
-     * @param scene scene of the level.
      */
-    public void initialize(Scene scene) {
+    public void initialize() {
+        Scene scene = level.getPane().getScene();
         scene.setOnKeyPressed(keyEvent -> {
             Control control =
                     KEYBINDS.getOrDefault(keyEvent.getCode(), Control.NULL);
-                direction = switch (control) {
-                    case UP -> Direction.UP;
-                    case LEFT -> Direction.LEFT;
-                    case DOWN -> Direction.DOWN;
-                    case RIGHT -> Direction.RIGHT;
-                    default -> null;
-                };
-            }
-        );
+
+            // Changes direction if there's an input from control.
+            direction = switch (control) {
+                case UP -> Direction.UP;
+                case LEFT -> Direction.LEFT;
+                case DOWN -> Direction.DOWN;
+                case RIGHT -> Direction.RIGHT;
+                default -> null;
+            };
+        });
     }
 
     /**

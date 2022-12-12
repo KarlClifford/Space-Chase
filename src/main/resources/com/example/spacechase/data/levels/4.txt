@@ -1,0 +1,9 @@
+10 6 300.00 0
+BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_
+BBBB_ YYYYP BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_
+BBBB_ YYYYN BBBB_ BBBB_ YYYY{ BBBB_ YYYY} BBBB_ BBBB_ BBBB_
+BBBB_ YYYY_ BBBB_ BBBB_ YYYY_ BBBB_ YYYY( BBBB_ BBBB_ BBBB_
+BBBB_ YYYY_ YYYY_ YYYY_ YYYY_ YYYY( YYYYN YYYY) YYYYD BBBB_
+BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_
+Attention: There is a checkpoint ahead.^In order to unlock the gates and proceed, it is necessary that you have a matching color key card.^Please ensure that you have the appropriate key card before attempting to unlock the gates.^Failure to do so may result in delays.
+[ENTRY 2/4]^^It's been two years since the Chase invaded our planet.^In that time, our world has been turned upside down.^The Chase have taken control of our governments and military, and have enslaved our people.^Those who resist are brutally punished.^We are no longer free.^We are nothing more than prisoners in our own homes, living in constant fear of the Chase and their cruel rulers.^I don't know how much longer we can survive like this. ^Every day, more and more of us are taken by the Chase, never to be seen again.^We are starving and desperate, with no hope of rescue.^But still, I try to hold on to hope.^I know that somewhere, there must be others like me who are fighting back against the Chase.^But I fear that it is already too late. The Chase are too powerful and too ruthless. They have already won.^I am resigned to my fate. I will continue to resist in whatever small ways I can, but I know that it will not be enough.^The Chase have already conquered our world.^^There is no hope left.

@@ -204,14 +204,14 @@ public class Tile {
     public String toString() {
         String charStr = character == null ? "" : character.toString();
         String itemStr = item == null ? "" : item.toString();
-        String entityStr = charStr.isBlank() && itemStr.isBlank()
-                ? "_" : charStr + itemStr;
+        String entityType = charStr + itemStr;
+        entityType = entityType.isBlank() ? "_" : entityType;
 
         return String.format("%s%s",
                 String.join("",
                         Stream.of(colours)
                                 .map(String::valueOf)
                                 .toArray(String[]::new)),
-                entityStr);
+                entityType);
     }
 }

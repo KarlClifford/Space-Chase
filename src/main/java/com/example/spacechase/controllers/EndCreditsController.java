@@ -17,19 +17,23 @@ import java.io.File;
  * @version 1.0.0
  */
 public class EndCreditsController extends Controller {
-
     /**
      * The path to the end credits video.
      */
     public static final String MEDIA_PATH = "media/end-credits.mp4";
     /**
+     * Rescale of height of media.
+     */
+    private static final double SCALE_Y = .9;
+    /**
      * Media view to display the media player.
+     * @see javafx.scene.media.MediaView
      */
     @FXML
     private MediaView mediaView;
-
     /**
      * Media player to view the end credits.
+     * @see javafx.scene.media.MediaPlayer
      */
     private MediaPlayer mediaPlayer;
 
@@ -40,7 +44,12 @@ public class EndCreditsController extends Controller {
         File file = Data.getFileFromPath(MEDIA_PATH);
         Media media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaView.fitWidthProperty().bind(stage.widthProperty());
+        mediaView.fitHeightProperty()
+                .bind(stage.heightProperty().multiply(SCALE_Y));
         mediaView.setMediaPlayer(mediaPlayer);
+        mediaPlayer.setVolume(SoundEngine.getMusicVolume());
+        mediaPlayer.setVolume(SoundEngine.getMusicVolume());
         mediaPlayer.onEndOfMediaProperty().addListener(e -> exit());
         mediaPlayer.play();
     }

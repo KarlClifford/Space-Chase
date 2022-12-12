@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * This class represents a controller for level selection menu.
  * This controller contains components of a buttons for different level
@@ -39,10 +42,15 @@ public class LevelMenuController extends Controller {
      */
     @FXML
     private void initialize() {
+        // Gets all levels from player profile.
         Level[] levels = Data.getLevelsFromProfile(playerName);
+        // Gets a sorted list of all levels.
+        Level[] sortedLevels = Arrays.stream(levels)
+                .sorted(Comparator.comparing(Level::getId))
+                .toArray(Level[]::new);
 
         // Creates a button for each level exists in player profile.
-        for (Level level : levels) {
+        for (Level level : sortedLevels) {
             int id = level.getId();
             Button button = new Button();
             button.setText(String.valueOf(id));

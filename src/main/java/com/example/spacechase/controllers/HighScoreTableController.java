@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
 import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
@@ -48,17 +47,18 @@ public class HighScoreTableController extends Controller {
     private static final int PROFILE_BOX_SPACING = 20;
     /**
      * Spacing of a score box.
+     * @see javafx.scene.layout.HBox
      */
     private static final int SCORE_BOX_SPACING = 10;
     /**
      * Container for level buttons.
-     *
-     * @see javafx.scene.layout.HBox
+     * @see javafx.scene.layout.VBox
      */
     @FXML
     private HBox levelButtonContainer;
     /**
      * Container for high score tables.
+     * @see javafx.scene.layout.AnchorPane
      */
     @FXML
     private AnchorPane scoreBoxContainer;
@@ -70,9 +70,8 @@ public class HighScoreTableController extends Controller {
     @FXML
     private void initialize() {
         // Get the directory that contains all level files.
-        File[] levelFiles = new File(Data.getUrl(Data.LEVELS_PATH)
-                .getPath()
-        ).listFiles();
+        File[] levelFiles = Data.getFileFromPath(Data.LEVELS_PATH)
+                .listFiles();
 
         /*
          * If levels directory exists, create button and score

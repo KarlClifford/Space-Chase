@@ -1,5 +1,6 @@
 package com.example.spacechase.models.items;
 
+import com.example.spacechase.models.characters.FlyingAssassin;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Data;
@@ -45,7 +46,6 @@ public class Bomb extends Item {
     public Bomb() {
         this.id = '*';
         this.imagePath = "blackHole.gif";
-
     }
 
     /**
@@ -181,7 +181,9 @@ public class Bomb extends Item {
             Tile neighbourTile = tile.getNeighbourTile(direction);
             if (neighbourTile != null
                     && neighbourTile
-                    .getCharacter() != null) {
+                    .getCharacter() != null
+                    && !(neighbourTile.getCharacter() instanceof FlyingAssassin)
+            ) {
                 trigger = true;
             }
         }

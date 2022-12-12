@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.TitleScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spacechase.controllers.TitleScreenController">
    <center>
        <VBox fx:id="titleLabel" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
            <Label contentDisplay="CENTER" text="Grwp 40" textAlignment="CENTER" textFill="WHITE">
@@ -17,11 +17,6 @@
               <font>
                   <Font name="Wingdings2" size="16.0"/>
               </font>
-           </Label>
-           <Label fx:id="message" contentDisplay="CENTER" text=" " textAlignment="CENTER" textFill="YELLOW">
-               <font>
-                   <Font name="RobotoMono-VariableFont_wght.ttf" size="14"/>
-               </font>
            </Label>
            <Label contentDisplay="BOTTOM" text="©2022 Grŵp 40" textAlignment="CENTER" textFill="GRAY">
                <font>

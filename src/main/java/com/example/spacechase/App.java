@@ -7,8 +7,10 @@ import com.example.spacechase.utils.Data;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
@@ -27,15 +29,35 @@ public class App extends Application {
      */
     public static final SoundEngine MUSIC_PLAYER = new SoundEngine();
     /**
+     * Default width of screen.
+     */
+    public static final double DEFAULT_WIDTH = 1920;
+    /**
+     * Default height of screen.
+     */
+    public static final double DEFAULT_HEIGHT = 1080;
+    /**
      * Width of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_WIDTH = 1920.0;
+    public static final double STAGE_WIDTH = Screen.getPrimary()
+            .getBounds()
+            .getWidth();
     /**
      * Height of the stage.
      * @see javafx.stage
      */
-    public static final double STAGE_HEIGHT = 1080.0;
+    public static final double STAGE_HEIGHT = Screen.getPrimary()
+            .getBounds()
+            .getHeight();
+    /**
+     * X of resize scale.
+     */
+    public static final double SCALE_X = STAGE_WIDTH / DEFAULT_WIDTH;
+    /**
+     * Y of resize scale.
+     */
+    public static final double SCALE_Y = STAGE_HEIGHT / DEFAULT_HEIGHT;
     /**
      * Title of the stage.
      * @see javafx.stage
@@ -45,7 +67,7 @@ public class App extends Application {
      * Resizeable of the stage.
      * @see javafx.stage
      */
-    public static final boolean RESIZEABLE = true;
+    public static final boolean RESIZEABLE = false;
     /**
      * Font size.
      * @see javafx.scene.text.Font
@@ -70,24 +92,18 @@ public class App extends Application {
 
         Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        getClass().getResource("fxml/titleScreen.fxml")));
+                        getClass().getResource("fxml/mainMenu.fxml")));
+        pane.setPrefSize(App.STAGE_WIDTH, App.STAGE_HEIGHT);
+
         Scene scene = new Scene(pane);
         stage.setScene(scene);
 
         stage.setTitle(TITLE);
         stage.setResizable(RESIZEABLE);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        stage.setMaximized(true);
         stage.show();
-
-        stage.sceneProperty().addListener((observable, oldScene, newScene) -> {
-            // Plays music if it changes scene from title screen.
-            if (oldScene == scene) {
-                // Start the game music.
-                App.MUSIC_PLAYER.playSound(
-                        SoundEngine.Sound.MENU_MUSIC,
-                        SoundEngine.getMusicVolume(),
-                        true);
-            }
-        });
     }
 
     /**

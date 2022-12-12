@@ -1,9 +1,9 @@
 package com.example.spacechase.models.level;
 
+import com.example.spacechase.App;
 import com.example.spacechase.models.Level;
 import com.example.spacechase.utils.Data;
 import javafx.scene.image.ImageView;
-
 
 /**
  * This class represents an entity, where it is an object
@@ -46,7 +46,7 @@ public abstract class Entity {
         imageView = new ImageView(
                 Data.getUrl(PATH_TO_IMAGES + imagePath)
                         .toExternalForm());
-        imageView.setFitHeight(Tile.TILE_SIZE);
+        imageView.setFitHeight(Tile.TILE_SIZE * App.SCALE_Y);
         imageView.setPreserveRatio(true);
         draw();
     }
@@ -56,9 +56,10 @@ public abstract class Entity {
      */
     public void draw() {
         imageView.relocate(
-                (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getX(),
-                Level.CANVAS_OFFSET_X
-                        + (Tile.TILE_SIZE + Level.TILE_SPACING) * tile.getY());
+                (Tile.TILE_SIZE + Level.TILE_SPACING)
+                        * tile.getX() * App.SCALE_X,
+                   (Tile.TILE_SIZE + Level.TILE_SPACING)
+                           * tile.getY() * App.SCALE_Y);
     }
 
     /**
@@ -67,6 +68,14 @@ public abstract class Entity {
      */
     public ImageView getImageView() {
         return imageView;
+    }
+
+    /**
+     * Gets the id of the entity.
+     * @return id of the entity.
+     */
+    public char getId() {
+        return id;
     }
 
     /**

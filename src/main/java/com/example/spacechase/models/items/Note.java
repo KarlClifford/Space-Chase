@@ -35,6 +35,14 @@ public class Note extends Item {
     }
 
     /**
+     * Gets the message of the note.
+     * @return message of note.
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
      * @param collector collector of the item.
      */
     @Override
