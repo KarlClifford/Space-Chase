@@ -92,7 +92,7 @@ public class App extends Application {
 
         Pane pane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        getClass().getResource("fxml/endCredits.fxml")));
+                        getClass().getResource("fxml/mainMenu.fxml")));
         pane.setPrefSize(App.STAGE_WIDTH, App.STAGE_HEIGHT);
 
         Scene scene = new Scene(pane);
