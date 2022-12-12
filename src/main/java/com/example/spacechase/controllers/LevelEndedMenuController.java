@@ -87,6 +87,18 @@ public class LevelEndedMenuController extends Controller {
     }
 
     /**
+     * Level failed menu where restart button restarts
+     * the game.
+     * @param level level to be restarted.
+     */
+    public void startFailMenu(Level level) {
+        levelEndedLabel.setText(LEVEL_FAILED_TEXT);
+        levelEndedLabel.setTextFill(Color.RED);
+        actionButton.setText(RESTART_TEXT);
+        actionButton.setOnMouseClicked(e -> level.restart());
+    }
+
+    /**
      * Loads main menu if button is clicked.
      */
     @FXML

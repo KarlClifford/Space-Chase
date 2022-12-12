@@ -1,6 +1,8 @@
 package com.example.spacechase.controllers;
 
 import com.example.spacechase.models.Level;
+import com.example.spacechase.services.SoundEngine;
+import com.example.spacechase.utils.Data;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,15 +20,16 @@ import java.io.File;
  */
 public class AdvertController extends Controller {
     /**
+     * Integer variable representing the time
+     * taken before the button will appear.
+     * @see javafx.scene.media.MediaPlayer
+     */
+    private static final int TIMER = 5;
+    /**
      * Variable holing a button object.
      */
     @FXML
     private Button button;
-    /**
-     * Variable holing a file.
-     * @see javafx.scene.control.Button
-     */
-    private File file;
     /**
      * Variable holing a media object.
      */
@@ -45,30 +48,37 @@ public class AdvertController extends Controller {
     @FXML
     private MediaPlayer mediaPlayer;
     /**
-     * Integer variable representing the time
-     * taken before the button will appear.
-     * @see javafx.scene.media.MediaPlayer
-     */
-    private final int timer = 5;
-    /**
      * Start will play a
      * video and load a button after a determined amount of time
      * to restart the level.
      * @param level the current level the player is on.
      */
     public void start(Level level) {
-        file = new File(
-                "src/main/resources/com/example/spacechase/Vid/vid.mp4");
+        File file = Data.getFileFromPath("media/ads/ad1.mp4");
         media = new Media(file.toURI().toString());
-        mediaPlayer = new  MediaPlayer(media);
-        mediaView.setMediaPlayer(mediaPlayer);
+
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(SoundEngine.getMusicVolume());
         mediaPlayer.play();
+
+        mediaView.fitWidthProperty().bind(stage.widthProperty());
+        mediaView.fitHeightProperty().bind(stage.heightProperty());
+        mediaView.setMediaPlayer(mediaPlayer);
+        mediaView.setViewOrder(1);
         mediaView.setVisible(true);
+
         button.setVisible(false);
-        PauseTransition pt = new PauseTransition(Duration.seconds(timer));
+        button.setViewOrder(0);
+
+        PauseTransition pt = new PauseTransition(Duration.seconds(TIMER));
         pt.setOnFinished(e -> {
             button.setVisible(true);
-            button.setOnMouseClicked(f -> level.restart());
+            button.setOnMouseClicked(event -> {
+                mediaPlayer.stop();
+                LevelEndedMenuController controller = (LevelEndedMenuController)
+                        loadFxml("fxml/levelEndedMenu.fxml");
+                controller.startFailMenu(level);
+            });
         });
         pt.play();
     }

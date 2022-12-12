@@ -44,7 +44,7 @@ public class Level {
     /**
      * Spacing of tiles.
      */
-    public static final int TILE_SPACING = 5;
+    public static final double TILE_SPACING = 0;
     /**
      * Fxml file path of end credits.
      * @see javafx.fxml
@@ -296,8 +296,6 @@ public class Level {
                 SoundEngine.getMusicVolume(),
                 true);
     }
-
-
 
     /**
      * Creates a label for the time of level.

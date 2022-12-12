@@ -5,7 +5,10 @@ import com.example.spacechase.services.GameMessage;
 import com.example.spacechase.services.SoundEngine;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.time.Clock;
@@ -43,6 +46,11 @@ public class MODController extends Controller {
      * Starts the cutscene.
      */
     public void start() {
+        messageLabel.setTextOverrun(OverrunStyle.CLIP);
+        messageLabel.setWrapText(true);
+        messageLabel.setAlignment(Pos.CENTER);
+        messageLabel.setMaxWidth(stage.getWidth());
+        messageLabel.setMaxHeight(stage.getHeight());
 
         AnimationTimer timer = new AnimationTimer() {
             final Clock clock = Clock.systemDefaultZone();

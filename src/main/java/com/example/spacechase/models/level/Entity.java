@@ -5,7 +5,6 @@ import com.example.spacechase.models.Level;
 import com.example.spacechase.utils.Data;
 import javafx.scene.image.ImageView;
 
-
 /**
  * This class represents an entity, where it is an object
  * that can be either a character or an item.

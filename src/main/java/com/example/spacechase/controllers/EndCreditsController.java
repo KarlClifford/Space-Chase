@@ -17,7 +17,6 @@ import java.io.File;
  * @version 1.0.0
  */
 public class EndCreditsController extends Controller {
-
     /**
      * The path to the end credits video.
      */
@@ -40,7 +39,10 @@ public class EndCreditsController extends Controller {
         File file = Data.getFileFromPath(MEDIA_PATH);
         Media media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaView.fitWidthProperty().bind(stage.widthProperty());
+        mediaView.fitHeightProperty().bind(stage.heightProperty());
         mediaView.setMediaPlayer(mediaPlayer);
+        mediaPlayer.setVolume(SoundEngine.getMusicVolume());
         mediaPlayer.onEndOfMediaProperty().addListener(e -> exit());
         mediaPlayer.play();
     }

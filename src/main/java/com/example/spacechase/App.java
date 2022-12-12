@@ -29,11 +29,11 @@ public class App extends Application {
      */
     public static final SoundEngine MUSIC_PLAYER = new SoundEngine();
     /**
-     *
+     * Default width of screen.
      */
     public static final double DEFAULT_WIDTH = 1920;
     /**
-     *
+     * Default height of screen.
      */
     public static final double DEFAULT_HEIGHT = 1080;
     /**
@@ -51,11 +51,11 @@ public class App extends Application {
             .getBounds()
             .getHeight();
     /**
-     *
+     * X of resize scale.
      */
     public static final double SCALE_X = STAGE_WIDTH / DEFAULT_WIDTH;
     /**
-     *
+     * Y of resize scale.
      */
     public static final double SCALE_Y = STAGE_HEIGHT / DEFAULT_HEIGHT;
     /**

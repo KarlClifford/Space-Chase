@@ -396,7 +396,8 @@ public interface Data {
      */
     static void addHighScore(int id, String name, int score) {
         HashMap<Integer, HashMap<String, Integer>> highScores = getHighScores();
-        HashMap<String, Integer> level = highScores.get(id);
+        HashMap<String, Integer> level = highScores.computeIfAbsent(id,
+                k -> new HashMap<>());
 
         // Replace the score if new score is higher or there's no old score.
         int lastScore = level.getOrDefault(name, score);
