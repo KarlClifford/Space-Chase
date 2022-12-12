@@ -538,12 +538,12 @@ public class Level {
         // Initialise the sound engine to play a sound effect.
         if (isCleared) {
             // Play win sound effect.
-            soundEngine.playSound(
+            App.MUSIC_PLAYER.playSound(
                     SoundEngine.Sound.WIN,
                     SoundEngine.getMusicVolume(), false);
         } else {
             // Play loose sound effect.
-            soundEngine.playSound(
+            App.MUSIC_PLAYER.playSound(
                     SoundEngine.Sound.LOOSE,
                     SoundEngine.getMusicVolume(), false);
         }
