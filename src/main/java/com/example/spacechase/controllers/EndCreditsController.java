@@ -22,6 +22,10 @@ public class EndCreditsController extends Controller {
      */
     public static final String MEDIA_PATH = "media/end-credits.mp4";
     /**
+     * Rescale of height of media.
+     */
+    private static final double SCALE_Y = .9;
+    /**
      * Media view to display the media player.
      * @see javafx.scene.media.MediaView
      */
@@ -41,7 +45,8 @@ public class EndCreditsController extends Controller {
         Media media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaView.fitWidthProperty().bind(stage.widthProperty());
-        mediaView.fitHeightProperty().bind(stage.heightProperty().multiply(.9));
+        mediaView.fitHeightProperty()
+                .bind(stage.heightProperty().multiply(SCALE_Y));
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setVolume(SoundEngine.getMusicVolume());
         mediaPlayer.setVolume(SoundEngine.getMusicVolume());

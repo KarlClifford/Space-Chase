@@ -20,6 +20,10 @@ import java.io.File;
  */
 public class AdvertController extends Controller {
     /**
+     * Rescale of height of media.
+     */
+    private static final double SCALE_Y = .9;
+    /**
      * Integer variable representing the time
      * taken before the button will appear.
      * @see javafx.scene.media.MediaPlayer
@@ -58,7 +62,8 @@ public class AdvertController extends Controller {
         mediaPlayer.setAutoPlay(true);
 
         mediaView.fitWidthProperty().bind(stage.widthProperty());
-        mediaView.fitHeightProperty().bind(stage.heightProperty().multiply(.9));
+        mediaView.fitHeightProperty()
+                .bind(stage.heightProperty().multiply(SCALE_Y));
         mediaView.setMediaPlayer(mediaPlayer);
 
         mediaView.setViewOrder(1);
