@@ -46,7 +46,6 @@ public class Bomb extends Item {
     public Bomb() {
         this.id = '*';
         this.imagePath = "blackHole.gif";
-
     }
 
     /**

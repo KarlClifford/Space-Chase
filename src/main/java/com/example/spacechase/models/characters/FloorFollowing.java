@@ -60,6 +60,10 @@ public class FloorFollowing extends Collector {
      * @return the tile to moved onto.
      */
     private Tile getLinkTile() {
+        /*
+         * Checks all direction to see if there is a tile
+         * in that direction that can be moved on to.
+         */
         for (Direction direction : directions) {
             Tile link = tile.getLinkedTile(direction);
 
