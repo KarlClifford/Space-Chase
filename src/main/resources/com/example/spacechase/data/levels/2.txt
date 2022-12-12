@@ -1,7 +1,8 @@
 6 6 300.00 0
-RRRRP RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
+BBBBP BRBRN RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR> RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRRD
+ENTITY SCAN IN PROGRESS……..^^SPECIES: CHASE^^THREAT LEVEL: HIGH - DANGER TO LIFE^^^^Attention: It is imperative that you avoid being in its line of sight.^Failure to do so may result in unfavourable outcomes.^Please exercise caution.

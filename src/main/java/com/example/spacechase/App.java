@@ -104,8 +104,6 @@ public class App extends Application {
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setMaximized(true);
         stage.show();
-
-
     }
 
     /**

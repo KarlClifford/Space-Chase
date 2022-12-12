@@ -1,4 +1,8 @@
 {
   "music": 30,
-  "fx": 100
+  "fx": 100,
+  "UP": "W",
+  "DOWN": "S",
+  "LEFT": "A",
+  "RIGHT": "D"
 }

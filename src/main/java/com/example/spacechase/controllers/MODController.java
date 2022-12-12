@@ -6,10 +6,9 @@ import com.example.spacechase.services.SoundEngine;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.OverrunStyle;
-import javafx.scene.text.TextAlignment;
-
 import java.io.IOException;
 import java.time.Clock;
 
@@ -37,6 +36,12 @@ public class MODController extends Controller {
      */
     @FXML
     private Label messageLabel;
+    /**
+     * Button that skips motd.
+     * @see javafx.scene.control.Button
+     */
+    @FXML
+    private Button skipButton;
     /**
      * Message of this cutscene.
      */
@@ -69,12 +74,7 @@ public class MODController extends Controller {
                     // Provide enough time to read the message.
                     if (now - last >= PAUSE_DURATION) {
                         this.stop();
-                        App.MUSIC_PLAYER.playSound(
-                                SoundEngine.Sound.MENU_MUSIC,
-                                SoundEngine.getMusicVolume(),
-                                true);
-                        // Switch to the main menu.
-                        loadFxml("fxml/mainMenu.fxml");
+                        switchToMainMenu();
                     }
 
                     /*
@@ -101,6 +101,33 @@ public class MODController extends Controller {
         timer.start();
 
         message = message.replaceAll("\\^", "\n");
+
+        skipButton.setOnKeyPressed(e -> {
+            timer.stop();
+            /*
+             * Stops the animation and shows full message
+             * if message is still printing out. Otherwise,
+             * ends printing and goes to main menu.
+             */
+            if (!messageLabel.getText().equals(message)) {
+                messageLabel.setText(message);
+            } else {
+                switchToMainMenu();
+            }
+        });
+    }
+
+    /**
+     * Goes to main menu.
+     */
+    private void switchToMainMenu() {
+        // Plays menu music.
+        App.MUSIC_PLAYER.playSound(
+                SoundEngine.Sound.MENU_MUSIC,
+                SoundEngine.getMusicVolume(),
+                true);
+        // Switches to the main menu.
+        loadFxml("fxml/mainMenu.fxml");
     }
 
     /**

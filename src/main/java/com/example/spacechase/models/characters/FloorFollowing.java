@@ -1,5 +1,6 @@
 package com.example.spacechase.models.characters;
 
+import com.example.spacechase.models.items.Bomb;
 import com.example.spacechase.models.items.Gate;
 import com.example.spacechase.models.level.Tile;
 import com.example.spacechase.utils.Direction;
@@ -66,8 +67,10 @@ public class FloorFollowing extends Collector {
              * If a link exists and does not have a character on it
              * nor a gate on it.
              */
-            if (link != null && link.getCharacter() == null
-                && !(link.getItem() instanceof Gate)) {
+            if (link != null
+                    && link.getCharacter() == null
+                    && !(link.getItem() instanceof Gate
+                    || link.getItem() instanceof Bomb)) {
                 /*
                  * If the tile matches any tiles in last tile,
                  * rotate the order of directions.

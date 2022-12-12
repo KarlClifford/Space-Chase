@@ -5,13 +5,21 @@ import com.example.spacechase.models.characters.Player;
 import com.example.spacechase.services.SoundEngine;
 import com.example.spacechase.utils.Control;
 import com.example.spacechase.utils.Data;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import org.json.simple.JSONValue;
+
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * This class represents the controller of settings
@@ -53,37 +61,44 @@ public class SettingsController extends Controller {
      */
     @FXML
     private Label fxLabel;
-
     /**
-     * Text field for W keybinding.
+     * Button for up keybinding.
+     * @see javafx.scene.control.Button
      */
     @FXML
-    private TextField upTextField;
-
+    private Button upKeybind;
     /**
-     * Text field for S keybinding.
+     * Button for down keybinding.
+     * @see javafx.scene.control.Button
      */
     @FXML
-    private TextField downTextField;
-
+    private Button downKeybind;
     /**
-     * Text field for A keybinding.
+     * Button for left keybinding.
+     * @see javafx.scene.control.Button
      */
     @FXML
-    private TextField leftTextField;
-
+    private Button leftKeybind;
     /**
-     * Text field for D keybinding.
+     * Button for right keybinding.
+     * @see javafx.scene.control.Button
      */
     @FXML
-    private TextField rightTextField;
+    private Button rightKeybind;
+    /**
+     * Whether user is setting key bind.
+     */
+    private BooleanProperty isKeybinding;
 
     /**
      * Changes the volume when the slider is dragged.
      */
     @FXML
     private void initialize() {
+        isKeybinding = new SimpleBooleanProperty(false);
+
         loadSettings();
+
         musicSlider.setValue(SoundEngine.getMusicVolume());
         fxSlider.setValue(SoundEngine.getSoundEffectVolume());
         /*
@@ -152,6 +167,8 @@ public class SettingsController extends Controller {
                 int volume = (int) Double.parseDouble(value);
                 setFxVolume(volume);
             }
+            case "UP", "DOWN", "LEFT", "RIGHT"
+                    -> readKeybind(attribute, value);
             default ->
                     throw new IllegalArgumentException(
                             "ERROR: Illegal attribute provided.");
@@ -184,31 +201,73 @@ public class SettingsController extends Controller {
         SoundEngine.setFxMusicVolume(volume);
     }
 
+    /**
+     * Reads keybind and sets it.
+     * @param controlStr control in string.
+     * @param keyCodeStr key code in string.
+     */
+    private void readKeybind(String controlStr, String keyCodeStr) {
+        Control control = Control.valueOf(controlStr);
+        KeyCode keyCode = KeyCode.valueOf(keyCodeStr);
+        Player.setKeybind(control, keyCode);
+
+        updateKeybindText(control, keyCode);
+    }
 
     /**
-     * Sets all the keybinds.
+     * Sets the text in the keybind button to keycode.
+     * @param control control of the game.
+     * @param keyCode keycode of the control.
+     */
+    private void updateKeybindText(Control control, KeyCode keyCode) {
+        Button[] keybinds = new Button[] {
+                upKeybind, downKeybind, leftKeybind, rightKeybind};
+
+        Arrays.stream(keybinds)
+                .filter(Objects::nonNull)
+                .filter(button -> button.getId()
+                        .replaceAll("Keybind", "")
+                        .toUpperCase()
+                        .equals(control.toString()))
+                .findFirst()
+                .ifPresent(button -> button.setText(keyCode.toString()));
+    }
+
+    /**
+     * Fires when a keybind button is clicked. Waits for player
+     * to input a key and sets the keybind for that control.
+     * @param event event of key binding.
      */
     @FXML
-    private void setKeyBinds() {
-        for (TextField textField : new TextField[] {
-                upTextField, downTextField, leftTextField, rightTextField}) {
-            Control control = switch (textField.toString()) {
-                case "upTextField" -> Control.UP;
-                case "downTextField" -> Control.DOWN;
-                case "leftTextField" -> Control.LEFT;
-                case "rightTextField" -> Control.RIGHT;
-                default -> Control.NULL;
-            };
+    private void onKeybinding(MouseEvent event) {
+        Button button = (Button) event.getSource();
+        Control control = Control.valueOf(
+                button.getId()
+                        .replaceAll("Keybind", "")
+                        .toUpperCase());
 
-            String input = textField.getText();
+        isKeybinding.set(true);
+        AtomicBoolean cancelBind = new AtomicBoolean(false);
 
-            // Sets the keybind if it keybind is one character.
-            if (input.length() == 1) {
-                KeyCode keyCode = KeyCode.getKeyCode(input);
+        Scene scene = stage.getScene();
+        scene.setOnKeyPressed(e -> {
+            KeyCode keyCode = e.getCode();
+
+            // Sets the keybind if this bind is not cancelled.
+            if (!cancelBind.get()) {
+                isKeybinding.set(false);
+                writeSetting(control.toString(), keyCode.toString());
                 Player.setKeybind(control, keyCode);
+                button.setText(keyCode.getName());
             }
-        }
+
+            e.consume();
+        });
+
+        // Cancel the bind if another keybind is requested.
+        isKeybinding.addListener(e -> cancelBind.set(true));
     }
+
 
     /**
      * Goes to main menu if clicked.

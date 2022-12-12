@@ -1,8 +1,9 @@
 7 7 300.00 0
-RRRRP RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRRS
+RRRRP RRRRN RRRR_ RRRR_ RRRR_ RRRR_ RRRRS
 RRBB( RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRGG_
 BBBB_ GGGG_ GGGG_ GGGG_ GGGG_ GGGG_ GGGG+
 BBBB_ GGGG{ GGGGG GGGG@ GGGG_ GGGG_ GGGGY
 BBBB_ GGGG_ GGGG_ GGGG* GGGG_ GGGG_ GGGGT
 BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_
 BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBB_ BBBBD
+ENTITY SCAN IN PROGRESS……..^^SPECIES: CHASE^^THREAT LEVEL: UNKNOWN^^^^Warning: There is an imminent threat ahead.^A sentient entity has been detected, and it is known to collect loot and steal ships.^You must take immediate action to protect yourself and your ship.^Do not engage with the entity, and take any necessary evasive maneuvers to avoid confrontation.^^Time is of the essence.^^Act now to ensure your safety.

@@ -1,7 +1,8 @@
 6 6 10.00 0
-RRRRP RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
+BBBBP BRBRN RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR@ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRR_
 RRRR_ RRRR_ RRRR_ RRRR_ RRRR_ RRRRD
+Attention: Your oxygen levels are currently decreasing.^In order to restore your oxygen levels, it is necessary that you collect an oxygen tank.^This will ensure your continued survival. Please take action immediately.

@@ -536,7 +536,6 @@ public class Level {
         // Stop the playing music.
         App.MUSIC_PLAYER.stopMusic();
         // Initialise the sound engine to play a sound effect.
-        SoundEngine soundEngine = new SoundEngine();
         if (isCleared) {
             // Play win sound effect.
             soundEngine.playSound(

@@ -19,10 +19,6 @@ import java.time.Clock;
  */
 public class CutsceneController extends Controller {
     /**
-     * The volume of the music to be played on this screen.
-     */
-    private static final int SLOW_MUSIC_VOLUME = 40;
-    /**
      * The speed of the music to be played on this screen.
      */
     private static final double SLOW_MUSIC_SPEED = 0.15;
@@ -155,7 +151,7 @@ public class CutsceneController extends Controller {
      * Adds a slowed music effect.
      */
     public void slowMusic() {
-        SoundEngine.setMusicVolume(SLOW_MUSIC_VOLUME);
+        SoundEngine.setMusicVolume(SoundEngine.getMusicVolume() / 2);
         App.MUSIC_PLAYER.setPlaybackSpeed(SLOW_MUSIC_SPEED);
     }
 
@@ -163,7 +159,7 @@ public class CutsceneController extends Controller {
      * Resets the music back to default.
      */
     public void resumeMusic() {
-        SoundEngine.setMusicVolume(SoundEngine.getMusicVolume());
+        SoundEngine.setMusicVolume(SoundEngine.getMusicVolume() * 2);
         App.MUSIC_PLAYER.setPlaybackSpeed(1);
     }
 

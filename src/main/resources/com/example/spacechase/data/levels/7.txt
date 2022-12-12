@@ -2,5 +2,6 @@
 GGGG_ GGGG+ GGGG_ GGGG+ GGGGF
 GGGG_ GGGG+ GGGGG GGGG+ GGGG_
 GGGG_ GGGG_ GGGGG GGGG_ GGGG_
-GGCC_ GGCC+ GGCCG GGCC+ GGCC_
-CCCCP CCCC_ CCCC_ CCCC_ CCCCD
+GGGG_ GGCC+ GGCCG GGCC+ GGCC_
+CCCCP CCCCN CCCC_ CCCC_ CCCCD
+ENTITY SCAN IN PROGRESS……..^^SPECIES: CHASE^^THREAT LEVEL: LOW^^^^Attention! A foreign entity has been detected in your vicinity.^^This entity may attempt to collect resources.^^Proceed with caution.

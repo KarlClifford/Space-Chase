@@ -43,6 +43,7 @@ public class EndCreditsController extends Controller {
         mediaView.fitHeightProperty().bind(stage.heightProperty());
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setVolume(SoundEngine.getMusicVolume());
+        mediaPlayer.setVolume(SoundEngine.getMusicVolume());
         mediaPlayer.onEndOfMediaProperty().addListener(e -> exit());
         mediaPlayer.play();
     }
