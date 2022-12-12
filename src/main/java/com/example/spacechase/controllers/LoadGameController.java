@@ -46,6 +46,7 @@ public class LoadGameController extends Controller {
     private void initialize() {
         String[] profiles = Data.getProfiles();
 
+        // Create a profile box for each profile.
         for (String name : profiles) {
             HBox hBox = new HBox();
             hBox.setSpacing(HBOX_SPACING);

@@ -23,12 +23,13 @@ public class EndCreditsController extends Controller {
     public static final String MEDIA_PATH = "media/end-credits.mp4";
     /**
      * Media view to display the media player.
+     * @see javafx.scene.media.MediaView
      */
     @FXML
     private MediaView mediaView;
-
     /**
      * Media player to view the end credits.
+     * @see javafx.scene.media.MediaPlayer
      */
     private MediaPlayer mediaPlayer;
 

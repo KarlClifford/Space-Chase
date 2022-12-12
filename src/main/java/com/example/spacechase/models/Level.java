@@ -1,6 +1,7 @@
 package com.example.spacechase.models;
 
 import com.example.spacechase.App;
+import com.example.spacechase.models.items.Note;
 import com.example.spacechase.models.level.GameClock;
 import com.example.spacechase.controllers.Controller;
 import com.example.spacechase.controllers.LevelEndedMenuController;
@@ -621,6 +622,23 @@ public class Level {
     }
 
     /**
+     * Gets all messages in string.
+     * @return all messages in string.
+     */
+    private String getMessageString() {
+        return String.join("",
+                Arrays.stream(tileMap)
+                .map(ts -> String.join("\n",
+                        Arrays.stream(ts)
+                                .map(Tile::getItem)
+                                .filter(item -> item instanceof Note)
+                                .map(item -> (Note) item)
+                                .map(Note::getMessage)
+                                .toArray(String[]::new)))
+                .toArray(String[]::new));
+    }
+
+    /**
      * Returns the height of the map, width of the map, time of the level,
      * score of the level, string data of all tiles, characters and items.
      * @return string of all contents in level.
@@ -630,11 +648,12 @@ public class Level {
         int height = tileMap.length;
         int width = tileMap[0].length;
 
-        return String.format("%d %d %.2f %d\n%s",
+        return String.format("%d %d %.2f %d\n%s\n%s",
                 width,
                 height,
                 time,
                 score,
-                getMapString());
+                getMapString(),
+                getMessageString());
     }
 }

@@ -39,7 +39,6 @@ public class CutsceneController extends Controller {
      */
     @FXML
     private Button skipButton;
-
     /**
      * Stores the level of the game.
      */
@@ -56,6 +55,7 @@ public class CutsceneController extends Controller {
         GameClock gameClock = level.getClock();
         gameClock.setRun(false);
 
+        // Resumes the game if there's no message.
         if (message == null) {
             resumeMusic();
             gameClock.setRun(true);
@@ -84,6 +84,7 @@ public class CutsceneController extends Controller {
                      * the rest in message.
                      */
                 } else if (now - last >= PRINT_SPEED) {
+                    // Prints a new line if character is '^'.
                     if (copy.charAt(0) == '^') {
                         copy = copy.substring(1);
                         messageLabel.setText(messageLabel.getText() + '\n');

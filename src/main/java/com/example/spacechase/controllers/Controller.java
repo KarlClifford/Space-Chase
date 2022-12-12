@@ -64,10 +64,6 @@ public class Controller {
             throw new RuntimeException(ex);
         }
 
-        //pane.setPrefSize(stage.getWidth(), stage.getHeight());
-
-        //Scene scene = new Scene(pane);
-        //stage.setScene(scene);
         stage.getScene().setRoot(pane);
 
         return fxmlLoader.getController();
