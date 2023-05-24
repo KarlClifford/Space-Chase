@@ -4,12 +4,18 @@ Welcome to the Space Chase repository! Below is an outline of our contributors a
 
 # Project Contributors and Roles
 
-Karl Clifford (Project Manager, Developer, Code Reviewer, Sound Designer) 
+Karl Clifford (Project Manager, Developer, Code Reviewer, Sound Designer)
+
 Tristan Tsang (Developer, Code Reviewer, Graphics Designer)
+
 Ben Thornber (Developer, Code Reviewer)
+
 Rami Abdulrazzaq (Developer)
+
 Alex Hallsworth (Developer)
+
 Daniel Halsall (Developer)
+
 Jamie Quinn (Developer)
 
 
